@@ -1,0 +1,16 @@
+{
+  "name": "@graphprotocol/common",
+  "version": "0.0.0",
+  "description": "Common TypeScript library for Graph Protocol components",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/graphprotocol/common",
+  "author": "Graph Protocol, Inc.",
+  "license": "MIT/Apache",
+  "private": true,
+  "scripts": {
+    "prepublish": "tsc",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch --passWithNoTests"
+  }
+}

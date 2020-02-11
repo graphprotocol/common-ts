@@ -1,0 +1,5 @@
+[book]
+authors = ["Graph Protocol"]
+multilingual = false
+src = "src"
+title = "Common TypeScript library for Graph Protocol components"
