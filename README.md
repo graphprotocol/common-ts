@@ -14,6 +14,12 @@
 - [Chan](https://github.com/geut/chan/tree/master/packages/chan) is used to
   maintain [changelogs](./packages/common/CHANGELOG.md).
 
+### Install dependencies
+
+```sh
+yarn
+```
+
 ### Build
 
 ```sh
