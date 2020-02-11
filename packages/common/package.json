@@ -14,7 +14,11 @@
     "test:watch": "jest --watch --passWithNoTests --verbose"
   },
   "dependencies": {
+    "@connext/client": "4.0.10",
+    "pg": "^7.18.1",
+    "pg-hstore": "^2.3.3",
     "prom-client": "^11.5.3",
+    "sequelize": "^5.21.4",
     "winston": "^3.2.1"
   }
 }
