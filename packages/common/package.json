@@ -10,7 +10,11 @@
   "private": true,
   "scripts": {
     "prepublish": "tsc",
-    "test": "jest --passWithNoTests",
-    "test:watch": "jest --watch --passWithNoTests"
+    "test": "jest --passWithNoTests --verbose",
+    "test:watch": "jest --watch --passWithNoTests --verbose"
+  },
+  "dependencies": {
+    "prom-client": "^11.5.3",
+    "winston": "^3.2.1"
   }
 }
