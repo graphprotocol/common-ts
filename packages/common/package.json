@@ -14,7 +14,8 @@
     "test:watch": "jest --watch --passWithNoTests --verbose"
   },
   "dependencies": {
-    "@connext/client": "4.0.10",
+    "@connext/client": "4.0.11",
+    "@connext/types": "4.0.11",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
     "prom-client": "^11.5.3",
