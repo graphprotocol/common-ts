@@ -6,11 +6,25 @@
 
 ## Development notes
 
+### General notes
+
 - This repository is managed using [Lerna](https://lerna.js.org/) and [Yarn
   workspaces](https://classic.yarnpkg.com/en/docs/workspaces/).
 
 - [Chan](https://github.com/geut/chan/tree/master/packages/chan) is used to
   maintain [changelogs](./packages/common/CHANGELOG.md).
+
+### Build
+
+```sh
+yarn prepublish
+```
+
+### Test
+
+```sh
+yarn test
+```
 
 ## Copyright
 
