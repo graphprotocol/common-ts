@@ -151,13 +151,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@connext/cf-core@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@connext/cf-core/-/cf-core-4.0.10.tgz#edac330474268f3b09947419506cc78d009df572"
-  integrity sha512-w8rVHlxd3ofy1NLKCe+Klja5+Cl5q/4X7rQoNFKdnAtYygcKWhHpiJ0kVsM8YjfP0lLylOThTuSBQekmaodfEQ==
+"@connext/cf-core@4.0.11":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@connext/cf-core/-/cf-core-4.0.11.tgz#5fc169c5841784c61ee3d75ad6a52c771f198172"
+  integrity sha512-SdVv5TFVyvBiniD4blsL4OtS8iN/L1mxg/vVM+LK5lDp2bhLDhbtGOUVVS642eAyMaZH9uF2jMGMzO4w+6jxvQ==
   dependencies:
     "@connext/contracts" "1.0.4"
-    "@connext/types" "4.0.10"
+    "@connext/types" "4.0.11"
     ethers "4.0.41"
     eventemitter3 "4.0.0"
     loglevel "1.6.6"
@@ -167,23 +167,23 @@
     typescript-memoize "1.0.0-alpha.3"
     uuid "3.3.3"
 
-"@connext/channel-provider@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@connext/channel-provider/-/channel-provider-4.0.10.tgz#263e2e8cd8d0681135123d11d195875b486edf17"
-  integrity sha512-snCIyVde3ma/QmitFiBSj5g+IDg48UW47uDGhLMkUx4l/DsE3LKrVHsa9NyQZxF1HKbi+CbatpWCPWeKcOTUSg==
+"@connext/channel-provider@4.0.11":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@connext/channel-provider/-/channel-provider-4.0.11.tgz#39426d54d5501fd95bb7268606a33ef5fde1b5b2"
+  integrity sha512-awamk8qPHAXq0n+pi3tBufqehgVefZUsTHybATlHT7ltVQn1x6RkYZ1wP3HOhqc+N3A/VmrPimsJ2xuJo53KaQ==
   dependencies:
-    "@connext/types" "4.0.10"
+    "@connext/types" "4.0.11"
 
-"@connext/client@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@connext/client/-/client-4.0.10.tgz#adeb12c9ef8b3de994529e0f9bd79375cefb859c"
-  integrity sha512-Fe+MRxM/ycaAljGTIytOZuNX6xcy42NMC01wijbLXIWifvN7ZvpvGJiqGfbT3E+THKh3skGcaw9sS0h9aNmABg==
+"@connext/client@4.0.11":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@connext/client/-/client-4.0.11.tgz#f2c420a97b397699eb0b1fb3b63d1a254fa5dc37"
+  integrity sha512-Z27H1zrA9ZH8ZnQOaboAmtYoE4N683/IPVl3qZwv6ftwKeTsq1mcimNdjIkUNZzzyE6BGZBvNDBSb5vGqRQkkw==
   dependencies:
-    "@connext/cf-core" "4.0.10"
-    "@connext/channel-provider" "4.0.10"
-    "@connext/messaging" "4.0.10"
-    "@connext/store" "4.0.10"
-    "@connext/types" "4.0.10"
+    "@connext/cf-core" "4.0.11"
+    "@connext/channel-provider" "4.0.11"
+    "@connext/messaging" "4.0.11"
+    "@connext/store" "4.0.11"
+    "@connext/types" "4.0.11"
     core-js "3.6.1"
     eccrypto "1.1.3"
     ethers "4.0.41"
@@ -203,29 +203,29 @@
     ganache-cli "6.7.0"
     openzeppelin-solidity "2.3.0"
 
-"@connext/messaging@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@connext/messaging/-/messaging-4.0.10.tgz#0a818727fcef1955a2c282da90fc2b9de33d7a77"
-  integrity sha512-obz4PZkcYMroNDK28qDXncVmhzua7INuxIKbyXZfZEYIJGY9p3MFdrAIgkUlp/ZVUCnURHBCTBRWCM5VGmCZQQ==
+"@connext/messaging@4.0.11":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@connext/messaging/-/messaging-4.0.11.tgz#4de1c240067402ced062078ddb1b7ccdaa263de4"
+  integrity sha512-XjaQB30vp3J3/tb6rGs48ME1PBlzlVeAPfwA1Rri71JvSV9s726zfVI+XPxalfyGMnfbr3cD4nZPiAgB9tq+ZQ==
   dependencies:
-    "@connext/types" "4.0.10"
+    "@connext/types" "4.0.11"
     ts-nats "1.2.4"
     websocket-nats "0.3.3"
 
-"@connext/store@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@connext/store/-/store-4.0.10.tgz#e0df2049874323429e9fc8dcdd8a976457be4285"
-  integrity sha512-KUmzrkQa8WoEv6NfsY70GNXGihQzBWmpUTG59WXgZIcFGDFS/84S8v8vH069ecagxjyg9r9iwvj4uPfHkSc3Lg==
+"@connext/store@4.0.11":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@connext/store/-/store-4.0.11.tgz#fb21451b29e00e7971505e610573938c98ac3e4b"
+  integrity sha512-52DRW0Wy47B4PumEgBkMVrT9Ef+F8ol9bEz4OW4TXKKb1gN8SCbboveKcuatRI9X7a1Hg8jPumPB5Svg4mgGvw==
   dependencies:
-    "@connext/types" "4.0.10"
+    "@connext/types" "4.0.11"
     ethers "4.0.41"
     pisa-client "0.1.4-connext-beta.1"
     uuid "3.3.3"
 
-"@connext/types@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@connext/types/-/types-4.0.10.tgz#bc14b794f5eda07431268236a3ff00726eca1cc6"
-  integrity sha512-CH9zya15BMinIUbEfYHy2x9LtPo+DcePofrglY3TxxResmHpK8PqwJu4dojjSy6AuR3T/qQ3HCmOdyOiEMmhMg==
+"@connext/types@4.0.11":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@connext/types/-/types-4.0.11.tgz#2b4820af86729e988904afa88eb99c56063b31ce"
+  integrity sha512-856ExpeSFdikXq04+LReHFZy0/6crrONjfVsakPFe5B/rZpi0V1dkWZ9e1lpAbPzrZNHE2zg+JBI3C0Oz/G9mg==
   dependencies:
     ethers "4.0.41"
 
