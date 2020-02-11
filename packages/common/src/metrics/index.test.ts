@@ -1,8 +1,8 @@
-import { metrics } from '.'
+import { createMetrics } from '.'
 
 describe('Metrics', () => {
   test('Create metrics', () => {
-    let m = metrics()
-    expect(m.Counter).toBeDefined()
+    let metrics = createMetrics()
+    expect(metrics.Counter).toBeDefined()
   })
 })
