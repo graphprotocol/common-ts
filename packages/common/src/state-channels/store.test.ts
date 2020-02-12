@@ -9,11 +9,12 @@ describe('SequelizeConnextStore', () => {
   let store: SequelizeConnextStore
 
   beforeEach(async () => {
+    // Prepare the database
     let sequelize = await database.connect(__DATABASE__)
-    // TODO: this might not be working, had to manually add the table into the db
+    Record.initialize(sequelize)
     await sequelize.sync({ force: true })
+
     store = new SequelizeConnextStore(sequelize)
-    await Record.destroy({ truncate: true })
   })
 
   test('should store and retrieve a channel record', async () => {
