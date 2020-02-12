@@ -34,7 +34,7 @@ export class SequelizeConnextStore implements Store {
       // Wrapping the value into an object is necessary for Postgres bc the JSON column breaks
       // if you use anything other than JSON (i.e. a raw string).
       // In some cases, the cf core code is inserting strings as values instead of objects :(
-      const record = Record.build({ path: pair.path, value: { [pair.path]: pair.value } })
+      const record = Record.build({ path: pair.path, value: pair.value })
       await record.save()
     }
   }
@@ -42,7 +42,7 @@ export class SequelizeConnextStore implements Store {
   async get(path: string): Promise<any> {
     let res: any
     // special case for certain paths
-    if (path.endsWith('channel') || path.endsWith('appInstanceIdToProposedAppInstance')) {
+    if (path.endsWith('channel')) {
       res = await Record.findAll({
         where: {
           path: {
@@ -50,18 +50,10 @@ export class SequelizeConnextStore implements Store {
           },
         },
       })
-      const nestedRecords = res.map((record: Record) => {
-        const existingKey = Object.keys(record.value)[0]
-        const leafKey = existingKey.split('/').pop()!
-        const nestedValue = record.value[existingKey]
-        delete record.value[existingKey]
-        record.value[leafKey] = nestedValue
-        return record.value
-      })
       const records: { [key: string]: any } = {}
-      nestedRecords.forEach((record: any): void => {
-        const key = Object.keys(record)[0]
-        const value = Object.values(record)[0]
+      res.forEach((record: Record): void => {
+        const key = record.value.multisigAddress
+        const value = record.value
         if (value !== null) {
           records[key] = value
         }
@@ -77,7 +69,7 @@ export class SequelizeConnextStore implements Store {
     if (!res) {
       return undefined
     }
-    return res.value[path]
+    return res.value
   }
 
   async restore(): Promise<StorePair[]> {

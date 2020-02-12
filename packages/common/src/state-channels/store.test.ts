@@ -17,6 +17,20 @@ describe('SequelizeConnextStore', () => {
     store = new SequelizeConnextStore(sequelize)
   })
 
+  test('Stores and retrieves a record', async () => {
+    const testRecord = {
+      path: "test123",
+      value: { data: "this is a test" }
+    }
+
+    // Verify setting the record works
+    await store.set([testRecord], false)
+
+    // Verify that retriving the same path returns the previously set value
+    const value = await store.get(testRecord.path)
+    expect(value).toMatchObject(testRecord.value)
+  })
+
   test('Stores and retrieves a channel record', async () => {
     const testXpub =
       'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6'
@@ -25,10 +39,29 @@ describe('SequelizeConnextStore', () => {
       'xpub6F3J5akuWKZLr6xaa6whvSQuCrBMTt3dACSDS6Wo6SyUxntgpid17TDW7GtFoz362r19WVbevmpQz9HM7Y4qWBNmyYWm7Unj4mU7PBJ8vXD',
     ]
 
-    const testRecord = {
+    const multisigAddress1 = hexlify(randomBytes(20))
+    const testRecord1 = {
+      path: `TEST_PREFIX/${testXpub}/channel/${multisigAddress1}`,
+      value: {
+        multisigAddress: multisigAddress1,
+        addresses: {
+          proxyFactory: hexlify(randomBytes(20)),
+          multisigMastercopy: hexlify(randomBytes(20)),
+        },
+        userNeuteredExtendedKeys,
+        proposedAppInstances: [],
+        appInstances: [],
+        monotonicNumProposedApps: 1,
+        singleAssetTwoPartyIntermediaryAgreements: [],
+        schemaVersion: 1,
+      },
+    }
+
+    const multisigAddress2 = hexlify(randomBytes(20))
+    const testRecord2 = {
       path: `TEST_PREFIX/${testXpub}/channel/${testXpub}`,
       value: {
-        multisigAddress: hexlify(randomBytes(20)),
+        multisigAddress: multisigAddress2,
         addresses: {
           proxyFactory: hexlify(randomBytes(20)),
           multisigMastercopy: hexlify(randomBytes(20)),
@@ -43,10 +76,11 @@ describe('SequelizeConnextStore', () => {
     }
 
     // Verify setting the record works
-    await store.set([testRecord], false)
+    await store.set([testRecord1, testRecord2], false)
 
-    // Verify that retriving the same path returns the previously set value
-    const value = await store.get(testRecord.path)
-    expect(value).toMatchObject(testRecord.value)
+    // Verify that retriving the special case `channel` path properly nests records
+    const value = await store.get(`TEST_PREFIX/${testXpub}/channel`)
+    expect(value[multisigAddress1]).toMatchObject(testRecord1.value)
+    expect(value[multisigAddress2]).toMatchObject(testRecord2.value)
   })
 })
