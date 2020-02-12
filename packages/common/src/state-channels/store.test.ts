@@ -9,54 +9,44 @@ describe('SequelizeConnextStore', () => {
   let store: SequelizeConnextStore
 
   beforeEach(async () => {
+    // Prepare the database
     let sequelize = await database.connect(__DATABASE__)
-    // TODO: this might not be working, had to manually add the table into the db
+    Record.initialize(sequelize)
     await sequelize.sync({ force: true })
+
     store = new SequelizeConnextStore(sequelize)
-    await Record.destroy({ truncate: true })
   })
 
-  test('should store and retrieve a channel record', async () => {
-    const testStorePrefix = 'TEST_PREFIX'
-    const testXpub = 'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6'
-    const multisigAddress = hexlify(randomBytes(20))
-    const proxyFactory = hexlify(randomBytes(20))
-    const multisigMastercopy = hexlify(randomBytes(20))
+  test('Stores and retrieves a channel record', async () => {
+    const testXpub =
+      'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6'
     const userNeuteredExtendedKeys = [
       'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6',
       'xpub6F3J5akuWKZLr6xaa6whvSQuCrBMTt3dACSDS6Wo6SyUxntgpid17TDW7GtFoz362r19WVbevmpQz9HM7Y4qWBNmyYWm7Unj4mU7PBJ8vXD',
     ]
-    const testRecordPath =
-      `${testStorePrefix}/${testXpub}/channel/${testXpub}`
-    const testRecordValue = {
-      multisigAddress,
-      addresses: {
-        proxyFactory,
-        multisigMastercopy,
+
+    const testRecord = {
+      path: `TEST_PREFIX/${testXpub}/channel/${testXpub}`,
+      value: {
+        multisigAddress: hexlify(randomBytes(20)),
+        addresses: {
+          proxyFactory: hexlify(randomBytes(20)),
+          multisigMastercopy: hexlify(randomBytes(20)),
+        },
+        userNeuteredExtendedKeys,
+        proposedAppInstances: [],
+        appInstances: [],
+        monotonicNumProposedApps: 1,
+        singleAssetTwoPartyIntermediaryAgreements: [],
+        schemaVersion: 1,
       },
-      userNeuteredExtendedKeys,
-      proposedAppInstances: [],
-      appInstances: [],
-      monotonicNumProposedApps: 1,
-      singleAssetTwoPartyIntermediaryAgreements: [],
-      schemaVersion: 1,
     }
 
-    await store.set([{ path: testRecordPath, value: testRecordValue }], false)
+    // Verify setting the record works
+    await store.set([testRecord], false)
 
-    const retrieved = await store.get(testRecordPath)
-    expect(retrieved).toMatchObject({
-      multisigAddress,
-      addresses: {
-        proxyFactory,
-        multisigMastercopy,
-      },
-      userNeuteredExtendedKeys,
-      proposedAppInstances: [],
-      appInstances: [],
-      monotonicNumProposedApps: 1,
-      singleAssetTwoPartyIntermediaryAgreements: [],
-      schemaVersion: 1,
-    })
+    // Verify that retriving the same path returns the previously set value
+    const value = await store.get(testRecord.path)
+    expect(value).toMatchObject(testRecord.value)
   })
 })
