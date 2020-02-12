@@ -28,6 +28,16 @@ yarn prepublish
 
 ### Test
 
+The following environment variables need to be defined for the test suite to run:
+
+- `POSTGRES_TEST_HOST`
+- `POSTGRES_TEST_PORT` (optional)
+- `POSTGRES_TEST_USERNAME`
+- `POSTGRES_TEST_PASSWORD`
+- `POSTGRES_TEST_DATABASE`
+
+After that, the test suite can be run with:
+
 ```sh
 yarn test
 ```
