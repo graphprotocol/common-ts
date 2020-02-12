@@ -1,10 +1,13 @@
 import winston from 'winston'
 
-interface LoggerOptions {
+// Re-export the Logger type from winston
+export { Logger } from 'winston'
+
+export interface LoggerOptions {
   appName: string
 }
 
-export const createLogger = (options: LoggerOptions) => {
+export const createLogger = (options: LoggerOptions): winston.Logger => {
   let loggerColorizer = winston.format.colorize()
 
   let loggerTransport = new winston.transports.Console({
