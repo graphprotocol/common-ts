@@ -4,6 +4,7 @@ import { Store, StorePair } from '@connext/types'
 export class Record extends Sequelize.Model {
   public path!: string
   public value!: any
+
   static initialize(sequelize: Sequelize.Sequelize) {
     Record.init(
       {
@@ -26,8 +27,6 @@ export class SequelizeConnextStore implements Store {
 
   constructor(sequelize: Sequelize.Sequelize) {
     this.sequelize = sequelize
-
-    Record.initialize(sequelize)
   }
 
   async set(pairs: StorePair[], shouldBackup: boolean): Promise<void> {
