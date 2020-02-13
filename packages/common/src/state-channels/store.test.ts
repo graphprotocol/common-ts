@@ -75,7 +75,7 @@ describe('SequelizeConnextStore', () => {
       },
     }
 
-    // Verify setting the record works
+    // Verify setting multiple records at once works
     await store.set([testRecord1, testRecord2], false)
 
     // Verify that retriving the special case `channel` path properly nests records
