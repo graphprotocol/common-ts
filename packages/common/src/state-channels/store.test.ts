@@ -24,7 +24,7 @@ describe('SequelizeConnextStore', () => {
     }
 
     // Verify setting the record works
-    await store.set([testRecord], false)
+    await store.set([testRecord])
 
     // Verify that retriving the same path returns the previously set value
     const value = await store.get(testRecord.path)
@@ -76,11 +76,28 @@ describe('SequelizeConnextStore', () => {
     }
 
     // Verify setting multiple records at once works
-    await store.set([testRecord1, testRecord2], false)
+    await store.set([testRecord1, testRecord2])
 
     // Verify that retriving the special case `channel` path properly nests records
     const value = await store.get(`TEST_PREFIX/${testXpub}/channel`)
     expect(value[multisigAddress1]).toMatchObject(testRecord1.value)
     expect(value[multisigAddress2]).toMatchObject(testRecord2.value)
+  })
+
+  test('Cannot store a channel without a multisig', async () => {
+    const testXpub =
+      'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6'
+    const testRecord = {
+      path: `TEST_PREFIX/${testXpub}/channel/${hexlify(randomBytes(20))}`,
+      value: {
+        addresses: {
+          proxyFactory: hexlify(randomBytes(20)),
+          multisigMastercopy: hexlify(randomBytes(20)),
+        },
+      },
+    }
+
+    // Verify setting the record fails
+    expect(store.set([testRecord])).rejects.toThrowError(/multisigAddress is required for channel values/);
   })
 })
