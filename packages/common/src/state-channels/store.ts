@@ -31,9 +31,6 @@ export class SequelizeConnextStore implements Store {
 
   async set(pairs: StorePair[], shouldBackup: boolean): Promise<void> {
     for (const pair of pairs) {
-      // Wrapping the value into an object is necessary for Postgres bc the JSON column breaks
-      // if you use anything other than JSON (i.e. a raw string).
-      // In some cases, the cf core code is inserting strings as values instead of objects :(
       const record = Record.build({ path: pair.path, value: pair.value })
       await record.save()
     }
