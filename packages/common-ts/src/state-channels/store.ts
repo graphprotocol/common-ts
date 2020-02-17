@@ -31,8 +31,8 @@ export class SequelizeConnextStore implements Store {
 
   async set(pairs: StorePair[]): Promise<void> {
     for (const pair of pairs) {
-      if (pair.path.includes("channel") && !pair.value.multisigAddress) {
-        throw new Error("multisigAddress is required for channel values");
+      if (pair.path.includes('channel') && !pair.value.multisigAddress) {
+        throw new Error('multisigAddress is required for channel values')
       }
       const record = Record.build({ path: pair.path, value: pair.value })
       await record.save()
