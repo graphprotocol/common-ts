@@ -1,8 +1,8 @@
 # Common TypeScript library for Graph Protocol components
 
-[![Build Status](https://travis-ci.com/graphprotocol/common.svg?branch=master)](https://travis-ci.com/graphprotocol/common)
-[![codecov](https://codecov.io/gh/graphprotocol/common/branch/master/graph/badge.svg)](https://codecov.io/gh/graphprotocol/common)
-[![Documentation](https://img.shields.io/badge/API-documentation-brightgreen.svg)](https://graphprotocol.github.io/common/)
+[![Build Status](https://travis-ci.com/graphprotocol/common-ts.svg?branch=master)](https://travis-ci.com/graphprotocol/common-ts)
+[![codecov](https://codecov.io/gh/graphprotocol/common-ts/branch/master/graph/badge.svg)](https://codecov.io/gh/graphprotocol/common-ts)
+[![Documentation](https://img.shields.io/badge/API-documentation-brightgreen.svg)](https://graphprotocol.github.io/common-ts/)
 
 ## Development notes
 
@@ -12,7 +12,7 @@
   workspaces](https://classic.yarnpkg.com/en/docs/workspaces/).
 
 - [Chan](https://github.com/geut/chan/tree/master/packages/chan) is used to
-  maintain [changelogs](./packages/common/CHANGELOG.md).
+  maintain [changelogs](./packages/common-ts/CHANGELOG.md).
 
 ### Install dependencies
 
