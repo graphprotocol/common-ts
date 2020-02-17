@@ -19,8 +19,8 @@ describe('SequelizeConnextStore', () => {
 
   test('Stores and retrieves a record', async () => {
     const testRecord = {
-      path: "test123",
-      value: { data: "this is a test" }
+      path: 'test123',
+      value: { data: 'this is a test' },
     }
 
     // Verify setting the record works
@@ -98,6 +98,8 @@ describe('SequelizeConnextStore', () => {
     }
 
     // Verify setting the record fails
-    expect(store.set([testRecord])).rejects.toThrowError(/multisigAddress is required for channel values/);
+    expect(store.set([testRecord])).rejects.toThrowError(
+      /multisigAddress is required for channel values/,
+    )
   })
 })
