@@ -1,4 +1,4 @@
-import * as database from '..'
+import { database } from '..'
 import { SequelizeConnextStore, Record } from './store'
 import { randomBytes, hexlify } from 'ethers/utils'
 
