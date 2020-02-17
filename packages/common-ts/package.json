@@ -7,7 +7,6 @@
   "repository": "https://github.com/graphprotocol/common",
   "author": "Graph Protocol, Inc.",
   "license": "MIT/Apache",
-  "private": true,
   "scripts": {
     "prepublish": "tsc",
     "test": "jest --passWithNoTests --detectOpenHandles --verbose",
