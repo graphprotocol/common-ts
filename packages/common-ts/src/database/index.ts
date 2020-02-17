@@ -6,10 +6,11 @@ interface ConnectOptions {
   username: string
   password: string
   database: string
+  logging?: (sql: string, timing?: number) => void
 }
 
 export const connect = async (options: ConnectOptions) => {
-  let { host, port, username, password, database } = options
+  let { host, port, username, password, database, logging } = options
 
   // Use port 5432 by default
   port = port || 5432
@@ -26,6 +27,7 @@ export const connect = async (options: ConnectOptions) => {
       max: 10,
       min: 0,
     },
+    logging,
   })
 
   // Test the connection
