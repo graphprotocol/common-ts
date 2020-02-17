@@ -4,7 +4,7 @@
   "description": "Common TypeScript library for Graph Protocol components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/graphprotocol/common",
+  "repository": "https://github.com/graphprotocol/common-ts",
   "author": "Graph Protocol, Inc.",
   "license": "MIT/Apache",
   "scripts": {
