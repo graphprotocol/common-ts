@@ -5,9 +5,10 @@ import { HDNode } from 'ethers/utils'
 import { SequelizeConnextStore } from './store'
 
 interface StateChannelOptions {
-  network: 'rinkeby'
   sequelize: Sequelize
   mnemonic: string
+  ethereumProvider: string
+  connextNode: string
 }
 
 export const createStateChannel = async (options: StateChannelOptions) => {
@@ -23,7 +24,9 @@ export const createStateChannel = async (options: StateChannelOptions) => {
   // Key derivation function
   const keyGen = async (index: string) => hdNode.derivePath(index).privateKey
 
-  return await connext.connect(options.network, {
+  return await connext.connect({
+    ethProviderUrl: options.ethereumProvider,
+    nodeUrl: options.connextNode,
     store,
     keyGen,
     xpub,
