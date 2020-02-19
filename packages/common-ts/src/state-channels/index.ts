@@ -11,6 +11,7 @@ interface StateChannelOptions {
   mnemonic: string
   ethereumProvider: string
   connextNode: string
+  logLevel: number
 }
 
 export const createStateChannel = async (options: StateChannelOptions) => {
@@ -32,5 +33,6 @@ export const createStateChannel = async (options: StateChannelOptions) => {
     store,
     keyGen,
     xpub,
+    logLevel: options.logLevel,
   })
 }
