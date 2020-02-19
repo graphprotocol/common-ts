@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6] - 2020-02-19
+### Added
+- Optional `logLevel` option for `createStateChannel()`
+- Export `Record` model from `stateChannels` module
+- Implement `reset()` method of state channel store
+
+### Fixed
+- Upsert existing `Record`s instead of throwing
+
 ## [0.0.5] - 2020-02-19
 ### Changed
 - Bump `@connext/client` and `@connext/types` to 4.0.16
@@ -29,7 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.5...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/graphprotocol/common/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/graphprotocol/common/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/graphprotocol/common/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/graphprotocol/common/compare/v0.0.2...v0.0.3
