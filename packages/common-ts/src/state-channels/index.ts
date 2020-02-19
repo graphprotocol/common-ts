@@ -4,6 +4,8 @@ import { Store, CF_PATH } from '@connext/types'
 import { HDNode } from 'ethers/utils'
 import { SequelizeConnextStore } from './store'
 
+export { Record } from './store'
+
 interface StateChannelOptions {
   sequelize: Sequelize
   mnemonic: string
