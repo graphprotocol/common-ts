@@ -102,4 +102,85 @@ describe('SequelizeConnextStore', () => {
       /multisigAddress is required for channel values/,
     )
   })
+
+  test('Updating an existing record works', async () => {
+    // Write original record to the store
+    let record = {
+      path: 'test',
+      value: { data: 'this is a test' },
+    }
+    await store.set([record])
+
+    // Verify that it exists
+    expect(store.get('test')).resolves.toStrictEqual(record.value)
+
+    // Write an updated version of the record
+    let updatedRecord = {
+      path: 'test',
+      value: { data: 'this is _NOT_ a test (or maybe it is)' },
+    }
+    await store.set([updatedRecord])
+
+    // Verify that it has changed
+    expect(store.get('test')).resolves.toStrictEqual(updatedRecord.value)
+  })
+
+  test('Cannot find records after reset', async () => {
+    const testXpub =
+      'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6'
+    const userNeuteredExtendedKeys = [
+      'xpub6E3tjd9js7QMrBtYo7f157D7MwauL6MWdLzKekFaRBb3bvaQnUPjHKJcdNhiqSjhmwa6TcTjV1wSDTgvz52To2ZjhGMiQFbYie2N2LZpNx6',
+      'xpub6F3J5akuWKZLr6xaa6whvSQuCrBMTt3dACSDS6Wo6SyUxntgpid17TDW7GtFoz362r19WVbevmpQz9HM7Y4qWBNmyYWm7Unj4mU7PBJ8vXD',
+    ]
+
+    const multisigAddress1 = hexlify(randomBytes(20))
+    const testRecord1 = {
+      path: `TEST_PREFIX/${testXpub}/channel/${multisigAddress1}`,
+      value: {
+        multisigAddress: multisigAddress1,
+        addresses: {
+          proxyFactory: hexlify(randomBytes(20)),
+          multisigMastercopy: hexlify(randomBytes(20)),
+        },
+        userNeuteredExtendedKeys,
+        proposedAppInstances: [],
+        appInstances: [],
+        monotonicNumProposedApps: 1,
+        singleAssetTwoPartyIntermediaryAgreements: [],
+        schemaVersion: 1,
+      },
+    }
+
+    const multisigAddress2 = hexlify(randomBytes(20))
+    const testRecord2 = {
+      path: `TEST_PREFIX/${testXpub}/channel/${testXpub}`,
+      value: {
+        multisigAddress: multisigAddress2,
+        addresses: {
+          proxyFactory: hexlify(randomBytes(20)),
+          multisigMastercopy: hexlify(randomBytes(20)),
+        },
+        userNeuteredExtendedKeys,
+        proposedAppInstances: [],
+        appInstances: [],
+        monotonicNumProposedApps: 1,
+        singleAssetTwoPartyIntermediaryAgreements: [],
+        schemaVersion: 1,
+      },
+    }
+
+    // Write records
+    await store.set([testRecord1, testRecord2])
+
+    // Reset the store
+    await store.reset()
+
+    // Verify that retriving the channel path returns an empty object
+    expect(store.get(`TEST_PREFIX/${testXpub}/channel`)).resolves.toStrictEqual({})
+
+    // Verify that retrieving a specific record returns nothing
+    expect(
+      store.get(`TEST_PREFIX/${testXpub}/channel/${testXpub}`),
+    ).resolves.toBeUndefined()
+  })
 })
