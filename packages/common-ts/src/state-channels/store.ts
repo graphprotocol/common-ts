@@ -42,10 +42,9 @@ export class SequelizeConnextStore implements Store {
   }
 
   async get(path: string): Promise<any> {
-    let res: any
-    // special case for certain paths
+    // Special case for certain paths
     if (path.endsWith('channel')) {
-      res = await Record.findAll({
+      let res = await Record.findAll({
         where: {
           path: {
             [Sequelize.Op.like]: `%${path}%`,
@@ -61,17 +60,22 @@ export class SequelizeConnextStore implements Store {
         }
       })
       return records
+    } else {
+      let res = await Record.findOne({
+        where: {
+          path,
+        },
+      })
+      return !res ? undefined : res.value
     }
+  }
 
-    res = await Record.findOne({
-      where: {
-        path,
-      },
+  async reset(): Promise<void> {
+    // Remove all records from the table
+    await Record.destroy({
+      where: {},
+      truncate: true,
     })
-    if (!res) {
-      return undefined
-    }
-    return res.value
   }
 
   async restore(): Promise<StorePair[]> {
