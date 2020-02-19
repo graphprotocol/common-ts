@@ -34,8 +34,10 @@ export class SequelizeConnextStore implements Store {
       if (pair.path.includes('channel') && !pair.value.multisigAddress) {
         throw new Error('multisigAddress is required for channel values')
       }
-      const record = Record.build({ path: pair.path, value: pair.value })
-      await record.save()
+      await Record.upsert({
+        path: pair.path,
+        value: pair.value,
+      })
     }
   }
 
