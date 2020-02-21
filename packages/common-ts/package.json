@@ -13,8 +13,8 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@connext/client": "4.0.16",
-    "@connext/types": "4.0.16",
+    "@connext/client": "4.1.0",
+    "@connext/types": "4.1.0",
     "ethers": "4.0.41",
     "express": "^4.17.1",
     "pg": "^7.18.1",
