@@ -1,6 +1,6 @@
 import * as connext from '@connext/client'
 import { Sequelize } from 'sequelize'
-import { Store, CF_PATH } from '@connext/types'
+import { Store, CF_PATH, ILogger } from '@connext/types'
 import { HDNode } from 'ethers/utils'
 import { SequelizeConnextStore } from './store'
 
@@ -12,6 +12,7 @@ interface StateChannelOptions {
   ethereumProvider: string
   connextNode: string
   logLevel: number
+  logger?: ILogger
 }
 
 export const createStateChannel = async (options: StateChannelOptions) => {
@@ -34,5 +35,6 @@ export const createStateChannel = async (options: StateChannelOptions) => {
     keyGen,
     xpub,
     logLevel: options.logLevel,
+    logger: options.logger,
   })
 }
