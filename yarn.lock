@@ -151,13 +151,18 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@connext/cf-core@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@connext/cf-core/-/cf-core-5.0.2.tgz#438b92afbddcd0ce03766440cc6ff5251697c977"
-  integrity sha512-/3/C6g6NDWWQqJJ3tkPbmwSk6E/VaYOM6B+euvtDosmh5kpZtZHbRrIl0Y7rKCch8lg2uboKd+U76uN4N37IyA==
+"@connext/apps@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/apps/-/apps-5.1.1.tgz#38e710b04bec2fc485416b2ec16d16b3aa43137d"
+  integrity sha512-xp8cIoWYedwg62Op5vfohwychjGd8AXlmClsKWcBMspK5o8FgBnH2WdoiBjlikWK1p6uKOXq5enYm57yplaCRQ==
+
+"@connext/cf-core@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/cf-core/-/cf-core-5.1.1.tgz#cbab1750fd85a59db78777d2a78a33ffa979a903"
+  integrity sha512-EdfH82wglW6+uF+gZiUF4EiDUJ2LoZ+jY2THjDiPZn2zKllbdSdJnLHaZOe/dumj2W5oIJ6AAk1ZE0Vg1HwBNw==
   dependencies:
-    "@connext/contracts" "1.0.4"
-    "@connext/types" "5.0.2"
+    "@connext/contracts" "1.0.5"
+    "@connext/types" "5.1.1"
     "@openzeppelin/contracts" "2.5.0"
     ethers "4.0.45"
     eventemitter3 "4.0.0"
@@ -167,25 +172,26 @@
     typescript-memoize "1.0.0-alpha.3"
     uuid "3.4.0"
 
-"@connext/channel-provider@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@connext/channel-provider/-/channel-provider-5.0.2.tgz#3b9cd25f499d1b0397e6312fefdb84d226ed5db2"
-  integrity sha512-BoXZojzf9CxNPoz/upAW5juroqDGnw0Nw/AcAkLCRuqFb73NilFr624C4BaQXQ/54QT335lhVr0lnZXDc6ysMw==
+"@connext/channel-provider@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/channel-provider/-/channel-provider-5.1.1.tgz#43cb1fd852cd1f28aebac7c433a360aa59fccabb"
+  integrity sha512-SoVZSNAAHtsLXG0vLYgBJCK1Yu2owGtbJnqy8eVNZ9rw4NdY6nxthj46I8+HHmBibRuVt9/8sj2Zti8Dk9oTTQ==
   dependencies:
-    "@connext/types" "5.0.2"
+    "@connext/types" "5.1.1"
     eventemitter3 "4.0.0"
 
-"@connext/client@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@connext/client/-/client-5.0.2.tgz#0d01a43a1e4ac7ab20bb11da437d6200afad9aa6"
-  integrity sha512-wfEfPPbgU3r8wvexuefnZYMzJ95lalct7nuWZFiyWC8KIsICWpz5B/x6NnWFc2AbfY6mgKA2GTIprCofC3CRlg==
+"@connext/client@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/client/-/client-5.1.1.tgz#80522926ebd5f34fb8c544aee46e8527f2e5c5eb"
+  integrity sha512-aF/1/sJIctt3JHRdnUCTK/WTxSMqphLpnuzt0OGzVFZ8Y6pLeR7xHbV2R8iBBqLXBR/NhYNH5PWZxhOzLLJzRQ==
   dependencies:
-    "@connext/cf-core" "5.0.2"
-    "@connext/channel-provider" "5.0.2"
-    "@connext/crypto" "5.0.2"
-    "@connext/messaging" "5.0.2"
-    "@connext/store" "5.0.2"
-    "@connext/types" "5.0.2"
+    "@connext/apps" "5.1.1"
+    "@connext/cf-core" "5.1.1"
+    "@connext/channel-provider" "5.1.1"
+    "@connext/crypto" "5.1.1"
+    "@connext/messaging" "5.1.1"
+    "@connext/store" "5.1.1"
+    "@connext/types" "5.1.1"
     core-js "3.6.4"
     eccrypto "1.1.3"
     ethers "4.0.45"
@@ -196,54 +202,56 @@
     secp256k1 "3.8.0"
     uuid "3.4.0"
 
-"@connext/contracts@1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@connext/contracts/-/contracts-1.0.4.tgz#ddad1ef7f1561d79862f8557cc4b65a6c980f9d4"
-  integrity sha512-7MwMOZYZdqAjztlWK7i9kY8aM23I4dWUnf0tju6lsCtaLtsw+/YpczNqKEy2IROj9EufgJp4Otby/y7xEyeDIA==
-  dependencies:
-    "@connext/types" "4.0.4"
-    ethers "4.0.41"
-    ganache-cli "6.7.0"
-    openzeppelin-solidity "2.3.0"
-
-"@connext/crypto@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@connext/crypto/-/crypto-5.0.2.tgz#738819d8a69defa9d5aa7e82d6f9d4724e56a8e0"
-  integrity sha512-snlHJ6HN+Jg68tk25Km7mZNHPcKRuTd926/fe2M3QrsqS3hbTAbBjOuCWB6o5tuaaX0g9fGscKtOyVboTtlPQQ==
+"@connext/contracts@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/@connext/contracts/-/contracts-1.0.5.tgz#271552ce68bf482a70b6164c418965d8e2328b59"
+  integrity sha512-RcRtUmB8ERtnjG+HruUC6FTIa3ZW6mrIzExEZL1qp5xdAR09ZhPNDDr/r0awcMZhzacF8y0QUsNvm8h7grGt5A==
   dependencies:
     "@connext/types" "5.0.2"
-    eccrypto-js "4.3.5"
+    "@openzeppelin/contracts" "2.5.0"
+    ethers "4.0.45"
+    ganache-cli "6.8.2"
+    solc "0.5.11"
 
-"@connext/messaging@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@connext/messaging/-/messaging-5.0.2.tgz#818508a65205eb36a8e4686a538970e818128b3c"
-  integrity sha512-gNMB/8DO8nXoOZ+4wPOq1GBt72idluOo9vg1TQAOp53TrmhsLG+8NBVnpF04KjzhDqizmF1HBBM0Pt+09pBwnA==
+"@connext/crypto@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/crypto/-/crypto-5.1.1.tgz#ecab7a7e056b4c86461d26e7d3debc724e06d3c2"
+  integrity sha512-+ZrhZwCjk4LiQfhNEZfHOmWnb0PL8KSPnoYoaf6SIy3V1SvvgDaj0t0F4YBKVfQEsSBLb3YqqImn8UzigDhGCQ==
   dependencies:
-    "@connext/types" "5.0.2"
+    "@connext/types" "5.1.1"
+    eccrypto-js "4.4.0"
+
+"@connext/messaging@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/messaging/-/messaging-5.1.1.tgz#f33cb9e5d8ad2ae19d24b9db0534616a7f477b05"
+  integrity sha512-Px5DUFqBcLGkjtJhoie4bMGo3dm1kY+GZ3wkj3J1DCEFcMEdPxlzoJZMRV1JU+aKmeKeoVU3gRVrAFO9+uaVpQ==
+  dependencies:
+    "@connext/types" "5.1.1"
     ts-nats "1.2.4"
     websocket-nats "0.3.3"
 
-"@connext/store@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@connext/store/-/store-5.0.2.tgz#a2a1c43a820c81e4dde0390ba86d7d7f018f7c31"
-  integrity sha512-1iDGK5EqYeK8vraZUK1xYtRueFqOL5LZyZottjJTaNP7wTY3de/MBZ02xibyHeKNIQvRxXsm5C1AL0MKvy6M6A==
+"@connext/store@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/store/-/store-5.1.1.tgz#071865b10ca6acd85738a87c1c63cb91ed497a30"
+  integrity sha512-rUPIpoP+MNJPKX8KhawpobdSjZF3eOuVEh2a0n5P8mhq+Wa19iOYtITnPn+j8g8ldIIApAVxHKelPiiYlwiM/Q==
   dependencies:
-    "@connext/types" "5.0.2"
+    "@connext/types" "5.1.1"
     ethers "4.0.45"
     pisa-client "0.1.4-connext-beta.1"
     uuid "3.4.0"
 
-"@connext/types@4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@connext/types/-/types-4.0.4.tgz#11d8d60eaef69f412cb97d311c0c2f0eaf27dd28"
-  integrity sha512-Wp2EICYUWkYmQXiAr58CsUYKeMlfQLZEPlgN7OxnsM6Jdy0Q1iQHF7CTZkwufHu5gPKSxweB83jCvh5HKY4BOg==
-  dependencies:
-    ethers "4.0.41"
-
-"@connext/types@5.0.2", "@connext/types@^5.0.2":
+"@connext/types@5.0.2":
   version "5.0.2"
   resolved "https://registry.npmjs.org/@connext/types/-/types-5.0.2.tgz#fdbe83f537ef3ce9db96b4d26b678cca550450bf"
   integrity sha512-8vpTLsaf7M4GPLKSZex1+MKI43rAIhYNz3+cv9B6+0zcvNhSXc+mez/X6tFQ4L8C/32YpWspHOT66SacGb38mA==
+  dependencies:
+    ethers "4.0.45"
+    eventemitter3 "4.0.0"
+
+"@connext/types@5.1.1", "@connext/types@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@connext/types/-/types-5.1.1.tgz#2e771d93f0bf6776be568a2f8adb089304629ef5"
+  integrity sha512-7407ygowd9+eB8becRZXMz/QCjiWviQpGvrRc8wbDv5htZG+ntvRRv1rhv8WNc59dqvgT4oPC2eoTGXeTTJxmg==
   dependencies:
     ethers "4.0.45"
     eventemitter3 "4.0.0"
@@ -2342,6 +2350,11 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+command-exists@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.npmjs.org/command-exists/-/command-exists-1.2.8.tgz#715acefdd1223b9c9b37110a149c6392c2852291"
+  integrity sha512-PM54PkseWbiiD/mMsbvW351/u+dafwTJ0ye2qB60G1aGQP9j3xK2gmMDc+R34L3nDtx4qMCitXT75mkbkGJDLw==
+
 commander@~2.20.3:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
@@ -2899,10 +2912,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-eccrypto-js@4.3.5:
-  version "4.3.5"
-  resolved "https://registry.npmjs.org/eccrypto-js/-/eccrypto-js-4.3.5.tgz#4f5c0c21f45b8a185ca45bf518656572fa22de23"
-  integrity sha512-Fuus3sIfJiyNuPykNwI3ekju2RS03YTjbfkBuUjiMEP2ZfA4jfbCS7NS2aRWVE0Imdraa3v3LsyZFBYg6NZLBQ==
+eccrypto-js@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.npmjs.org/eccrypto-js/-/eccrypto-js-4.4.0.tgz#0b91ea0c64e80822308c736707c316020f2773a8"
+  integrity sha512-TTDKh6N7qeU9uyoFnghy59NKfRbm9LEZncAEt9oHaNoWFYMak+8Cuq9eO7rm1W765nEQqG8fZSmBaF4bBHTCcA==
   dependencies:
     aes-js "3.1.2"
     hash.js "1.1.7"
@@ -3230,21 +3243,6 @@ ethereumjs-util@6.1.0:
     rlp "^2.0.0"
     safe-buffer "^5.1.1"
     secp256k1 "^3.0.1"
-
-ethers@4.0.41:
-  version "4.0.41"
-  resolved "https://registry.yarnpkg.com/ethers/-/ethers-4.0.41.tgz#a0cff526f08c2e08c525cf82ef4483f6333b8000"
-  integrity sha512-QpW2CPZajquwiA7rVDozMksOuvdUBKIruamAakt0++EKBB/VWtLB9zSRZDInLDpp9fZYgOT/0trPD38r6CzLIg==
-  dependencies:
-    aes-js "3.0.0"
-    bn.js "^4.4.0"
-    elliptic "6.5.2"
-    hash.js "1.1.3"
-    js-sha3 "0.5.7"
-    scrypt-js "2.0.4"
-    setimmediate "1.0.4"
-    uuid "2.0.1"
-    xmlhttprequest "1.8.0"
 
 ethers@4.0.45:
   version "4.0.45"
@@ -3685,6 +3683,17 @@ from2@^2.1.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
 
+fs-extra@^0.30.0:
+  version "0.30.0"
+  resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-0.30.0.tgz#f233ffcc08d4da7d432daa449776989db1df93f0"
+  integrity sha1-8jP/zAjU2n1DLapEl3aYnbHfk/A=
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^2.1.0"
+    klaw "^1.0.0"
+    path-is-absolute "^1.0.0"
+    rimraf "^2.2.8"
+
 fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
@@ -3731,10 +3740,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-ganache-cli@6.7.0:
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/ganache-cli/-/ganache-cli-6.7.0.tgz#b59845578221bdf686cf124d007c5ee62e85a62f"
-  integrity sha512-9CZsClo9hl5MxGL7hkk14mie89Q94P0idh92jcV7LmppTYTCG7SHatuwcfqN7emFHArMt3fneN4QbH2do2N6Ow==
+ganache-cli@6.8.2:
+  version "6.8.2"
+  resolved "https://registry.npmjs.org/ganache-cli/-/ganache-cli-6.8.2.tgz#357b5ea93f013a7f0fce4ede1b8bec8613e95dd3"
+  integrity sha512-FgsJx/hHh7A1/fmSQpNT5jxZ3dYEal4zQMqYyA8Bm7S6MgrVO48hIjnROn2JteubHY8Rob8LzxMkhEvoQce7WA==
   dependencies:
     ethereumjs-util "6.1.0"
     source-map-support "0.5.12"
@@ -3923,7 +3932,7 @@ globby@^9.2.0:
     pify "^4.0.1"
     slash "^2.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2, graceful-fs@^4.2.3:
+graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@^4.2.0, graceful-fs@^4.2.2, graceful-fs@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
@@ -5083,6 +5092,13 @@ json5@2.x, json5@^2.1.0:
   dependencies:
     minimist "^1.2.0"
 
+jsonfile@^2.1.0:
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
+  integrity sha1-NzaitCi4e72gzIO1P6PWM6NcKug=
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
 jsonfile@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
@@ -5138,6 +5154,13 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
+klaw@^1.0.0:
+  version "1.3.1"
+  resolved "https://registry.npmjs.org/klaw/-/klaw-1.3.1.tgz#4088433b46b3b1ba259d78785d8e96f73ba02439"
+  integrity sha1-QIhDO0azsbolnXh4XY6W9zugJDk=
+  optionalDependencies:
+    graceful-fs "^4.1.9"
 
 kleur@^3.0.3:
   version "3.0.3"
@@ -5471,6 +5494,11 @@ memoizee@0.4.14:
     lru-queue "0.1"
     next-tick "1"
     timers-ext "^0.1.5"
+
+memorystream@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/memorystream/-/memorystream-0.3.1.tgz#86d7090b30ce455d63fbae12dda51a47ddcaf9b2"
+  integrity sha1-htcJCzDORV1j+64S3aUaR93K+bI=
 
 meow@^3.3.0:
   version "3.7.0"
@@ -6098,11 +6126,6 @@ onetime@^5.1.0:
   integrity sha512-5NcSkPHhwTVFIQN+TUqXoS5+dlElHXdpAWu9I0HP20YOtIi+aZ0Ct82jdlILDxjLEAWwvm+qj1m6aEtsDVmm6Q==
   dependencies:
     mimic-fn "^2.1.0"
-
-openzeppelin-solidity@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/openzeppelin-solidity/-/openzeppelin-solidity-2.3.0.tgz#1ab7b4cc3782a5472ed61eb740c56a8bfdd74119"
-  integrity sha512-QYeiPLvB1oSbDt6lDQvvpx7k8ODczvE474hb2kLXZBPKMsxKT1WxTCHBYrCU7kS7hfAku4DcJ0jqOyL+jvjwQw==
 
 optimist@^0.6.1:
   version "0.6.1"
@@ -6959,6 +6982,11 @@ require-directory@^2.1.1:
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
 
+require-from-string@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
+  integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
 require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
@@ -7050,7 +7078,7 @@ rimraf@2.6.3:
   dependencies:
     glob "^7.1.3"
 
-rimraf@^2.5.4, rimraf@^2.6.2, rimraf@^2.6.3:
+rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.2, rimraf@^2.6.3:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
   integrity sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
@@ -7427,6 +7455,20 @@ socks@~2.3.2:
   dependencies:
     ip "1.1.5"
     smart-buffer "^4.1.0"
+
+solc@0.5.11:
+  version "0.5.11"
+  resolved "https://registry.npmjs.org/solc/-/solc-0.5.11.tgz#5905261191d01befd78ef52610a006820022ee8f"
+  integrity sha512-F8avCCVDYnJzvIm/ITsU11GFNdFI4HaNsME+zw9lK5a3ojD3LZN2Op2cIfWg7w1HeRYRiMOU1dM77saX6jUIKw==
+  dependencies:
+    command-exists "^1.2.8"
+    fs-extra "^0.30.0"
+    js-sha3 "0.8.0"
+    memorystream "^0.3.1"
+    require-from-string "^2.0.0"
+    semver "^5.5.0"
+    tmp "0.0.33"
+    yargs "^13.2.0"
 
 sort-keys@^2.0.0:
   version "2.0.0"
@@ -7935,7 +7977,7 @@ timers-ext@^0.1.5:
     es5-ext "~0.10.46"
     next-tick "1"
 
-tmp@^0.0.33:
+tmp@0.0.33, tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
   integrity sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==
@@ -8606,7 +8648,7 @@ yargs-parser@^10.0.0:
   dependencies:
     camelcase "^4.1.0"
 
-yargs-parser@^13.1.0:
+yargs-parser@^13.1.0, yargs-parser@^13.1.1:
   version "13.1.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-13.1.1.tgz#d26058532aa06d365fe091f6a1fc06b2f7e5eca0"
   integrity sha512-oVAVsHz6uFrg3XQheFII8ESO2ssAf9luWuAd6Wexsu4F3OtIW0o8IribPXYrD4WC24LWtPrJlGy87y5udK+dxQ==
@@ -8646,6 +8688,22 @@ yargs@13.2.4:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.1.0"
+
+yargs@^13.2.0:
+  version "13.3.0"
+  resolved "https://registry.npmjs.org/yargs/-/yargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
+  integrity sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
+  dependencies:
+    cliui "^5.0.0"
+    find-up "^3.0.0"
+    get-caller-file "^2.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^2.0.0"
+    set-blocking "^2.0.0"
+    string-width "^3.0.0"
+    which-module "^2.0.0"
+    y18n "^4.0.0"
+    yargs-parser "^13.1.1"
 
 yargs@^14.2.2:
   version "14.2.2"
