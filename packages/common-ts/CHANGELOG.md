@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.13] - 2020-03-19
+### Changed
+- Bump `@connext/client` and `@connext/types` to 5.2.1
+
 ## [0.0.12] - 2020-03-11
 ### Added
 - Add optional `logger` option to createStateChannel
@@ -65,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.12...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.13...HEAD
+[0.0.13]: https://github.com/graphprotocol/common/compare/v0.0.12...v0.0.13
 [0.0.12]: https://github.com/graphprotocol/common/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/graphprotocol/common/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/graphprotocol/common/compare/v0.0.9...v0.0.10
