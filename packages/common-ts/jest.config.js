@@ -21,5 +21,9 @@ module.exports = {
         process.env.POSTGRES_TEST_DATABASE ||
         bail('POSTGRES_TEST_DATABASE is not defined'),
     },
+    __INDRA__: {
+      ethereumProvider: process.env.ETH_PROVIDER,
+      connextNode: process.env.CONNEXT_NODE,
+    },
   },
 }
