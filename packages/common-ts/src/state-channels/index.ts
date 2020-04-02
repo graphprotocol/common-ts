@@ -1,10 +1,15 @@
 import * as connext from '@connext/client'
 import { Sequelize } from 'sequelize'
-import { Store, CF_PATH, ILogger } from '@connext/types'
+import { CF_PATH, ILogger, StoreTypes } from '@connext/types'
 import { HDNode } from 'ethers/utils'
-import { SequelizeConnextStore } from './store'
-
-export { Record } from './store'
+import {
+  ConnextStore,
+  KeyValueStorage,
+  WrappedPostgresStorage,
+  DEFAULT_STORE_PREFIX,
+  DEFAULT_STORE_SEPARATOR,
+  DEFAULT_DATABASE_STORAGE_TABLE_NAME,
+} from '@connext/store'
 
 interface StateChannelOptions {
   sequelize: Sequelize
@@ -17,7 +22,20 @@ interface StateChannelOptions {
 
 export const createStateChannel = async (options: StateChannelOptions) => {
   // Create Sequelize-based store
-  let store = new SequelizeConnextStore(options.sequelize)
+  // create low level store just to access the `sync` function
+  // TODO: can remove this when we have a better idea around syncing
+  // this should be the "prod-ready" initialization:
+  // ```
+  // const store = new ConnextStore(StoreTypes.Postgres, { sequelize: options.sequelize })
+  // ```
+  const wrappedPostgresStorage = new WrappedPostgresStorage(
+    DEFAULT_STORE_PREFIX,
+    DEFAULT_STORE_SEPARATOR,
+    DEFAULT_DATABASE_STORAGE_TABLE_NAME,
+    options.sequelize,
+  )
+  const store = new ConnextStore(StoreTypes.Postgres, { storage: wrappedPostgresStorage })
+  await wrappedPostgresStorage.syncModels();
 
   // Create in-memory HDWallet from the mnemonic
   const hdNode = HDNode.fromMnemonic(options.mnemonic).derivePath(CF_PATH)
