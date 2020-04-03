@@ -22,12 +22,6 @@ interface StateChannelOptions {
 
 export const createStateChannel = async (options: StateChannelOptions) => {
   // Create Sequelize-based store
-  // create low level store just to access the `sync` function
-  // TODO: can remove this when we have a better idea around syncing
-  // this should be the "prod-ready" initialization:
-  // ```
-  // const store = new ConnextStore(StoreTypes.Postgres, { sequelize: options.sequelize })
-  // ```
   const wrappedPostgresStorage = new WrappedPostgresStorage(
     DEFAULT_STORE_PREFIX,
     DEFAULT_STORE_SEPARATOR,
