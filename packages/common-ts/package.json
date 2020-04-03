@@ -1,6 +1,6 @@
 {
   "name": "@graphprotocol/common-ts",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Common TypeScript library for Graph Protocol components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@connext/client": "^6.0.0-alpha.7",
-    "@connext/types": "^6.0.0-alpha.7",
     "@connext/store": "^6.0.0-alpha.7",
+    "@connext/types": "^6.0.0-alpha.7",
     "ethers": "4.0.45",
     "express": "^4.17.1",
     "pg": "^7.18.1",
