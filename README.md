@@ -37,7 +37,7 @@ The following environment variables need to be defined for the test suite to run
 - `POSTGRES_TEST_DATABASE`
 
 The following are optional for testing the state channel client:
-- `ETH_PROVIDER`
+- `ETHEREUM_PROVIDER`
 - `CONNEXT_NODE`
 
 After that, the test suite can be run with:

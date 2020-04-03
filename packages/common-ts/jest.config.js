@@ -22,7 +22,7 @@ module.exports = {
         bail('POSTGRES_TEST_DATABASE is not defined'),
     },
     __INDRA__: {
-      ethereumProvider: process.env.ETH_PROVIDER,
+      ethereumProvider: process.env.ETHEREUM_PROVIDER,
       connextNode: process.env.CONNEXT_NODE,
     },
   },
