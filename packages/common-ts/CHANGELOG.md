@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.17] - 2020-04-07
+### Added
+- Add `connextMessaging` option to `createStateChannel`
+
 ## [0.0.16] - 2020-04-07
 ### Changed
 - Update to Connext 6.0.0-alpha.9
@@ -81,7 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.16...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.17...HEAD
+[0.0.17]: https://github.com/graphprotocol/common/compare/v0.0.16...v0.0.17
 [0.0.16]: https://github.com/graphprotocol/common/compare/v0.0.15...v0.0.16
 [0.0.15]: https://github.com/graphprotocol/common/compare/v0.0.14...v0.0.15
 [0.0.14]: https://github.com/graphprotocol/common/compare/v0.0.13...v0.0.14
