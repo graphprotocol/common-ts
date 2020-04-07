@@ -16,6 +16,7 @@ interface StateChannelOptions {
   mnemonic: string
   ethereumProvider: string
   connextNode: string
+  connextMessaging: string
   logLevel: number
   logger?: ILogger
 }
@@ -43,6 +44,7 @@ export const createStateChannel = async (options: StateChannelOptions) => {
   return await connext.connect({
     ethProviderUrl: options.ethereumProvider,
     nodeUrl: options.connextNode,
+    messagingUrl: options.connextMessaging,
     store,
     keyGen,
     xpub,
