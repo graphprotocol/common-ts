@@ -151,19 +151,19 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@connext/apps@6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/apps/-/apps-6.0.0-alpha.8.tgz#d4fa74203a9e21b9a1c3f9be121c85a08a2c291c"
-  integrity sha512-BE1Nu3cDmQ3fPsW7QPM6xhMYPjBYL/neHmp0FLJNFRve3QNEGwPl/r+hHQGIHc5R8AX/LhwlyeSC63mW+IbLkg==
+"@connext/apps@6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/apps/-/apps-6.0.0-alpha.9.tgz#fb8e9ee8301bbb6dc0bf13d5fd9c262b789e4550"
+  integrity sha512-qjfFZiI/77OEfSZhpMHLznukmgEwDzg3ugYSHORMy7MAzDuNHfLOJY0ifDzCodtO6xkrfMoDMx+ESiH/c3e0/w==
 
-"@connext/cf-core@6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/cf-core/-/cf-core-6.0.0-alpha.8.tgz#e2ae9a725ccd8f4a06c9cf3fdc1bb7ad31ed4661"
-  integrity sha512-29UTZiMSWokLUQ5Oc9c1nJQKssiOZl/xiXzvjj/PAF50cgLDRUvhLo0L/YsWYniaT0tyF58IJu0nc5HkXYu8OA==
+"@connext/cf-core@6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/cf-core/-/cf-core-6.0.0-alpha.9.tgz#0b0d38096ed4cd41b7f33f4a4ac7d355a0db2861"
+  integrity sha512-34VxDPvf3UpgbjLDB2ryo2cB1UX4wtCPDkBbXYnLH9bwdg7DRdYpV2UgAAO+RNk33lSThW0S0/zYfXngK+7O0Q==
   dependencies:
     "@connext/contracts" "1.0.5"
-    "@connext/crypto" "6.0.0-alpha.8"
-    "@connext/types" "6.0.0-alpha.8"
+    "@connext/crypto" "6.0.0-alpha.9"
+    "@connext/types" "6.0.0-alpha.9"
     "@openzeppelin/contracts" "2.5.0"
     ethers "4.0.46"
     eventemitter3 "4.0.0"
@@ -173,27 +173,27 @@
     typescript-memoize "1.0.0-alpha.3"
     uuid "3.4.0"
 
-"@connext/channel-provider@6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/channel-provider/-/channel-provider-6.0.0-alpha.8.tgz#7088988cf5319b6db7e7cce71b8278625e39d099"
-  integrity sha512-wRKbjDXhn255EvKTycW0kB5axTzrbNCZhVxnl7wXbl2ovuZNIs5nbLZTA/9AcNyXr8UW4zIedwqalG9yRfDh1w==
+"@connext/channel-provider@6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/channel-provider/-/channel-provider-6.0.0-alpha.9.tgz#ae93189fc61c0eb1e538476dc98f7922315811eb"
+  integrity sha512-8P44L4j50WNY/MkJL4dbflIX+nHhcHjmwGsrHX8aRh/7msBYyxSZhZLAz/Bs1dZ0ObzEey3sdu+vGMTsBS3omw==
   dependencies:
-    "@connext/types" "6.0.0-alpha.8"
+    "@connext/types" "6.0.0-alpha.9"
     eventemitter3 "4.0.0"
 
-"@connext/client@^6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/client/-/client-6.0.0-alpha.8.tgz#069432682d3d9b51d6370363305b3e933a33d754"
-  integrity sha512-j7qhKJx2LvZCKOC2fFuZhRY12mmqbJAzYSF59g3pdLzCvnX7a232OeDEz9l52zXAdJb5uRa0o92YzJUACFo1dA==
+"@connext/client@^6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/client/-/client-6.0.0-alpha.9.tgz#9aaa6199668b20f9309d7beba19b3155813c0182"
+  integrity sha512-mXt1spq6o+G56Yyap/Fy2O9PLLxTvPJpV8kbyzBU94tZ9j15rgZUlZosoZD+EyQmdkrQnc6lUKQ7bWT/eZEb/w==
   dependencies:
-    "@connext/apps" "6.0.0-alpha.8"
-    "@connext/cf-core" "6.0.0-alpha.8"
-    "@connext/channel-provider" "6.0.0-alpha.8"
+    "@connext/apps" "6.0.0-alpha.9"
+    "@connext/cf-core" "6.0.0-alpha.9"
+    "@connext/channel-provider" "6.0.0-alpha.9"
     "@connext/contracts" "1.0.5"
-    "@connext/crypto" "6.0.0-alpha.8"
-    "@connext/messaging" "6.0.0-alpha.8"
-    "@connext/store" "6.0.0-alpha.8"
-    "@connext/types" "6.0.0-alpha.8"
+    "@connext/crypto" "6.0.0-alpha.9"
+    "@connext/messaging" "6.0.0-alpha.9"
+    "@connext/store" "6.0.0-alpha.9"
+    "@connext/types" "6.0.0-alpha.9"
     axios "0.19.2"
     core-js "3.6.4"
     ethers "4.0.46"
@@ -214,28 +214,28 @@
     ganache-cli "6.8.2"
     solc "0.5.11"
 
-"@connext/crypto@6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/crypto/-/crypto-6.0.0-alpha.8.tgz#d223da3f36f7132399ea0b517ce2155f14eabf90"
-  integrity sha512-9PGgquQCJE3M3JE7KaHZfblwFA590dOkNoFR9GJHVxvL9t5bsDo/lnHpzZY+ZSW7CTWgHYkfwnjQLToTX8zZOA==
+"@connext/crypto@6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/crypto/-/crypto-6.0.0-alpha.9.tgz#bc08f8e488f03114d0db6db691d32f23b44c16a8"
+  integrity sha512-9XxY2Hc6gICumhxrE75berVL0gB4Hkk1vN4KrdUCP44O9fdvB/hz3awWq3hnwkNG7ltp55k89t6NUorppieUfw==
   dependencies:
-    "@connext/types" "6.0.0-alpha.8"
+    "@connext/types" "6.0.0-alpha.9"
     eccrypto-js "4.5.2"
 
-"@connext/messaging@6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/messaging/-/messaging-6.0.0-alpha.8.tgz#00dab45a63a8bbb7571b2f22f1d246895afcff4b"
-  integrity sha512-hi1gE7V/AnvXImvL4IyjRxkGwO7fT2fsnWlq/E9ADByxEYTej7pphrmDU2dju//qaoeBZLr7Lqb39OGc0AOjeg==
+"@connext/messaging@6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/messaging/-/messaging-6.0.0-alpha.9.tgz#d9895baf7c9cd1f46f0dbe47e0073aa1ea97db5c"
+  integrity sha512-TofoWH2BlKxu0NcYFxOpXzuR7UU+Uwsaj6XmHv/mKkSWiZACm44S5yntmv+A+rFbVkgnDa4FaW/qMgv6FgoqYw==
   dependencies:
-    "@connext/types" "6.0.0-alpha.8"
+    "@connext/types" "6.0.0-alpha.9"
     ts-natsutil "1.0.4"
 
-"@connext/store@6.0.0-alpha.8", "@connext/store@^6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/store/-/store-6.0.0-alpha.8.tgz#6eef03b388186956220f866dcf3d3f15b0652f3c"
-  integrity sha512-aFGQENDfEA1vy4A9sOlrRlnnL5aa4Ghu8yzQYAbSv2EYzV+PPIi+cmrBNiV3df1dG11SwCDDHsgSGtfdymR5zQ==
+"@connext/store@6.0.0-alpha.9", "@connext/store@^6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/store/-/store-6.0.0-alpha.9.tgz#7b77d45487c8f375154c20e1c0be4f166a303ced"
+  integrity sha512-SFLlUp4INq+Rx+87d0p7XWSIK2JYjmwWhy5FBHQVowYv+2IkKZZF7iaZcwi3TEmR2fSaNkGp/dWB0cOIF/wX+w==
   dependencies:
-    "@connext/types" "6.0.0-alpha.8"
+    "@connext/types" "6.0.0-alpha.9"
     ethers "4.0.46"
     localStorage "1.0.4"
     pg "^8.0.0"
@@ -252,10 +252,10 @@
     ethers "4.0.45"
     eventemitter3 "4.0.0"
 
-"@connext/types@6.0.0-alpha.8", "@connext/types@^6.0.0-alpha.8":
-  version "6.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@connext/types/-/types-6.0.0-alpha.8.tgz#e9c0d5040ffd26c90ed42d4dd46832a4878eb974"
-  integrity sha512-z+6fmZ8g9FLqvpYvbdd3DjkMJf1GF+rlwAbUtaX4i4t0qHmSm0JMfwm7PyMtQikhSKTlAkgIstl39MB8j08UAA==
+"@connext/types@6.0.0-alpha.9", "@connext/types@^6.0.0-alpha.9":
+  version "6.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@connext/types/-/types-6.0.0-alpha.9.tgz#66d072262fc2d73b11bf106684b5c34a180c4a4b"
+  integrity sha512-ranOkRUWtieaG4ltMIuPsBf3ihw8dNjxy2j5gqB5iecRGLY7vJ+FChRqg1tbcVPOmb52San2QNaEzmUhaMfQpg==
 
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
@@ -7016,8 +7016,6 @@ read@1, read@~1.0.1:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/read/-/read-1.0.7.tgz#b3da19bd052431a97671d44a42634adf710b40c4"
   integrity sha1-s9oZvQUkMal2cdRKQmNK33ELQMQ=
-  dependencies:
-    mute-stream "~0.0.4"
 
 "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.5, readable-stream@^2.3.6, readable-stream@~2.3.6:
   version "2.3.7"
