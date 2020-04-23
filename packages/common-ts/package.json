@@ -13,10 +13,10 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@connext/client": "6.0.3",
-    "@connext/store": "6.0.3",
-    "@connext/types": "6.0.3",
-    "ethers": "4.0.46",
+    "@connext/client": "6.0.9",
+    "@connext/store": "6.0.9",
+    "@connext/types": "6.0.9",
+    "ethers": "4.0.47",
     "express": "^4.17.1",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
