@@ -2,7 +2,6 @@ import * as connext from '@connext/client'
 import { Sequelize } from 'sequelize'
 import { ILogger, StoreTypes } from '@connext/types'
 import { ConnextStore, WrappedPostgresStorage } from '@connext/store'
-import { Wallet } from 'ethers'
 
 interface StateChannelOptions {
   sequelize: Sequelize
