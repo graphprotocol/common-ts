@@ -1,7 +1,7 @@
 import * as connext from '@connext/client'
 import { Sequelize } from 'sequelize'
-import { ILogger, StoreTypes } from '@connext/types'
-import { ConnextStore, WrappedPostgresStorage } from '@connext/store'
+import { ILogger } from '@connext/types'
+import { getPostgresStore } from '@connext/store'
 
 interface StateChannelOptions {
   sequelize: Sequelize
@@ -11,18 +11,12 @@ interface StateChannelOptions {
   logLevel: number
   logger?: ILogger
   privateKey: string
+  storePrefix?: string // for multiple channels to share a sequelize instance
 }
 
 export const createStateChannel = async (options: StateChannelOptions) => {
   // Create Sequelize-based store
-  const wrappedPostgresStorage = new WrappedPostgresStorage(
-    undefined, // use default
-    undefined, // use default
-    undefined, // use default
-    options.sequelize,
-  )
-  const store = new ConnextStore(StoreTypes.Postgres, { storage: wrappedPostgresStorage })
-  await wrappedPostgresStorage.syncModels()
+  const store = getPostgresStore(options.sequelize, options.storePrefix)
 
   return await connext.connect({
     ethProviderUrl: options.ethereumProvider,

@@ -1,4 +1,3 @@
-import { Sequelize } from 'sequelize/types'
 import { connect as dbConnect } from '../database'
 import { createStateChannel } from '.'
 import { Wallet } from 'ethers'
@@ -19,7 +18,7 @@ describe('State Channel', () => {
     const connextClient = await createStateChannel({
       ...__INDRA__,
       sequelize,
-      mnemonic: Wallet.createRandom().mnemonic,
+      privateKey: Wallet.createRandom().privateKey,
       logLevel: 3,
     })
     expect(connextClient.multisigAddress).toBeTruthy()
