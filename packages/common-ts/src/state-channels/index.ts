@@ -6,12 +6,12 @@ import { Wallet } from 'ethers'
 
 interface StateChannelOptions {
   sequelize: Sequelize
-  mnemonic: string
   ethereumProvider: string
   connextNode: string
   connextMessaging: string
   logLevel: number
   logger?: ILogger
+  privateKey: string
 }
 
 export const createStateChannel = async (options: StateChannelOptions) => {
@@ -25,17 +25,12 @@ export const createStateChannel = async (options: StateChannelOptions) => {
   const store = new ConnextStore(StoreTypes.Postgres, { storage: wrappedPostgresStorage })
   await wrappedPostgresStorage.syncModels()
 
-  // Create in-memory wallet from the mnemonic
-  // We can replace this with just a private key if we don't want to instantiate
-  // with a mnemonic
-  const wallet = Wallet.fromMnemonic(options.mnemonic)
-
   return await connext.connect({
     ethProviderUrl: options.ethereumProvider,
     nodeUrl: options.connextNode,
     messagingUrl: options.connextMessaging,
     store,
-    signer: wallet.privateKey,
+    signer: options.privateKey,
     logLevel: options.logLevel,
     logger: options.logger,
   })
