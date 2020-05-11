@@ -1,6 +1,6 @@
 {
   "name": "@graphprotocol/common-ts",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Common TypeScript library for Graph Protocol components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
