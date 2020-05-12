@@ -28,7 +28,7 @@ const encodeReceipt = (receipt: Receipt): string =>
     [receipt.requestCID, receipt.responseCID, receipt.subgraphID],
   )
 
-interface Attestation {
+export interface Attestation {
   requestCID: string
   responseCID: string
   subgraphID: string
