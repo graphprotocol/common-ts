@@ -1,5 +1,12 @@
-import { keccak256, toUtf8Bytes, splitSignature } from 'ethers/utils'
-import { Signer } from 'ethers'
+import {
+  keccak256,
+  toUtf8Bytes,
+  splitSignature,
+  SigningKey,
+  joinSignature,
+  Arrayish,
+  HDNode,
+} from 'ethers/utils'
 import * as eip712 from './eip712'
 
 const RECEIPT_TYPE_HASH = keccak256(
@@ -21,7 +28,7 @@ const encodeReceipt = (receipt: Receipt): string =>
     [receipt.requestCID, receipt.responseCID, receipt.subgraphID],
   )
 
-interface SignedAttestation {
+interface Attestation {
   requestCID: string
   responseCID: string
   subgraphID: string
@@ -30,12 +37,12 @@ interface SignedAttestation {
   s: string
 }
 
-export const createSignedAttestation = async (
-  signer: Signer,
+export const createAttestation = async (
+  signer: Arrayish | HDNode.HDNode,
   chainId: number,
   disputeManagerAddress: string,
   receipt: Receipt,
-): Promise<SignedAttestation> => {
+): Promise<Attestation> => {
   let domainSeparator = eip712.domainSeparator({
     name: 'Graph Protocol',
     version: '0',
@@ -46,8 +53,9 @@ export const createSignedAttestation = async (
 
   let encodedReceipt = encodeReceipt(receipt)
   let message = eip712.encode(domainSeparator, encodedReceipt)
-  let signature = await signer.signMessage(keccak256(message))
-  let { r, s, v } = splitSignature(signature)
+  let messageHash = keccak256(message)
+  let signingKey = new SigningKey(signer)
+  let { r, s, v } = signingKey.signDigest(messageHash)
 
   return {
     requestCID: receipt.requestCID,
