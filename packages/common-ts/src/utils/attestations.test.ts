@@ -1,10 +1,10 @@
-import { createSignedAttestation } from './attestations'
+import { createAttestation } from './attestations'
 import { Wallet } from 'ethers'
 import { hexlify } from 'ethers/utils'
 import * as bs58 from 'bs58'
 
 describe('Attestations', () => {
-  test('signed attestations are correct', async () => {
+  test('attestations are correct', async () => {
     let mnemonic =
       'coyote tattoo slush ball cluster culture bleak news when action cover effort'
 
@@ -17,8 +17,8 @@ describe('Attestations', () => {
     }
 
     let signer = Wallet.fromMnemonic(mnemonic)
-    let attestation = await createSignedAttestation(
-      signer,
+    let attestation = await createAttestation(
+      signer.privateKey,
       1,
       '0x0000000000000000000000000000000000000000',
       receipt,
@@ -28,9 +28,9 @@ describe('Attestations', () => {
       requestCID: receipt.requestCID,
       responseCID: receipt.responseCID,
       subgraphID: receipt.subgraphID,
-      v: 27,
-      r: '0x406f6cc3857a1f94ae0f51fa2c50a24306c0e0165f6816871c1b7ce45ab45449',
-      s: '0x4d80d68aa70e191140e24ae6bb2b7acb170cbae1b44a49a4f0f0a63780fb7951',
+      v: 28,
+      r: '0x5eb1e2428518b5fac8904e3239b6bda39cd52ecd054b271b94ae6145976c4ef3',
+      s: '0x38f0f5c725bef4c799d440a2b846d09ab268b23fd363964445643267d789cfd2',
     })
   })
 })
