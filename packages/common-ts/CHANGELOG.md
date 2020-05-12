@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.27] - 2020-05-12
+### Changed
+- Reorganization attestation code and export Attestation interface
+
 ## [0.0.26] - 2020-05-12
 ### Added
 - Add dependency on bs58
@@ -120,7 +124,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.26...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.27...HEAD
+[0.0.27]: https://github.com/graphprotocol/common/compare/v0.0.26...v0.0.27
 [0.0.26]: https://github.com/graphprotocol/common/compare/v0.0.25...v0.0.26
 [0.0.25]: https://github.com/graphprotocol/common/compare/v0.0.24...v0.0.25
 [0.0.24]: https://github.com/graphprotocol/common/compare/v0.0.23...v0.0.24
