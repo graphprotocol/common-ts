@@ -1,12 +1,4 @@
-import {
-  keccak256,
-  toUtf8Bytes,
-  splitSignature,
-  SigningKey,
-  joinSignature,
-  Arrayish,
-  HDNode,
-} from 'ethers/utils'
+import { keccak256, toUtf8Bytes, SigningKey, Arrayish, HDNode } from 'ethers/utils'
 import * as eip712 from './eip712'
 
 const RECEIPT_TYPE_HASH = keccak256(
