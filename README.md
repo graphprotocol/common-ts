@@ -1,6 +1,6 @@
 # Common TypeScript library for Graph Protocol components
 
-[![Build Status](https://travis-ci.com/graphprotocol/common-ts.svg?branch=master)](https://travis-ci.com/graphprotocol/common-ts)
+[![CI](https://github.com/graphprotocol/common-ts/workflows/CI/badge.svg)](https://github.com/graphprotocol/common-ts/actions?query=workflow%3ACI)
 [![codecov](https://codecov.io/gh/graphprotocol/common-ts/branch/master/graph/badge.svg)](https://codecov.io/gh/graphprotocol/common-ts)
 [![Documentation](https://img.shields.io/badge/API-documentation-brightgreen.svg)](https://graphprotocol.github.io/common-ts/)
 
