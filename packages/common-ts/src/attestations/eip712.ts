@@ -11,8 +11,23 @@ export const typeHash = (typeSignature: string) => keccak256(toUtf8Bytes(typeSig
 //
 // See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#definition-of-encodedata
 // for details.
-const encodeData = (types: string[], values: any[]): string =>
-  defaultAbiCoder.encode(types, values)
+const encodeData = (types: string[], values: any[]): string => {
+  let transformedTypes = []
+  let transformedValues = []
+
+  // Values of types `bytes` and `strings` need to be hashed using keccak256
+  for (let i = 0; i < types.length; i++) {
+    if (types[i] === 'string' || types[i] === 'bytes') {
+      transformedTypes[i] = 'bytes32'
+      transformedValues[i] = keccak256(toUtf8Bytes(values[i]))
+    } else {
+      transformedTypes[i] = types[i]
+      transformedValues[i] = values[i]
+    }
+  }
+
+  return defaultAbiCoder.encode(transformedTypes, transformedValues)
+}
 
 // Hashes a struct based on the hash of a type signature (see `typeHash`),
 // a list of struct field types and unencoded values for these fields.
