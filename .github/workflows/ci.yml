@@ -28,7 +28,7 @@ jobs:
     - name: Clone Indra (Connext)
       run: cd /tmp/ && git clone https://github.com/connext/simple-docker
     - name: Run Connext in Docker
-      run: cd /tmp/ && docker-compose up -d && sleep 10
+      run: cd /tmp/simple-docker && docker-compose up -d && sleep 10
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
