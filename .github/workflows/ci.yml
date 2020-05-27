@@ -28,7 +28,7 @@ jobs:
     - name: Install Ganache
       run: sudo npm install -g ganache-cli
     - name: Run Ganache
-      run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -i 4447 --defaultBalanceEther="1000000000" &
+      run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -i 4447 --defaultBalanceEther="1000000000" -h 0.0.0.0 &
     - name: Clone Indra (Connext)
       run: cd /tmp/ && git clone https://github.com/connext/simple-docker
     - name: Deploy Connext contracts
@@ -47,3 +47,6 @@ jobs:
         POSTGRES_TEST_DATABASE: test
         POSTGRES_TEST_USERNAME: test
         POSTGRES_TEST_PASSWORD: test
+        INDRA_CONNEXT_MESSAGING: nats://localhost:4222
+        INDRA_CONNEXT_NODE: http://localhost:8080
+        ETHEREUM_PROVIDER: http://localhost:8545
