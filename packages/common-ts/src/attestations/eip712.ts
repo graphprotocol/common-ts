@@ -1,4 +1,4 @@
-import { solidityKeccak256, defaultAbiCoder, keccak256, toUtf8Bytes } from 'ethers/utils'
+import { defaultAbiCoder, keccak256, toUtf8Bytes } from 'ethers/utils'
 
 // Hashes a type signature based on the `typeHash` defined on
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#definition-of-hashstruct.
@@ -19,7 +19,9 @@ const encodeData = (types: string[], values: any[]): string =>
 //
 // NOTE: Does not support recursion yet.
 export const hashStruct = (typeHash: string, types: string[], values: any[]): string =>
-  solidityKeccak256(['bytes32', 'bytes'], [typeHash, encodeData(types, values)])
+  keccak256(
+    defaultAbiCoder.encode(['bytes32', 'bytes'], [typeHash, encodeData(types, values)]),
+  )
 
 const EIP712_DOMAIN_TYPE_HASH = typeHash(
   'EIP712Domain(string name,string version,uint256 chainId,address verifyingContract,bytes32 salt)',
