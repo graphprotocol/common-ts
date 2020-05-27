@@ -26,7 +26,7 @@ jobs:
         postgresql user: test
         postgresql password: test
     - name: Install Ganache
-      run: npm install -g ganache-cli
+      run: sudo npm install -g ganache-cli
     - name: Run Ganache
       run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -i 4447 --defaultBalanceEther="1000000000" &
     - name: Clone Indra (Connext)
