@@ -1,8 +1,8 @@
 import { keccak256, toUtf8Bytes, SigningKey, Arrayish, HDNode } from 'ethers/utils'
 import * as eip712 from './eip712'
 
-const RECEIPT_TYPE_HASH = keccak256(
-  toUtf8Bytes('Receipt(bytes32 requestCID,bytes32 responseCID,bytes32 subgraphID)'),
+const RECEIPT_TYPE_HASH = eip712.typeHash(
+  'Receipt(bytes32 requestCID,bytes32 responseCID,bytes32 subgraphID)',
 )
 
 export interface Receipt {
@@ -42,7 +42,6 @@ export const createAttestation = async (
     verifyingContract: disputeManagerAddress,
     salt: SALT,
   })
-
   let encodedReceipt = encodeReceipt(receipt)
   let message = eip712.encode(domainSeparator, encodedReceipt)
   let messageHash = keccak256(message)
