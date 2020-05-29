@@ -33,10 +33,9 @@ const encodeData = (types: string[], values: any[]): string => {
 // a list of struct field types and unencoded values for these fields.
 //
 // NOTE: Does not support recursion yet.
-export const hashStruct = (typeHash: string, types: string[], values: any[]): string =>
-  keccak256(
-    defaultAbiCoder.encode(['bytes32', 'bytes'], [typeHash, encodeData(types, values)]),
-  )
+export const hashStruct = (typeHash: string, types: string[], values: any[]) => {
+  return keccak256(encodeData(['bytes32', ...types], [typeHash, ...values]))
+}
 
 const EIP712_DOMAIN_TYPE_HASH = typeHash(
   'EIP712Domain(string name,string version,uint256 chainId,address verifyingContract,bytes32 salt)',
