@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.30] - 2020-06-01
+### Changed
+- Fix hashStruct EIP712 function
+
 ## [0.0.28] - 2020-05-15
 ### Changed
 - Update to Connext 6.5.0
@@ -128,7 +132,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.28...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.30...HEAD
+[0.0.30]: https://github.com/graphprotocol/common/compare/v0.0.28...v0.0.30
 [0.0.28]: https://github.com/graphprotocol/common/compare/v0.0.27...v0.0.28
 [0.0.27]: https://github.com/graphprotocol/common/compare/v0.0.26...v0.0.27
 [0.0.26]: https://github.com/graphprotocol/common/compare/v0.0.25...v0.0.26
