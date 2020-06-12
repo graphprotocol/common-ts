@@ -1,4 +1,4 @@
-import { keccak256, toUtf8Bytes, SigningKey, Arrayish, HDNode } from 'ethers/utils'
+import { utils, ethers } from 'ethers'
 import * as eip712 from './eip712'
 
 const RECEIPT_TYPE_HASH = eip712.typeHash(
@@ -30,7 +30,7 @@ export interface Attestation {
 }
 
 export const createAttestation = async (
-  signer: Arrayish | HDNode.HDNode,
+  signer: utils.BytesLike,
   chainId: number,
   disputeManagerAddress: string,
   receipt: Receipt,
@@ -44,8 +44,8 @@ export const createAttestation = async (
   })
   let encodedReceipt = encodeReceipt(receipt)
   let message = eip712.encode(domainSeparator, encodedReceipt)
-  let messageHash = keccak256(message)
-  let signingKey = new SigningKey(signer)
+  let messageHash = utils.keccak256(message)
+  let signingKey = new utils.SigningKey(signer)
   let { r, s, v } = signingKey.signDigest(messageHash)
 
   return {

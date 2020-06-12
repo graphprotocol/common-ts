@@ -1,6 +1,6 @@
 import { createAttestation } from './attestations'
 import { Wallet } from 'ethers'
-import { hexlify } from 'ethers/utils'
+import { utils } from 'ethers'
 import * as bs58 from 'bs58'
 
 describe('Attestations', () => {
@@ -11,7 +11,7 @@ describe('Attestations', () => {
     let receipt = {
       requestCID: '0xd902c18a1b3590a3d2a8ae4439db376764fda153ca077e339d0427bf776bd463',
       responseCID: '0xbe0b5ae5f598fdf631133571d59ef16b443b2fe02e35ca2cb807158069009db9',
-      subgraphDeploymentID: hexlify(
+      subgraphDeploymentID: utils.hexlify(
         bs58.decode('QmTXzATwNfgGVukV1fX2T6xw9f6LAYRVWpsdXyRWzUR2H9').slice(2),
       ),
     }

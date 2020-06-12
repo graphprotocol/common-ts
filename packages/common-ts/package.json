@@ -13,15 +13,15 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@connext/client": "6.5.0",
-    "@connext/store": "6.5.0",
-    "@connext/types": "6.5.0",
-    "ethers": "4.0.47",
+    "@connext/client": "^7.0.0-alpha.0",
+    "@connext/store": "^7.0.0-alpha.0",
+    "@connext/types": "^7.0.0-alpha.0",
+    "ethers": "^5.0.0-beta.191",
     "express": "^4.17.1",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
     "prom-client": "^11.5.3",
-    "sequelize": "5.21.5",
+    "sequelize": "5.21.11",
     "winston": "^3.2.1"
   },
   "devDependencies": {

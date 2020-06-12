@@ -16,7 +16,9 @@ interface StateChannelOptions {
 
 export const createStateChannel = async (options: StateChannelOptions) => {
   // Create Sequelize-based store
-  const store = getPostgresStore(options.sequelize, options.storePrefix)
+  const store = getPostgresStore(options.sequelize, {
+    prefix: options.storePrefix,
+  })
 
   return await connext.connect({
     ethProviderUrl: options.ethereumProvider,
