@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.32] - 2020-06-12
+### Changed
+- Update to Connext 7.0.0-alpha.0
+- Update to ethers 5.0.0-beta.191
+
 ## [0.0.31] - 2020-06-03
 ### Changed
 - Rename subgraphID to subgraphDeploymentID in Attestation
@@ -136,7 +141,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.31...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.32...HEAD
+[0.0.32]: https://github.com/graphprotocol/common/compare/v0.0.31...v0.0.32
 [0.0.31]: https://github.com/graphprotocol/common/compare/v0.0.30...v0.0.31
 [0.0.30]: https://github.com/graphprotocol/common/compare/v0.0.28...v0.0.30
 [0.0.28]: https://github.com/graphprotocol/common/compare/v0.0.27...v0.0.28
