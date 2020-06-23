@@ -26,5 +26,5 @@ describe('State Channel', () => {
       logLevel: 3,
     })
     expect(connextClient.multisigAddress).toBeTruthy()
-  })
+  }, 30000)
 })
