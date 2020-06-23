@@ -1,6 +1,6 @@
 {
   "name": "@graphprotocol/common-ts",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "Common TypeScript library for Graph Protocol components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,6 +35,9 @@
     "supertest": "^4.0.2",
     "ts-jest": "^25.3.1",
     "typescript": "^3.9.5"
+  },
+  "peerDependencies": {
+    "@graphprotocol/contracts": "0.3.2-beta"
   },
   "gitHead": "54b083d705ead76b4963231aeb6accba7eeb4525"
 }
