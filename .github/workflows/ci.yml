@@ -30,6 +30,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - shell: bash
+      env:
+        NPM_TOKEN: ${{secrets.npm_token}}
+      run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > ~/.npmrc && echo 'registry "https://registry.npmjs.org"' >> ~/.yarnrc
     - run: yarn install --frozen-lockfile
       env:
         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
