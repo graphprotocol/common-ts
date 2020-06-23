@@ -6,21 +6,23 @@ const DEPLOYED_CONTRACTS = require('@graphprotocol/contracts/addresses.json')
 
 // Contract ABIs
 import { Curation } from '@graphprotocol/contracts/dist/typechain/contracts/Curation'
-const CURATION_ABI = require('@graphprotocol/contracts/dist/abis/Curation.json')
 import { DisputeManager } from '@graphprotocol/contracts/dist/typechain/contracts/DisputeManager'
-const DISPUTE_MANAGER_ABI = require('@graphprotocol/contracts/dist/abis/DisputeManager.json')
 import { EpochManager } from '@graphprotocol/contracts/dist/typechain/contracts/EpochManager'
-const EPOCH_MANAGER_ABI = require('@graphprotocol/contracts/dist/abis/EpochManager.json')
 import { Gns } from '@graphprotocol/contracts/dist/typechain/contracts/Gns'
-const GNS_ABI = require('@graphprotocol/contracts/dist/abis/GNS.json')
 import { RewardsManager } from '@graphprotocol/contracts/dist/typechain/contracts/RewardsManager'
-const REWARDS_MANAGER_ABI = require('@graphprotocol/contracts/dist/abis/RewardsManager.json')
 import { ServiceRegistry } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistry'
-const SERVICE_REGISTRY_ABI = require('@graphprotocol/contracts/dist/abis/ServiceRegistry.json')
 import { Staking } from '@graphprotocol/contracts/dist/typechain/contracts/Staking'
-const STAKING_ABI = require('@graphprotocol/contracts/dist/abis/Staking.json')
 import { GraphToken } from '@graphprotocol/contracts/dist/typechain/contracts/GraphToken'
-const GRAPH_TOKEN_ABI = require('@graphprotocol/contracts/dist/abis/GraphToken.json')
+
+// Contract factories
+import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationContract'
+import { DisputeManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/DisputeManagerContract'
+import { EpochManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/EpochManagerContract'
+import { GnsFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GnsContract'
+import { RewardsManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/RewardsManagerContract'
+import { ServiceRegistryFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistryContract'
+import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contracts/StakingContract'
+import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenContract'
 
 // TODO: Remove when contracts repo has TypeChain with ethers v5 support.
 export interface Contracts {
@@ -41,40 +43,30 @@ export const connect = async (
   let deployedContracts = DEPLOYED_CONTRACTS[`${chainId}`]
 
   return {
-    curation: new Curation(
+    curation: CurationFactory.connect(
       deployedContracts.Curation.address,
-      CURATION_ABI,
       providerOrSigner,
     ),
-    disputeManager: new DisputeManager(
+    disputeManager: DisputeManagerFactory.connect(
       deployedContracts.DisputeManager.address,
-      DISPUTE_MANAGER_ABI,
       providerOrSigner,
     ),
-    epochManager: new EpochManager(
+    epochManager: EpochManagerFactory.connect(
       deployedContracts.EpochManager.address,
-      EPOCH_MANAGER_ABI,
       providerOrSigner,
     ),
-    gns: new Gns(deployedContracts.GNS.address, GNS_ABI, providerOrSigner),
-    rewardsManager: new RewardsManager(
+    gns: GnsFactory.connect(deployedContracts.GNS.address, providerOrSigner),
+    rewardsManager: RewardsManagerFactory.connect(
       deployedContracts.RewardsManager.address,
-      REWARDS_MANAGER_ABI,
       providerOrSigner,
     ),
-    serviceRegistry: new ServiceRegistry(
+    serviceRegistry: ServiceRegistryFactory.connect(
       deployedContracts.ServiceRegistry.address,
-      SERVICE_REGISTRY_ABI,
       providerOrSigner,
     ),
-    staking: new Staking(
-      deployedContracts.Staking.address,
-      STAKING_ABI,
-      providerOrSigner,
-    ),
-    token: new GraphToken(
+    staking: StakingFactory.connect(deployedContracts.Staking.address, providerOrSigner),
+    token: GraphTokenFactory.connect(
       deployedContracts.GraphToken.address,
-      GRAPH_TOKEN_ABI,
       providerOrSigner,
     ),
   }

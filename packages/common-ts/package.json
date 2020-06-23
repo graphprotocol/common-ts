@@ -36,5 +36,8 @@
     "ts-jest": "^25.3.1",
     "typescript": "^3.9.5"
   },
+  "peerDependencies": {
+    "@graphprotocol/contracts": "0.3.1-beta"
+  },
   "gitHead": "54b083d705ead76b4963231aeb6accba7eeb4525"
 }
