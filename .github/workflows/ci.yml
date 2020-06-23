@@ -31,6 +31,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --frozen-lockfile
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.npm_token}}
     - run: npm test
       env:
         POSTGRES_TEST_HOST: localhost
