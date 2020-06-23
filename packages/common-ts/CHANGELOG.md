@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.33] - 2020-06-23
+### Added
+- Add `contracts` module based on TypeChain bindings
+
+### Changed
+- Allow state channel test to take up to 30s
+- Update dependencies
+
 ## [0.0.32] - 2020-06-12
 ### Changed
 - Update to Connext 7.0.0-alpha.0
@@ -141,7 +149,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.32...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.33...HEAD
+[0.0.33]: https://github.com/graphprotocol/common/compare/v0.0.32...v0.0.33
 [0.0.32]: https://github.com/graphprotocol/common/compare/v0.0.31...v0.0.32
 [0.0.31]: https://github.com/graphprotocol/common/compare/v0.0.30...v0.0.31
 [0.0.30]: https://github.com/graphprotocol/common/compare/v0.0.28...v0.0.30
