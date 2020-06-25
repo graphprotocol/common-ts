@@ -1,1 +1,1 @@
-export * from './network-subgraph-client'
+export * from './networkSubgraphClient'
