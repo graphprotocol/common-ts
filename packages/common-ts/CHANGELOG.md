@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.38] - 2020-06-25
+### Changed
+- Update Connext to 7.0.0-alpha.3
+
 ## [0.0.37] - 2020-06-23
 ### Changed
 - Add TypeChain bindings back in
@@ -164,7 +168,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.37...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.38...HEAD
+[0.0.38]: https://github.com/graphprotocol/common/compare/v0.0.37...v0.0.38
 [0.0.37]: https://github.com/graphprotocol/common/compare/v0.0.35...v0.0.37
 [0.0.35]: https://github.com/graphprotocol/common/compare/v0.0.34...v0.0.35
 [0.0.34]: https://github.com/graphprotocol/common/compare/v0.0.33...v0.0.34
