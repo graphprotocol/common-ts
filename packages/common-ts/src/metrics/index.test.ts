@@ -34,9 +34,7 @@ describe('Metrics', () => {
       gauge.set(100)
 
       // Verify that the registered metrics are served at `/`
-      let response = await request(server)
-        .get('/')
-        .send()
+      let response = await request(server).get('/').send()
       expect(response.status).toEqual(200)
       expect(response.text).toMatch(/counter 2/)
       expect(response.text).toMatch(/gauge 100/)
