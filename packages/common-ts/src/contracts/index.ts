@@ -2,6 +2,7 @@ import { providers } from 'ethers'
 import { Signer } from 'ethers'
 
 // Contract addresses
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const DEPLOYED_CONTRACTS = require('@graphprotocol/contracts/addresses.json')
 
 // Contract ABIs
@@ -40,7 +41,7 @@ export const connectContracts = async (
   providerOrSigner: providers.Provider | Signer,
   chainId: number,
 ): Promise<NetworkContracts> => {
-  let deployedContracts = DEPLOYED_CONTRACTS[`${chainId}`]
+  const deployedContracts = DEPLOYED_CONTRACTS[`${chainId}`]
 
   return {
     curation: CurationFactory.connect(

@@ -1,4 +1,4 @@
-import { utils, ethers } from 'ethers'
+import { utils } from 'ethers'
 import * as eip712 from './eip712'
 
 const RECEIPT_TYPE_HASH = eip712.typeHash(
@@ -35,24 +35,24 @@ export const createAttestation = async (
   disputeManagerAddress: string,
   receipt: Receipt,
 ): Promise<Attestation> => {
-  let domainSeparator = eip712.domainSeparator({
+  const domainSeparator = eip712.domainSeparator({
     name: 'Graph Protocol',
     version: '0',
     chainId,
     verifyingContract: disputeManagerAddress,
     salt: SALT,
   })
-  let encodedReceipt = encodeReceipt(receipt)
-  let message = eip712.encode(domainSeparator, encodedReceipt)
-  let messageHash = utils.keccak256(message)
-  let signingKey = new utils.SigningKey(signer)
-  let { r, s, v } = signingKey.signDigest(messageHash)
+  const encodedReceipt = encodeReceipt(receipt)
+  const message = eip712.encode(domainSeparator, encodedReceipt)
+  const messageHash = utils.keccak256(message)
+  const signingKey = new utils.SigningKey(signer)
+  const { r, s, v } = signingKey.signDigest(messageHash)
 
   return {
     requestCID: receipt.requestCID,
     responseCID: receipt.responseCID,
     subgraphDeploymentID: receipt.subgraphDeploymentID,
-    v: v!,
+    v,
     r,
     s,
   }

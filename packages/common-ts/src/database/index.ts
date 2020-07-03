@@ -9,14 +9,15 @@ interface ConnectOptions {
   logging?: (sql: string, timing?: number) => void
 }
 
-export const connect = async (options: ConnectOptions) => {
-  let { host, port, username, password, database, logging } = options
+export const connect = async (options: ConnectOptions): Promise<Sequelize> => {
+  let { port } = options
+  const { host, username, password, database, logging } = options
 
   // Use port 5432 by default
   port = port || 5432
 
   // Connect to the database
-  let sequelize = new Sequelize({
+  const sequelize = new Sequelize({
     dialect: 'postgres',
     host,
     port,

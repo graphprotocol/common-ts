@@ -5,16 +5,17 @@ import { utils } from 'ethers'
 //
 // The type signature is expected to follow the `encodeType` format described on
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#definition-of-encodetype.
-export const typeHash = (typeSignature: string) =>
+export const typeHash = (typeSignature: string): string =>
   utils.keccak256(utils.toUtf8Bytes(typeSignature))
 
 // Encodes a list of values according to the given types.
 //
 // See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#definition-of-encodedata
 // for details.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const encodeData = (types: string[], values: any[]): string => {
-  let transformedTypes = []
-  let transformedValues = []
+  const transformedTypes = []
+  const transformedValues = []
 
   // Values of types `bytes` and `strings` need to be hashed using keccak256
   for (let i = 0; i < types.length; i++) {
@@ -34,7 +35,8 @@ const encodeData = (types: string[], values: any[]): string => {
 // a list of struct field types and unencoded values for these fields.
 //
 // NOTE: Does not support recursion yet.
-export const hashStruct = (typeHash: string, types: string[], values: any[]) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const hashStruct = (typeHash: string, types: string[], values: any[]): string => {
   return utils.keccak256(encodeData(['bytes32', ...types], [typeHash, ...values]))
 }
 

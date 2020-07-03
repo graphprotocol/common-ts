@@ -1,6 +1,6 @@
 import * as connext from '@connext/client'
 import { Sequelize } from 'sequelize'
-import { ILogger } from '@connext/types'
+import { ILogger, IConnextClient } from '@connext/types'
 import { getPostgresStore } from '@connext/store'
 
 interface StateChannelOptions {
@@ -14,7 +14,9 @@ interface StateChannelOptions {
   storePrefix?: string // for multiple channels to share a sequelize instance
 }
 
-export const createStateChannel = async (options: StateChannelOptions) => {
+export const createStateChannel = async (
+  options: StateChannelOptions,
+): Promise<IConnextClient> => {
   // Create Sequelize-based store
   const store = getPostgresStore(options.sequelize, {
     prefix: options.storePrefix,

@@ -4,7 +4,7 @@ import { Server } from 'net'
 import { logging } from '..'
 
 export interface Metrics {
-  client: any
+  client: typeof prometheus
   registry: Registry
 }
 
@@ -20,15 +20,15 @@ export interface MetricsServerOptions {
 }
 
 export const createMetricsServer = (options: MetricsServerOptions): Server => {
-  let logger = options.logger.child({ component: 'MetricsServer' })
+  const logger = options.logger.child({ component: 'MetricsServer' })
 
-  let app = express()
+  const app = express()
 
   app.get('/', (_, res) => {
     res.status(200).send(options.registry.metrics())
   })
 
-  let server = app.listen(7300, () => {
+  const server = app.listen(7300, () => {
     logger.debug('Listening on port 7300')
   })
 

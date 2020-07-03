@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as database from '.'
 
 // Make global Jest variable available
-declare var __DATABASE__: any
+declare const __DATABASE__: any
 
 describe('Database', () => {
   test('Connect', async () => {
-    let sequelize = await database.connect(__DATABASE__)
+    const sequelize = await database.connect(__DATABASE__)
     expect(sequelize).toBeDefined()
   })
 })

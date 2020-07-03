@@ -1,4 +1,4 @@
-const nock = require('nock')
+import nock from 'nock'
 import gql from 'graphql-tag'
 import { createNetworkSubgraphClient } from './networkSubgraphClient'
 
@@ -8,7 +8,7 @@ describe('Network Subgraph Client', () => {
       .post('/baz/ruux')
       .reply(200, { data: { ok: true } })
 
-    let client = await createNetworkSubgraphClient({ url: 'http://foo.bar/baz/ruux' })
+    const client = await createNetworkSubgraphClient({ url: 'http://foo.bar/baz/ruux' })
 
     expect(
       client
