@@ -1,7 +1,7 @@
 import prometheus, { collectDefaultMetrics, Registry } from 'prom-client'
 import express from 'express'
 import { Server } from 'net'
-import { logging } from '..'
+import { Logger } from '..'
 
 export interface Metrics {
   client: typeof prometheus
@@ -15,7 +15,7 @@ export const createMetrics = (): Metrics => {
 }
 
 export interface MetricsServerOptions {
-  logger: logging.Logger
+  logger: Logger
   registry: Registry
 }
 
