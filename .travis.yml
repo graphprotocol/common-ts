@@ -1,34 +1,24 @@
-# Packages
-language: node_js
-node_js:
-  - "10"
-  - "11"
-  - "12"
-cache: yarn
-
-matrix:
-  include:
-    # Documentation
-    - language: rust
-      sudo: false
-      cache:
-        - cargo
-      rust:
-        - stable
-      before_script:
-        - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
-        - (test -x $HOME/.cargo/bin/mdbook || cargo install mdbook)
-        - cargo install-update -a
-      script:
-        - mdbook build docs && mdbook test docs
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        local-dir: docs/book
-        keep-history: false
-        on:
-          branch: master
+# Documentation
+language: rust
+sudo: false
+cache:
+  - cargo
+rust:
+  - stable
+before_script:
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install mdbook)
+  - cargo install-update -a
+script:
+  - mdbook build docs && mdbook test docs
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: docs/book
+  keep-history: false
+  on:
+    branch: master
 
 notifications:
   email: false
