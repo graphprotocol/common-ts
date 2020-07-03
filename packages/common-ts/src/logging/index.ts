@@ -8,15 +8,15 @@ export interface LoggerOptions {
 }
 
 export const createLogger = (options: LoggerOptions): winston.Logger => {
-  let loggerColorizer = winston.format.colorize()
+  const loggerColorizer = winston.format.colorize()
 
-  let loggerTransport = new winston.transports.Console({
+  const loggerTransport = new winston.transports.Console({
     format: winston.format.combine(
       winston.format.timestamp(),
       loggerColorizer,
       winston.format.ms(),
-      winston.format.printf((args: any) => {
-        let { level, message, component, timestamp, ms } = args
+      winston.format.printf((args) => {
+        const { level, message, component, timestamp, ms } = args
         return `${timestamp} ${loggerColorizer.colorize(
           'debug',
           ms,
@@ -25,7 +25,7 @@ export const createLogger = (options: LoggerOptions): winston.Logger => {
     ),
   })
 
-  let rootLogger = winston.createLogger({
+  const rootLogger = winston.createLogger({
     level: 'debug',
     transports: [loggerTransport],
   })

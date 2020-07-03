@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { connect as dbConnect } from '../database'
 import { createStateChannel } from '.'
 import { Wallet } from 'ethers'
 
 // Make global Jest variable available
-declare var __DATABASE__: any
-declare var __INDRA__: any
+declare const __DATABASE__: any
+declare const __INDRA__: any
 
 describe('State Channel', () => {
   test('creates a state channel', async () => {
