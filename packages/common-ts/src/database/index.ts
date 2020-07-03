@@ -10,11 +10,10 @@ interface ConnectOptions {
 }
 
 export const connect = async (options: ConnectOptions): Promise<Sequelize> => {
-  let { port } = options
   const { host, username, password, database, logging } = options
 
   // Use port 5432 by default
-  port = port || 5432
+  const port = options.port || 5432
 
   // Connect to the database
   const sequelize = new Sequelize({
