@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.41] - 2020-07-03
+### Changed
+- Switch to flat module exports
+
 ## [0.0.40] - 2020-07-03
 ### Added
 - Add `subgraphs` module with `SubgraphName` and `SubgraphDeploymentID` types
@@ -177,7 +181,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.40...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.41...HEAD
+[0.0.41]: https://github.com/graphprotocol/common/compare/v0.0.40...v0.0.41
 [0.0.40]: https://github.com/graphprotocol/common/compare/v0.0.39...v0.0.40
 [0.0.39]: https://github.com/graphprotocol/common/compare/v0.0.38...v0.0.39
 [0.0.38]: https://github.com/graphprotocol/common/compare/v0.0.37...v0.0.38
