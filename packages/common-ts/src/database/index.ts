@@ -9,7 +9,7 @@ interface ConnectOptions {
   logging?: (sql: string, timing?: number) => void
 }
 
-export const connect = async (options: ConnectOptions): Promise<Sequelize> => {
+export const connectDatabase = async (options: ConnectOptions): Promise<Sequelize> => {
   const { host, username, password, database, logging } = options
 
   // Use port 5432 by default

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { connect as dbConnect } from '../database'
+import { connectDatabase } from '../database'
 import { createStateChannel } from '.'
 import { Wallet } from 'ethers'
 
@@ -10,7 +10,7 @@ declare const __INDRA__: any
 
 describe('State Channel', () => {
   test('creates a state channel', async () => {
-    const sequelize = await dbConnect(__DATABASE__)
+    const sequelize = await connectDatabase(__DATABASE__)
     if (
       !__INDRA__.ethereumProvider ||
       !__INDRA__.connextNode ||
