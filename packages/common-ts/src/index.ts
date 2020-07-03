@@ -5,5 +5,15 @@ import * as stateChannels from './state-channels'
 import * as attestations from './attestations'
 import * as contracts from './contracts'
 import * as subgraph from './subgraph'
+import * as subgraphs from './subgraphs'
 
-export { logging, metrics, database, stateChannels, attestations, contracts, subgraph }
+export {
+  logging,
+  metrics,
+  database,
+  stateChannels,
+  attestations,
+  contracts,
+  subgraph,
+  subgraphs,
+}
