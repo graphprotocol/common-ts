@@ -8,7 +8,9 @@
   "author": "Graph Protocol, Inc.",
   "license": "MIT/Apache",
   "scripts": {
-    "prepublish": "tsc",
+    "format": "prettier --write src/*.ts src/**/*.ts src/**/**/*.ts",
+    "lint": "eslint . --ext .ts,.tsx",
+    "prepublish": "yarn format && yarn lint && tsc",
     "test": "jest --passWithNoTests --detectOpenHandles --verbose",
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
