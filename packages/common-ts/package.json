@@ -15,9 +15,9 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@connext/client": "^7.0.0-alpha.11",
-    "@connext/store": "^7.0.0-alpha.11",
-    "@connext/types": "^7.0.0-alpha.11",
+    "@connext/client": "^7.0.0-alpha.13",
+    "@connext/store": "^7.0.0-alpha.13",
+    "@connext/types": "^7.0.0-alpha.13",
     "@graphprotocol/contracts": "^0.3.2-beta",
     "@urql/core": "^1.12.1",
     "cross-fetch": "^3.0.5",
@@ -47,5 +47,5 @@
   "peerDependencies": {
     "@graphprotocol/contracts": "0.3.2-beta"
   },
-  "gitHead": "54b083d705ead76b4963231aeb6accba7eeb4525"
+  "gitHead": "782b6fcac923fe50b80bf648a1a3a87f986fd386"
 }

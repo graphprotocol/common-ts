@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Update Connext to 7.0.0-alpha.11
+- Update Connext to 7.0.0-alpha.13
 
 ## [0.0.41] - 2020-07-03
 ### Changed
