@@ -15,9 +15,9 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@connext/client": "^7.0.0-alpha.6",
-    "@connext/store": "^7.0.0-alpha.6",
-    "@connext/types": "^7.0.0-alpha.6",
+    "@connext/client": "^7.0.0-alpha.11",
+    "@connext/store": "^7.0.0-alpha.11",
+    "@connext/types": "^7.0.0-alpha.11",
     "@graphprotocol/contracts": "^0.3.2-beta",
     "@urql/core": "^1.12.1",
     "cross-fetch": "^3.0.5",
