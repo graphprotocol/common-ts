@@ -34,6 +34,14 @@ export class SubgraphDeploymentID {
     return this.value
   }
 
+  get display(): { bytes32: string; ipfsHash: string; humanReadable: string } {
+    return {
+      bytes32: this.bytes32,
+      ipfsHash: this.ipfsHash,
+      humanReadable: this.humanReadable,
+    }
+  }
+
   get bytes32(): string {
     return this.value
   }
