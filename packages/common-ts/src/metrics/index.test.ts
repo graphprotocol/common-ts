@@ -12,7 +12,7 @@ describe('Metrics', () => {
 
   test('Serve metrics', async () => {
     const { client, registry } = createMetrics()
-    const logger = createLogger({ appName: 'test' })
+    const logger = createLogger({ name: 'test' })
     const server = createMetricsServer({ logger, registry })
 
     try {
