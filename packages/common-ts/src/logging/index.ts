@@ -1,34 +1,16 @@
-import winston from 'winston'
+import pino from 'pino'
 
 // Re-export the Logger type from winston
-export { Logger } from 'winston'
+export { Logger } from 'pino'
 
 export interface LoggerOptions {
-  appName: string
+  name: string
 }
 
-export const createLogger = (options: LoggerOptions): winston.Logger => {
-  const loggerColorizer = winston.format.colorize()
-
-  const loggerTransport = new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.timestamp(),
-      loggerColorizer,
-      winston.format.ms(),
-      winston.format.printf((args) => {
-        const { level, message, component, timestamp, ms } = args
-        return `${timestamp} ${loggerColorizer.colorize(
-          'debug',
-          ms,
-        )} ${level} ${component} → ${message}`
-      }),
-    ),
-  })
-
-  const rootLogger = winston.createLogger({
+export const createLogger = (options: LoggerOptions): pino.Logger => {
+  return pino({
+    name: options.name,
     level: 'debug',
-    transports: [loggerTransport],
+    base: {},
   })
-
-  return rootLogger.child({ component: options.appName })
 }
