@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.48] - 2020-07-10
+### Added
+- Add support for manually syncing state channel models to the db
+
+### Changed
+- Update Connext to 7.0.0-alpha.18
+- Update sequelize from 5.x to 6.x
+
 ## [0.0.47] - 2020-07-06
 ### Added
 - Add `display` property to `SubgraphDeploymentID`
@@ -202,7 +210,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.47...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.48...HEAD
+[0.0.48]: https://github.com/graphprotocol/common/compare/v0.0.47...v0.0.48
 [0.0.47]: https://github.com/graphprotocol/common/compare/v0.0.46...v0.0.47
 [0.0.46]: https://github.com/graphprotocol/common/compare/v0.0.45...v0.0.46
 [0.0.45]: https://github.com/graphprotocol/common/compare/v0.0.44...v0.0.45
