@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { connectDatabase } from '../database'
-import { createStateChannel } from '.'
+import { createStateChannel, defineStateChannelStoreModels } from '.'
 import { Wallet } from 'ethers'
 
 // Make global Jest variable available
@@ -11,6 +11,9 @@ declare const __INDRA__: any
 describe('State Channel', () => {
   test('creates a state channel', async () => {
     const sequelize = await connectDatabase(__DATABASE__)
+    await defineStateChannelStoreModels(sequelize)
+    await sequelize.sync()
+
     if (
       !__INDRA__.ethereumProvider ||
       !__INDRA__.connextNode ||
