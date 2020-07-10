@@ -1,5 +1,5 @@
 import * as connext from '@connext/client'
-import { Sequelize, ModelCtor, Model } from 'sequelize'
+import { Sequelize } from 'sequelize'
 import { ILogger, IConnextClient } from '@connext/types'
 import { getPostgresStore } from '@connext/store'
 import { getSequelizeModelDefinitionData } from '@connext/store/dist/wrappers/sequelizeStorage'
