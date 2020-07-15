@@ -9,8 +9,9 @@ export interface Metrics {
 }
 
 export const createMetrics = (): Metrics => {
-  // Probe default metrics (memory, file descriptors etc.) every 5s
-  collectDefaultMetrics({ timeout: 5000 })
+  // Collect default metrics (event loop lag, memory, file descriptors etc.)
+  collectDefaultMetrics()
+
   return { client: prometheus, registry: prometheus.register }
 }
 
