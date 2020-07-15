@@ -8,6 +8,7 @@ describe('Metrics', () => {
     const metrics = createMetrics()
     expect(metrics.client).toBeDefined()
     expect(metrics.registry).toBeInstanceOf(Registry)
+    metrics.registry.clear()
   })
 
   test('Serve metrics', async () => {
@@ -39,6 +40,7 @@ describe('Metrics', () => {
       expect(response.text).toMatch(/gauge 100/)
     } finally {
       server.close()
+      registry.clear()
     }
   })
 })
