@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Update prom-client from 11.x to 12.x
+- Add `timed` helper to measure promise execution time
 
 ## [0.0.48] - 2020-07-10
 ### Added

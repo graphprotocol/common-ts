@@ -1,4 +1,9 @@
-import prometheus, { collectDefaultMetrics, Registry } from 'prom-client'
+import prometheus, {
+  collectDefaultMetrics,
+  LabelValues,
+  Histogram,
+  Registry,
+} from 'prom-client'
 import express from 'express'
 import { Server } from 'net'
 import { Logger } from '..'
@@ -34,4 +39,19 @@ export const createMetricsServer = (options: MetricsServerOptions): Server => {
   })
 
   return server
+}
+
+export async function timed<T>(
+  metric: Histogram<string> | undefined,
+  labels: LabelValues<string> | undefined,
+  promise: Promise<T>,
+): Promise<T> {
+  const timer = metric?.startTimer(labels)
+  try {
+    return await promise
+  } finally {
+    if (timer) {
+      timer(labels)
+    }
+  }
 }
