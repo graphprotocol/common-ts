@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.0.49] - 2020-07-15
 ### Added
 - Add `timed` helper to measure promise execution time
 
@@ -217,7 +219,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.48...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.49...HEAD
+[0.0.49]: https://github.com/graphprotocol/common/compare/v0.0.48...v0.0.49
 [0.0.48]: https://github.com/graphprotocol/common/compare/v0.0.47...v0.0.48
 [0.0.47]: https://github.com/graphprotocol/common/compare/v0.0.46...v0.0.47
 [0.0.46]: https://github.com/graphprotocol/common/compare/v0.0.45...v0.0.46
