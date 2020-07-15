@@ -55,4 +55,4 @@ export class SubgraphDeploymentID {
   }
 }
 
-export type SubgraphNameOrDepoymentID = SubgraphName | SubgraphDeploymentID
+export type SubgraphNameOrDeploymentID = SubgraphName | SubgraphDeploymentID

@@ -1,9 +1,9 @@
-import { SubgraphDeploymentID, SubgraphNameOrDepoymentID } from '.'
+import { SubgraphDeploymentID, SubgraphNameOrDeploymentID } from '.'
 
 describe('Subgraph deployment IDs', () => {
   test('Type safety', () => {
     const original = '0x4d31d21d389263c98d1e83a031e8fed17cdcef15bd62ee8153f34188a83c7b1c'
-    const id: SubgraphNameOrDepoymentID = new SubgraphDeploymentID(original)
+    const id: SubgraphNameOrDeploymentID = new SubgraphDeploymentID(original)
 
     // This wouldn't compile if TypeScript didn't recognize `id` having
     // kind == 'deployment-id'
