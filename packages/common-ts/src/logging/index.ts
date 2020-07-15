@@ -3,9 +3,11 @@
 
 import pino from 'pino'
 
+export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | 'silent'
+
 export interface LoggerOptions {
   name: string
-  level?: 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal'
+  level?: LogLevel
 }
 
 export class Logger {
