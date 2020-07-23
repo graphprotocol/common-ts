@@ -15,9 +15,9 @@
     "test:watch": "jest --watch --passWithNoTests --verbose"
   },
   "dependencies": {
-    "@connext/client": "^7.0.0-alpha.20",
-    "@connext/store": "^7.0.0-alpha.20",
-    "@connext/types": "^7.0.0-alpha.20",
+    "@connext/client": "^7.0.0",
+    "@connext/store": "^7.0.0",
+    "@connext/types": "^7.0.0",
     "@graphprotocol/contracts": "^0.3.2-beta",
     "@urql/core": "^1.12.1",
     "cross-fetch": "^3.0.5",
@@ -29,7 +29,7 @@
     "pg-hstore": "^2.3.3",
     "pino": "^6.3.2",
     "prom-client": "^12.0.0",
-    "sequelize": "^6.3.1"
+    "sequelize": "^6.3.3"
   },
   "devDependencies": {
     "@types/bs58": "^4.0.1",
