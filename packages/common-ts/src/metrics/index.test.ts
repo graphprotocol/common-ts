@@ -14,7 +14,7 @@ describe('Metrics', () => {
   test('Serve metrics', async () => {
     const { client, registry } = createMetrics()
     const logger = createLogger({ name: 'test' })
-    const server = createMetricsServer({ logger, registry })
+    const server = createMetricsServer({ logger, registry, port: 51235 })
 
     try {
       // Create two metrics for testing

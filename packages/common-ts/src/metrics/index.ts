@@ -23,6 +23,7 @@ export const createMetrics = (): Metrics => {
 export interface MetricsServerOptions {
   logger: Logger
   registry: Registry
+  port?: number
 }
 
 export const createMetricsServer = (options: MetricsServerOptions): Server => {
@@ -34,8 +35,9 @@ export const createMetricsServer = (options: MetricsServerOptions): Server => {
     res.status(200).send(options.registry.metrics())
   })
 
-  const server = app.listen(7300, () => {
-    logger.debug('Listening on port 7300')
+  const port = options.port || 7300
+  const server = app.listen(port, () => {
+    logger.debug('Listening on port', { port })
   })
 
   return server
