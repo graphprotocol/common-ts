@@ -46,7 +46,7 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@graphprotocol/contracts": "0.3.2-beta"
+    "@graphprotocol/contracts": "0.4.7-testnet-phase1"
   },
   "gitHead": "328580342e5597b2cd0907ff6c79377d84e41269"
 }
