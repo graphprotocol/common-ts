@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2020-07-30
+### Changed
+- Update contracts to 0.4.7-testnet-phase1
+
 ## [0.0.51] - 2020-07-29
 ### Added
 - Add optional `port` parameter to `createMetricsServer`
@@ -227,7 +231,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.0.51...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/graphprotocol/common/compare/v0.0.51...v0.1.0
 [0.0.51]: https://github.com/graphprotocol/common/compare/v0.0.50...v0.0.51
 [0.0.50]: https://github.com/graphprotocol/common/compare/v0.0.49...v0.0.50
 [0.0.49]: https://github.com/graphprotocol/common/compare/v0.0.48...v0.0.49
