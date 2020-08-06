@@ -1,8 +1,6 @@
 import { utils } from 'ethers'
 import base58 from 'bs58'
 
-const humanhash = new (require('humanhash'))()
-
 export class SubgraphName {
   kind: 'name' = 'name'
   value: string
@@ -34,11 +32,10 @@ export class SubgraphDeploymentID {
     return this.value
   }
 
-  get display(): { bytes32: string; ipfsHash: string; humanReadable: string } {
+  get display(): { bytes32: string; ipfsHash: string } {
     return {
       bytes32: this.bytes32,
       ipfsHash: this.ipfsHash,
-      humanReadable: this.humanReadable,
     }
   }
 
@@ -48,10 +45,6 @@ export class SubgraphDeploymentID {
 
   get ipfsHash(): string {
     return base58.encode([0x12, 0x20, ...utils.arrayify(this.value)])
-  }
-
-  get humanReadable(): string {
-    return humanhash.humanize(this.value)
   }
 }
 
