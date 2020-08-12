@@ -43,7 +43,7 @@ const SCHEMA_SDL = gql`
   }
 
   type Query {
-    indexingRule(deployment: String!): IndexingRule!
+    indexingRule(deployment: String!): IndexingRule
     indexingRules: [IndexingRule!]!
   }
 
