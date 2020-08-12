@@ -18,7 +18,7 @@ export const createIndexerManagementServer = async ({
   client,
   port,
 }: CreateIndexerManagementServerOptions): Promise<express.Express> => {
-  logger = logger.child({ component: 'IndexerApiServer' })
+  logger = logger.child({ component: 'IndexerManagementServer' })
 
   const loggerStream = new Stream.Writable()
   loggerStream._write = (chunk, _, next) => {
