@@ -3,7 +3,7 @@ import { connectDatabase } from '../database'
 import {
   defineIndexerManagementModels,
   IndexerManagementModels,
-  IndexingDecision,
+  IndexingDecisionBasis,
   INDEXING_RULE_GLOBAL,
 } from './models'
 import { Sequelize } from 'sequelize/types'
@@ -25,7 +25,7 @@ const SET_INDEXING_RULE_MUTATION = gql`
       minStake
       minAverageQueryFees
       custom
-      indexingDecision
+      decisionBasis
     }
   }
 `
@@ -48,7 +48,7 @@ const INDEXING_RULE_QUERY = gql`
       minStake
       minAverageQueryFees
       custom
-      indexingDecision
+      decisionBasis
     }
   }
 `
@@ -65,7 +65,7 @@ const INDEXING_RULES_QUERY = gql`
       minStake
       minAverageQueryFees
       custom
-      indexingDecision
+      decisionBasis
     }
   }
 `
@@ -101,7 +101,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const client = await createIndexerManagementClient({ models })
@@ -129,7 +129,7 @@ describe('Indexer API client', () => {
         minStake: '4',
         minAverageQueryFees: '5',
         custom: JSON.stringify({ foo: 'bar' }),
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const expected = {
@@ -165,7 +165,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const client = await createIndexerManagementClient({ models })
@@ -213,7 +213,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const client = await createIndexerManagementClient({ models })
@@ -255,7 +255,7 @@ describe('Indexer API client', () => {
         deployment: INDEXING_RULE_GLOBAL,
         allocation: '1',
         minSignal: '1',
-        indexingDecision: IndexingDecision.NEVER,
+        decisionBasis: IndexingDecisionBasis.NEVER,
       }
 
       const deploymentInput = {
@@ -271,7 +271,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.NEVER,
+        decisionBasis: IndexingDecisionBasis.NEVER,
       }
 
       const deploymentExpected = {
@@ -281,7 +281,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const client = await createIndexerManagementClient({ models })
@@ -338,7 +338,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const client = await createIndexerManagementClient({ models })
@@ -380,7 +380,7 @@ describe('Indexer API client', () => {
         minStake: null,
         minAverageQueryFees: null,
         custom: null,
-        indexingDecision: IndexingDecision.RULES,
+        decisionBasis: IndexingDecisionBasis.RULES,
       }
 
       const client = await createIndexerManagementClient({ models })
