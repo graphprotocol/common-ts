@@ -24,6 +24,11 @@ function getSupportedDialect(sequelize: Sequelize): 'postgres' | 'sqlite' {
   throw new Error('Unsupported sequelize dialect. Expecting postgres or sqlite')
 }
 
+/**
+ * Fields are all null
+ */
+export type NullFields<T> = { [P in keyof T]: null }
+
 export type PaymentStoreModel = ModelCtor<Model<PaymentStore>>
 
 /**
@@ -35,12 +40,11 @@ export type PaymentStoreUpdate = {
   // 'Virtual' data sent over read interface.
   // These can all be null because it is not part
   // of the app install
-  totalPayment: HexBytes32 | null
-  requestCID: HexBytes32 | null
-  consumerSignature: RawSignature | null
-  attestationSignature: RawSignature | null
-  // Whether or not we already played the final move for the app
-  finished: boolean
+  totalPayment: HexBytes32
+  requestCID: HexBytes32
+  responseCID: HexBytes32
+  consumerSignature: RawSignature
+  attestationSignature: RawSignature
 }
 
 // See also b474a6ed-f054-4a2b-846a-39fc14425e40
@@ -51,7 +55,9 @@ export type PaymentStore = {
   connextAppIdHash: HexBytes32
   totalCollateralization: HexBytes32
   channelId: HexBytes32
-} & PaymentStoreUpdate
+  // Whether or not we already played the final move for the app
+  finished: boolean
+} & (PaymentStoreUpdate | NullFields<PaymentStoreUpdate>)
 
 export const defineStateChannelStoreModels = (
   sequelize: Sequelize,
