@@ -2,7 +2,7 @@
 
 import { Optional, Model, DataTypes, Sequelize } from 'sequelize'
 
-export enum IndexingDecision {
+export enum IndexingDecisionBasis {
   RULES = 'rules',
   NEVER = 'never',
   ALWAYS = 'always',
@@ -20,7 +20,7 @@ export interface IndexingRuleAttributes {
   minStake: string | null
   minAverageQueryFees: string | null
   custom: string | null
-  indexingDecision: IndexingDecision
+  decisionBasis: IndexingDecisionBasis
 }
 
 export interface IndexingRuleCreationAttributes
@@ -34,7 +34,7 @@ export interface IndexingRuleCreationAttributes
     | 'minStake'
     | 'minAverageQueryFees'
     | 'custom'
-    | 'indexingDecision'
+    | 'decisionBasis'
   > {}
 
 export class IndexingRule
@@ -49,7 +49,7 @@ export class IndexingRule
   public minStake!: string | null
   public minAverageQueryFees!: string | null
   public custom!: string | null
-  public indexingDecision!: IndexingDecision
+  public decisionBasis!: IndexingDecisionBasis
 
   public readonly createdAt!: Date
   public readonly updatedAt!: Date
@@ -109,7 +109,7 @@ export const defineIndexerManagementModels = (
         type: DataTypes.STRING,
         allowNull: true,
       },
-      indexingDecision: {
+      decisionBasis: {
         type: DataTypes.ENUM('rules', 'never', 'always'),
         allowNull: false,
         defaultValue: 'rules',
