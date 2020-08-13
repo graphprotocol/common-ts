@@ -27,12 +27,15 @@ export default {
   setIndexingRule: async (
     { rule }: { rule: IndexingRuleCreationAttributes },
     { models }: IndexerManagementResolverContext,
-  ): Promise<object | null> => {
+  ): Promise<object> => {
     await models.IndexingRule.upsert(rule)
+
+    // Since upsert succeeded, we _must_ have a rule
     const updatedRule = await models.IndexingRule.findOne({
       where: { deployment: rule.deployment },
     })
-    return updatedRule?.toGraphQL() || null
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return updatedRule!.toGraphQL()
   },
 
   deleteIndexingRule: async (
