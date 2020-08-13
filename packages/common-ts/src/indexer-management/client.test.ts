@@ -94,7 +94,6 @@ describe('Indexer API client', () => {
 
       const expected = {
         ...input,
-        deployment: INDEXING_RULE_GLOBAL,
         maxAllocationPercentage: null,
         minSignal: null,
         maxSignal: null,
@@ -406,6 +405,13 @@ describe('Indexer API client', () => {
         ...expectedBefore,
         allocation: null,
       })
+
+      // Query the rules again to see that the update went through
+      await expect(
+        client.query(INDEXING_RULES_QUERY).toPromise(),
+      ).resolves.toHaveProperty('data.indexingRules', [
+        { ...expectedBefore, allocation: null },
+      ])
     })
   })
 })
