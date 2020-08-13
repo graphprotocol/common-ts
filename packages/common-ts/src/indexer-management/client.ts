@@ -12,7 +12,7 @@ export interface IndexerManagementResolverContext {
 const SCHEMA_SDL = gql`
   scalar BigInt
 
-  enum IndexingDecision {
+  enum IndexingDecisionBasis {
     rules
     never
     always
@@ -27,7 +27,7 @@ const SCHEMA_SDL = gql`
     minStake: BigInt
     minAverageQueryFees: BigInt
     custom: String
-    indexingDecision: IndexingDecision!
+    decisionBasis: IndexingDecisionBasis!
   }
 
   input IndexingRuleInput {
@@ -39,7 +39,7 @@ const SCHEMA_SDL = gql`
     minStake: BigInt
     minAverageQueryFees: BigInt
     custom: String
-    indexingDecision: IndexingDecision
+    decisionBasis: IndexingDecisionBasis
   }
 
   type Query {
