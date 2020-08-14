@@ -37,8 +37,8 @@ const DELETE_INDEXING_RULE_MUTATION = gql`
 `
 
 const INDEXING_RULE_QUERY = gql`
-  query indexingRule($deployment: String!) {
-    indexingRule(deployment: $deployment) {
+  query indexingRule($deployment: String!, $merged: Boolean!) {
+    indexingRule(deployment: $deployment, merged: $merged) {
       id
       deployment
       allocation
@@ -54,8 +54,8 @@ const INDEXING_RULE_QUERY = gql`
 `
 
 const INDEXING_RULES_QUERY = gql`
-  {
-    indexingRules {
+  query indexingRuls($merged: Boolean!) {
+    indexingRules(merged: $merged) {
       id
       deployment
       allocation
@@ -113,7 +113,7 @@ describe('Indexer API client', () => {
       // Query the rule to make sure it's updated in the db
       await expect(
         client
-          .query(INDEXING_RULE_QUERY, { deployment: INDEXING_RULE_GLOBAL })
+          .query(INDEXING_RULE_QUERY, { deployment: INDEXING_RULE_GLOBAL, merged: false })
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', expected)
     })
@@ -145,7 +145,7 @@ describe('Indexer API client', () => {
       // Query the rule to make sure it's updated in the db
       await expect(
         client
-          .query(INDEXING_RULE_QUERY, { deployment: INDEXING_RULE_GLOBAL })
+          .query(INDEXING_RULE_QUERY, { deployment: INDEXING_RULE_GLOBAL, merged: false })
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', expected)
     })
@@ -193,7 +193,7 @@ describe('Indexer API client', () => {
       // Query the rule to make sure it's updated in the db
       await expect(
         client
-          .query(INDEXING_RULE_QUERY, { deployment: INDEXING_RULE_GLOBAL })
+          .query(INDEXING_RULE_QUERY, { deployment: INDEXING_RULE_GLOBAL, merged: false })
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', expected)
     })
@@ -244,6 +244,7 @@ describe('Indexer API client', () => {
           .query(INDEXING_RULE_QUERY, {
             deployment:
               '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
+            merged: false,
           })
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', expected)
@@ -300,6 +301,7 @@ describe('Indexer API client', () => {
         client
           .query(INDEXING_RULE_QUERY, {
             deployment: INDEXING_RULE_GLOBAL,
+            merged: false,
           })
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', globalExpected)
@@ -310,13 +312,14 @@ describe('Indexer API client', () => {
           .query(INDEXING_RULE_QUERY, {
             deployment:
               '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
+            merged: false,
           })
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', deploymentExpected)
 
       // Query all rules together
       await expect(
-        client.query(INDEXING_RULES_QUERY, {}).toPromise(),
+        client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [
         globalExpected,
         deploymentExpected,
@@ -349,7 +352,7 @@ describe('Indexer API client', () => {
 
       // Query all rules
       await expect(
-        client.query(INDEXING_RULES_QUERY).toPromise(),
+        client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [expected])
 
       // Delete the rule
@@ -361,7 +364,7 @@ describe('Indexer API client', () => {
 
       // Query all rules together
       await expect(
-        client.query(INDEXING_RULES_QUERY, {}).toPromise(),
+        client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [])
     })
 
@@ -391,7 +394,7 @@ describe('Indexer API client', () => {
 
       // Query all rules
       await expect(
-        client.query(INDEXING_RULES_QUERY).toPromise(),
+        client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [expectedBefore])
 
       // Clear the allocation field
@@ -408,9 +411,95 @@ describe('Indexer API client', () => {
 
       // Query the rules again to see that the update went through
       await expect(
-        client.query(INDEXING_RULES_QUERY).toPromise(),
+        client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [
         { ...expectedBefore, allocation: null },
+      ])
+    })
+
+    test('Set and get global and deployment rule (merged)', async () => {
+      const globalInput = {
+        deployment: INDEXING_RULE_GLOBAL,
+        allocation: '1',
+        minSignal: '1',
+        decisionBasis: IndexingDecisionBasis.NEVER,
+        minAverageQueryFees: '1',
+      }
+
+      const deploymentInput = {
+        deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
+        allocation: '1',
+        minSignal: '2',
+      }
+
+      const globalExpected = {
+        ...globalInput,
+        maxAllocationPercentage: null,
+        maxSignal: null,
+        minStake: null,
+        custom: null,
+        decisionBasis: IndexingDecisionBasis.NEVER,
+      }
+
+      const deploymentExpected = {
+        ...deploymentInput,
+        maxAllocationPercentage: null,
+        maxSignal: null,
+        minStake: null,
+        minAverageQueryFees: null,
+        custom: null,
+        decisionBasis: IndexingDecisionBasis.RULES,
+      }
+
+      const deploymentMergedExpected = {
+        ...deploymentInput,
+        maxAllocationPercentage: null,
+        maxSignal: null,
+        minStake: null,
+        minAverageQueryFees: '1',
+        custom: null,
+        decisionBasis: IndexingDecisionBasis.RULES,
+      }
+
+      const client = await createIndexerManagementClient({ models })
+
+      // Write the orginals
+      await expect(
+        client.mutation(SET_INDEXING_RULE_MUTATION, { rule: globalInput }).toPromise(),
+      ).resolves.toHaveProperty('data.setIndexingRule', globalExpected)
+      await expect(
+        client
+          .mutation(SET_INDEXING_RULE_MUTATION, { rule: deploymentInput })
+          .toPromise(),
+      ).resolves.toHaveProperty('data.setIndexingRule', deploymentExpected)
+
+      // Query the global rule
+      await expect(
+        client
+          .query(INDEXING_RULE_QUERY, {
+            deployment: INDEXING_RULE_GLOBAL,
+            merged: false,
+          })
+          .toPromise(),
+      ).resolves.toHaveProperty('data.indexingRule', globalExpected)
+
+      // Query the rule for the deployment merged with the global rule
+      await expect(
+        client
+          .query(INDEXING_RULE_QUERY, {
+            deployment:
+              '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
+            merged: true,
+          })
+          .toPromise(),
+      ).resolves.toHaveProperty('data.indexingRule', deploymentMergedExpected)
+
+      // Query all rules together
+      await expect(
+        client.query(INDEXING_RULES_QUERY, { merged: true }).toPromise(),
+      ).resolves.toHaveProperty('data.indexingRules', [
+        globalExpected,
+        deploymentMergedExpected,
       ])
     })
   })

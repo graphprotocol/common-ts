@@ -1,27 +1,43 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import { IndexingRuleCreationAttributes } from '../models'
+import { IndexingRuleCreationAttributes, INDEXING_RULE_GLOBAL } from '../models'
 import { IndexerManagementResolverContext } from '../client'
 
 export default {
   indexingRule: async (
-    { deployment }: { deployment: string },
+    { deployment, merged }: { deployment: string; merged: boolean },
     { models }: IndexerManagementResolverContext,
   ): Promise<object | null> => {
     const rule = await models.IndexingRule.findOne({
       where: { deployment },
     })
-    return rule?.toGraphQL() || null
+    if (merged && rule) {
+      return rule.mergeToGraphql(
+        rule,
+        await models.IndexingRule.findOne({
+          where: { deployment: INDEXING_RULE_GLOBAL },
+        }),
+      )
+    } else {
+      return rule?.toGraphQL() || null
+    }
   },
 
   indexingRules: async (
-    _: {},
+    { merged }: { merged: boolean },
     { models }: IndexerManagementResolverContext,
   ): Promise<object[]> => {
     const rules = await models.IndexingRule.findAll({
       order: [['deployment', 'DESC']],
     })
-    return rules.map((rule) => rule.toGraphQL()) || null
+    if (merged) {
+      const global_rule = await models.IndexingRule.findOne({
+        where: { deployment: INDEXING_RULE_GLOBAL },
+      })
+      return rules.map((rule) => rule.mergeToGraphql(rule, global_rule))
+    } else {
+      return rules.map((rule) => rule.toGraphQL())
+    }
   },
 
   setIndexingRule: async (
