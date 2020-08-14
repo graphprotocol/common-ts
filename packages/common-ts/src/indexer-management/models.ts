@@ -51,12 +51,35 @@ export class IndexingRule
   public custom!: string | null
   public decisionBasis!: IndexingDecisionBasis
 
-  public readonly createdAt!: Date
-  public readonly updatedAt!: Date
+  public createdAt!: Date
+  public updatedAt!: Date
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   public toGraphQL(): object {
     return { ...this.toJSON(), __typename: 'IndexingRule' }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  public mergeToGraphql(rule: IndexingRule, global_rule: IndexingRule | null): object {
+    if (global_rule instanceof IndexingRule) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const global: { [key: string]: any } | null = global_rule.toJSON()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const deployment: { [key: string]: any } | null = rule.toJSON()
+      for (const k in global) {
+        if (null == deployment[k]) {
+          deployment[k] = global[k]
+        }
+      }
+      for (const k in deployment) {
+        if (deployment[k] == undefined) {
+          deployment[k] = global[k]
+        }
+      }
+      return { ...deployment, __typename: 'IndexingRule' }
+    } else {
+      return rule.toGraphQL()
+    }
   }
 }
 

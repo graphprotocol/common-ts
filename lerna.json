@@ -1,6 +1,6 @@
 {
   "packages": [
-    "packages/*"
+    "packages/common-ts"
   ],
   "version": "0.1.1"
 }
