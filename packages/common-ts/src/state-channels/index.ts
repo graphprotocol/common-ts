@@ -84,7 +84,7 @@ export const defineStateChannelStoreModels = (
     }
   }
 
-  // TODO: (Zac) Add indexes
+  // TODO: HIGH (Zac) Add indexes
 
   // Batch payment app state
   // See also b474a6ed-f054-4a2b-846a-39fc14425e40
@@ -95,7 +95,7 @@ export const defineStateChannelStoreModels = (
       ...nonNull(hexBytes32),
     },
     channelId: nonNull(hexBytes32),
-    totalPayment: nonNull(hexBytes32),
+    totalPayment: hexBytes32,
     requestCID: hexBytes32,
     attestationSignature: signature,
     consumerSignature: signature,
