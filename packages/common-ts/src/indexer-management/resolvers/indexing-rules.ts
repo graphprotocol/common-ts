@@ -11,9 +11,8 @@ export default {
     const rule = await models.IndexingRule.findOne({
       where: { deployment },
     })
-    if (merged && rule) {
-      return rule.mergeToGraphql(
-        rule,
+    if (rule && merged) {
+      return rule.mergeToGraphQL(
         await models.IndexingRule.findOne({
           where: { deployment: INDEXING_RULE_GLOBAL },
         }),
@@ -31,10 +30,10 @@ export default {
       order: [['deployment', 'DESC']],
     })
     if (merged) {
-      const global_rule = await models.IndexingRule.findOne({
+      const global = await models.IndexingRule.findOne({
         where: { deployment: INDEXING_RULE_GLOBAL },
       })
-      return rules.map((rule) => rule.mergeToGraphql(rule, global_rule))
+      return rules.map((rule) => rule.mergeToGraphQL(global))
     } else {
       return rules.map((rule) => rule.toGraphQL())
     }

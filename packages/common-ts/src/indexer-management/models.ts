@@ -60,25 +60,26 @@ export class IndexingRule
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  public mergeToGraphql(rule: IndexingRule, global_rule: IndexingRule | null): object {
-    if (global_rule instanceof IndexingRule) {
+  public mergeToGraphQL(global: IndexingRule | null): object {
+    if (global instanceof IndexingRule) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const global: { [key: string]: any } | null = global_rule.toJSON()
+      const globalRule: { [key: string]: any } | null = global.toJSON()
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const deployment: { [key: string]: any } | null = rule.toJSON()
-      for (const k in global) {
-        if (null == deployment[k]) {
-          deployment[k] = global[k]
+      const rule: { [key: string]: any } | null = this.toJSON()
+      for (const k in globalRule) {
+        if (null == rule[k]) {
+          rule[k] = globalRule[k]
         }
       }
-      for (const k in deployment) {
-        if (deployment[k] == undefined) {
-          deployment[k] = global[k]
+      for (const k in rule) {
+        if (rule[k] == undefined) {
+          rule[k] = globalRule[k]
         }
       }
-      return { ...deployment, __typename: 'IndexingRule' }
+      return { ...rule, __typename: 'IndexingRule' }
     } else {
-      return rule.toGraphQL()
+      return this.toGraphQL()
     }
   }
 }
