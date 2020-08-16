@@ -494,7 +494,15 @@ describe('Indexer API client', () => {
           .toPromise(),
       ).resolves.toHaveProperty('data.indexingRule', deploymentMergedExpected)
 
-      // Query all rules together
+      // Query all rules together (without merging)
+      await expect(
+        client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
+      ).resolves.toHaveProperty('data.indexingRules', [
+        globalExpected,
+        deploymentExpected,
+      ])
+
+      // Query all rules together (with merging)
       await expect(
         client.query(INDEXING_RULES_QUERY, { merged: true }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [
