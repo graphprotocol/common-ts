@@ -97,6 +97,7 @@ export const defineStateChannelStoreModels = (
     channelId: nonNull(hexBytes32),
     totalPayment: hexBytes32,
     requestCID: hexBytes32,
+    responseCID: hexBytes32,
     attestationSignature: signature,
     consumerSignature: signature,
     connextAppIdHash: nonNull(hexBytes32),
