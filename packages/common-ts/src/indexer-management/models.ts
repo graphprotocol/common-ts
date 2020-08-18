@@ -106,7 +106,7 @@ export const defineIndexerManagementModels = (
         primaryKey: true,
       },
       allocation: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       maxAllocationPercentage: {
@@ -114,19 +114,19 @@ export const defineIndexerManagementModels = (
         allowNull: true,
       },
       minSignal: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       minStake: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       maxSignal: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       minAverageQueryFees: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       custom: {
