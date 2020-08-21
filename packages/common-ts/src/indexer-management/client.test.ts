@@ -18,7 +18,8 @@ const SET_INDEXING_RULE_MUTATION = gql`
     setIndexingRule(rule: $rule) {
       id
       deployment
-      allocation
+      allocationAmount
+      parallelAllocations
       maxAllocationPercentage
       minSignal
       maxSignal
@@ -41,7 +42,8 @@ const INDEXING_RULE_QUERY = gql`
     indexingRule(deployment: $deployment, merged: $merged) {
       id
       deployment
-      allocation
+      allocationAmount
+      parallelAllocations
       maxAllocationPercentage
       minSignal
       maxSignal
@@ -58,7 +60,8 @@ const INDEXING_RULES_QUERY = gql`
     indexingRules(merged: $merged) {
       id
       deployment
-      allocation
+      allocationAmount
+      parallelAllocations
       maxAllocationPercentage
       minSignal
       maxSignal
@@ -89,11 +92,12 @@ describe('Indexer API client', () => {
     test('Set and get global rule (partial)', async () => {
       const input = {
         deployment: INDEXING_RULE_GLOBAL,
-        allocation: '1000',
+        allocationAmount: '1000',
       }
 
       const expected = {
         ...input,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         minSignal: null,
         maxSignal: null,
@@ -121,7 +125,8 @@ describe('Indexer API client', () => {
     test('Set and get global rule (complete)', async () => {
       const input = {
         deployment: INDEXING_RULE_GLOBAL,
-        allocation: '1',
+        allocationAmount: '1',
+        parallelAllocations: 5,
         maxAllocationPercentage: 0.5,
         minSignal: '2',
         maxSignal: '3',
@@ -153,12 +158,13 @@ describe('Indexer API client', () => {
     test('Set and get global rule (partial update)', async () => {
       const originalInput = {
         deployment: INDEXING_RULE_GLOBAL,
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '2',
       }
 
       const original = {
         ...originalInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -176,7 +182,7 @@ describe('Indexer API client', () => {
 
       const update = {
         deployment: INDEXING_RULE_GLOBAL,
-        allocation: null,
+        allocationAmount: null,
         maxSignal: '3',
       }
 
@@ -201,12 +207,13 @@ describe('Indexer API client', () => {
     test('Set and get deployment rule (partial update)', async () => {
       const originalInput = {
         deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '2',
       }
 
       const original = {
         ...originalInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -224,7 +231,7 @@ describe('Indexer API client', () => {
 
       const update = {
         deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
-        allocation: null,
+        allocationAmount: null,
         maxSignal: '3',
       }
 
@@ -253,19 +260,20 @@ describe('Indexer API client', () => {
     test('Set and get global and deployment rule', async () => {
       const globalInput = {
         deployment: INDEXING_RULE_GLOBAL,
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '1',
         decisionBasis: IndexingDecisionBasis.NEVER,
       }
 
       const deploymentInput = {
         deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '2',
       }
 
       const globalExpected = {
         ...globalInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -276,6 +284,7 @@ describe('Indexer API client', () => {
 
       const deploymentExpected = {
         ...deploymentInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -329,12 +338,13 @@ describe('Indexer API client', () => {
     test('Set, delete and get rule', async () => {
       const input = {
         deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '2',
       }
 
       const expected = {
         ...input,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -371,11 +381,12 @@ describe('Indexer API client', () => {
     test('Clear a parameter', async () => {
       const input = {
         deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
-        allocation: '1',
+        allocationAmount: '1',
       }
 
       const expectedBefore = {
         ...input,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         minSignal: null,
         maxSignal: null,
@@ -397,30 +408,30 @@ describe('Indexer API client', () => {
         client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [expectedBefore])
 
-      // Clear the allocation field
+      // Clear the allocationAmount field
       await expect(
         client
           .mutation(SET_INDEXING_RULE_MUTATION, {
-            rule: { ...expectedBefore, allocation: null },
+            rule: { ...expectedBefore, allocationAmount: null },
           })
           .toPromise(),
       ).resolves.toHaveProperty('data.setIndexingRule', {
         ...expectedBefore,
-        allocation: null,
+        allocationAmount: null,
       })
 
       // Query the rules again to see that the update went through
       await expect(
         client.query(INDEXING_RULES_QUERY, { merged: false }).toPromise(),
       ).resolves.toHaveProperty('data.indexingRules', [
-        { ...expectedBefore, allocation: null },
+        { ...expectedBefore, allocationAmount: null },
       ])
     })
 
     test('Set and get global and deployment rule (merged)', async () => {
       const globalInput = {
         deployment: INDEXING_RULE_GLOBAL,
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '1',
         decisionBasis: IndexingDecisionBasis.NEVER,
         minAverageQueryFees: '1',
@@ -428,12 +439,13 @@ describe('Indexer API client', () => {
 
       const deploymentInput = {
         deployment: '0xa4e311bfa7edabed7b31d93e0b3e751659669852ef46adbedd44dc2454db4bf3',
-        allocation: '1',
+        allocationAmount: '1',
         minSignal: '2',
       }
 
       const globalExpected = {
         ...globalInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -443,6 +455,7 @@ describe('Indexer API client', () => {
 
       const deploymentExpected = {
         ...deploymentInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,
@@ -453,6 +466,7 @@ describe('Indexer API client', () => {
 
       const deploymentMergedExpected = {
         ...deploymentInput,
+        parallelAllocations: null,
         maxAllocationPercentage: null,
         maxSignal: null,
         minStake: null,

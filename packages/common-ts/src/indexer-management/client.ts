@@ -20,7 +20,8 @@ const SCHEMA_SDL = gql`
 
   type IndexingRule {
     deployment: String!
-    allocation: BigInt
+    allocationAmount: BigInt
+    parallelAllocations: Int
     maxAllocationPercentage: Float
     minSignal: BigInt
     maxSignal: BigInt
@@ -32,7 +33,8 @@ const SCHEMA_SDL = gql`
 
   input IndexingRuleInput {
     deployment: String!
-    allocation: BigInt
+    allocationAmount: BigInt
+    parallelAllocations: Int
     maxAllocationPercentage: Float
     minSignal: BigInt
     maxSignal: BigInt

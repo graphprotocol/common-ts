@@ -13,7 +13,8 @@ export const INDEXING_RULE_GLOBAL = 'global'
 export interface IndexingRuleAttributes {
   id: number
   deployment: string
-  allocation: string | null
+  allocationAmount: string | null
+  parallelAllocations: number | null
   maxAllocationPercentage: number | null
   minSignal: string | null
   maxSignal: string | null
@@ -27,7 +28,8 @@ export interface IndexingRuleCreationAttributes
   extends Optional<
     IndexingRuleAttributes,
     | 'id'
-    | 'allocation'
+    | 'allocationAmount'
+    | 'parallelAllocations'
     | 'maxAllocationPercentage'
     | 'minSignal'
     | 'maxSignal'
@@ -42,7 +44,8 @@ export class IndexingRule
   implements IndexingRuleAttributes {
   public id!: number
   public deployment!: string
-  public allocation!: string | null
+  public allocationAmount!: string | null
+  public parallelAllocations!: number | null
   public maxAllocationPercentage!: number | null
   public minSignal!: string | null
   public maxSignal!: string | null
@@ -105,8 +108,12 @@ export const defineIndexerManagementModels = (
         allowNull: true,
         primaryKey: true,
       },
-      allocation: {
+      allocationAmount: {
         type: DataTypes.DECIMAL,
+        allowNull: true,
+      },
+      parallelAllocations: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       maxAllocationPercentage: {
