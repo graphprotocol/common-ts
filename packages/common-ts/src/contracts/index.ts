@@ -16,16 +16,15 @@ import { Staking } from '@graphprotocol/contracts/dist/typechain/contracts/Staki
 import { GraphToken } from '@graphprotocol/contracts/dist/typechain/contracts/GraphToken'
 
 // Contract factories
-import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationContract'
-import { DisputeManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/DisputeManagerContract'
-import { EpochManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/EpochManagerContract'
-import { GnsFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GnsContract'
-import { RewardsManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/RewardsManagerContract'
-import { ServiceRegistryFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistryContract'
-import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contracts/StakingContract'
-import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenContract'
+import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationFactory'
+import { DisputeManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/DisputeManagerFactory'
+import { EpochManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/EpochManagerFactory'
+import { GnsFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GnsFactory'
+import { RewardsManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/RewardsManagerFactory'
+import { ServiceRegistryFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistryFactory'
+import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contracts/StakingFactory'
+import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenFactory'
 
-// TODO: Remove when contracts repo has TypeChain with ethers v5 support.
 export interface NetworkContracts {
   curation: Curation
   disputeManager: DisputeManager
