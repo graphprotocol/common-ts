@@ -812,10 +812,10 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@graphprotocol/contracts@^0.4.10-testnet-phase1":
-  version "0.4.10-testnet-phase1"
-  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-0.4.10-testnet-phase1.tgz#f42ced0ce0195aae7a49a0fa2c94a1c4e902bc47"
-  integrity sha512-I0xzBEF00rAbvak18QAT4fCMaGC19Uv+StZolpt6dxZQGyNjGpJa8mdyXOEFbJvgk5Qhn9mkMINkAkbGZtb1kw==
+"@graphprotocol/contracts@0.5.0-testnet-phase1":
+  version "0.5.0-testnet-phase1"
+  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-0.5.0-testnet-phase1.tgz#db457821ce9d849262d51d020b9564706808b7eb"
+  integrity sha512-Geph8Q71q9R1JQ4q6Ph7tF87yLnwDwDiIjw7he/KfRqwtcrseCmTJ0vFgRAhqD9mWszljj5BUt8qiDommUCkPQ==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -7874,7 +7874,7 @@ mz@^2.5.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@^2.0.8, nan@^2.14.0, nan@^2.2.1:
+nan@^2.14.0, nan@^2.2.1:
   version "2.14.1"
   resolved "https://registry.npmjs.org/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
   integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
@@ -9597,12 +9597,9 @@ scrypt-js@3.0.1, scrypt-js@^3.0.0:
   resolved "https://registry.npmjs.org/scrypt-js/-/scrypt-js-3.0.1.tgz#d314a57c2aef69d1ad98a138a21fe9eafa9ee312"
   integrity sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==
 
-scrypt@6.0.3:
-  version "6.0.3"
-  resolved "https://registry.npmjs.org/scrypt/-/scrypt-6.0.3.tgz#04e014a5682b53fa50c2d5cce167d719c06d870d"
-  integrity sha1-BOAUpWgrU/pQwtXM4WfXGcBthw0=
-  dependencies:
-    nan "^2.0.8"
+scrypt@6.0.3, "scrypt@https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz#77a4f0789bbd0aba4a1a19c97e03402475df02d1"
 
 secp256k1@3.8.0, secp256k1@^3.0.1:
   version "3.8.0"
