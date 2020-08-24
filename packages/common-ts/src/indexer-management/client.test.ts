@@ -8,6 +8,8 @@ import {
 } from './models'
 import { Sequelize } from 'sequelize/types'
 import gql from 'graphql-tag'
+import { connectContracts, NetworkContracts } from '../contracts'
+import { ethers } from 'ethers'
 
 // Make global Jest variable available
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,6 +77,9 @@ const INDEXING_RULES_QUERY = gql`
 
 let sequelize: Sequelize
 let models: IndexerManagementModels
+let address: string
+let url: string
+let contracts: NetworkContracts
 
 describe('Indexer API client', () => {
   describe('Indexing rules', () => {
@@ -82,6 +87,9 @@ describe('Indexer API client', () => {
       // Spin up db
       sequelize = await connectDatabase(__DATABASE__)
       models = defineIndexerManagementModels(sequelize)
+      address = '0xtest'
+      url = 'http://localhost'
+      contracts = await connectContracts(ethers.getDefaultProvider('1'), 1)
       await sequelize.sync({ force: true })
     })
 
@@ -107,7 +115,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Update the rule and ensure the right data is returned
       await expect(
@@ -140,7 +153,12 @@ describe('Indexer API client', () => {
         ...input,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Update the rule
       await expect(
@@ -173,7 +191,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Write the orginal
       await expect(
@@ -222,7 +245,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Write the orginal
       await expect(
@@ -293,7 +321,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Write the orginals
       await expect(
@@ -353,7 +386,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Write the rule
       await expect(
@@ -396,7 +434,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Write the rule
       await expect(
@@ -475,7 +518,12 @@ describe('Indexer API client', () => {
         decisionBasis: IndexingDecisionBasis.RULES,
       }
 
-      const client = await createIndexerManagementClient({ models })
+      const client = await createIndexerManagementClient({
+        models,
+        address,
+        url,
+        contracts,
+      })
 
       // Write the orginals
       await expect(
