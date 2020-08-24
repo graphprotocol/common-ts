@@ -1,7 +1,6 @@
 export * from './logging'
 export * from './metrics'
 export * from './database'
-export * from './state-channels'
 export * from './attestations'
 export * from './contracts'
 export * from './subgraph'
