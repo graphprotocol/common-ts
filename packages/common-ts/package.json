@@ -33,7 +33,8 @@
     "pg-hstore": "^2.3.3",
     "pino": "^6.3.2",
     "prom-client": "^12.0.0",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.4",
+    "helmet": "^4.1.0"
   },
   "devDependencies": {
     "@types/bs58": "^4.0.1",
