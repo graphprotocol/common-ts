@@ -2,12 +2,7 @@ import { Request, Response, Express } from 'express'
 import helmet from 'helmet'
 
 const rejectBadHeaders = (req: Request, res: Response, next: () => void) => {
-  if (
-    req.headers['challenge-bypass-token'] ||
-    req.headers['x_proxy_id'] ||
-    // Note: This one doesn't work on Google Cloud:
-    req.headers['via']
-  ) {
+  if (req.headers['challenge-bypass-token']) {
     res.status(400).send('Bad Request')
   } else {
     next()
