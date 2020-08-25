@@ -4,12 +4,12 @@ import { executeExchange } from '@urql/exchange-execute'
 import { createClient, Client } from '@urql/core'
 import { IndexerManagementModels } from './models'
 import indexingRuleResolvers from './resolvers/indexing-rules'
-import indexingStatusResolvers from './resolvers/indexer-status'
+import statusResolvers from './resolvers/indexer-status'
 import { NetworkContracts } from '../contracts'
 
 export interface IndexerManagementResolverContext {
   models: IndexerManagementModels
-  configs: IndexerConfigs
+  address: string
   contracts: NetworkContracts
 }
 
@@ -48,17 +48,29 @@ const SCHEMA_SDL = gql`
     decisionBasis: IndexingDecisionBasis
   }
 
-  type IndexerStatus {
-    indexerUrl: String!
-    indexerAddress: String!
-    isRegistered: Boolean!
-    registeredUrl: String
+  type IndexerRegistration {
+    url: String
+    address: String
+    registered: Boolean!
+    geoHash: String
+  }
+
+  type IndexerEndpoint {
+    url: String
+    healthy: Boolean!
+  }
+
+  type IndexerEndpoints {
+    serviceEndpoint: IndexerEndpoint!
+    statusEndpoint: IndexerEndpoint!
+    channelsEndpoint: IndexerEndpoint!
   }
 
   type Query {
     indexingRule(deployment: String!, merged: Boolean! = false): IndexingRule
     indexingRules(merged: Boolean! = false): [IndexingRule!]!
-    indexerStatus: IndexerStatus
+    indexerRegistration: IndexerRegistration!
+    indexerEndpoints: IndexerEndpoints!
   }
 
   type Mutation {
@@ -70,7 +82,6 @@ const SCHEMA_SDL = gql`
 export interface IndexerManagementClientOptions {
   models: IndexerManagementModels
   address: string
-  url: string
   contracts: NetworkContracts
 }
 
@@ -84,22 +95,20 @@ export type IndexerManagementClient = Client
 export const createIndexerManagementClient = async ({
   models,
   address,
-  url,
   contracts,
 }: IndexerManagementClientOptions): Promise<Client> => {
   const schema = buildSchema(print(SCHEMA_SDL))
   const resolvers = {
     ...indexingRuleResolvers,
-    ...indexingStatusResolvers,
+    ...statusResolvers,
   }
-  const configs: IndexerConfigs = { address, url }
 
   const exchange = executeExchange({
     schema,
     rootValue: resolvers,
     context: {
       models,
-      configs,
+      address,
       contracts,
     },
   })

@@ -1,27 +1,71 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 import { IndexerManagementResolverContext } from '../client'
+import url from 'url'
+
+class IndexerEndpoint {
+  url: string | null
+  healthy: boolean
+
+  constructor(url: string | null, healthy: boolean) {
+    this.url = url
+    this.healthy = healthy
+  }
+}
 
 export default {
-  indexerStatus: async (
+  indexerRegistration: async (
     _: {},
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    { models, configs, contracts }: IndexerManagementResolverContext,
+    { address, contracts }: IndexerManagementResolverContext,
   ): Promise<object | null> => {
-    const isRegistered = await contracts.serviceRegistry.isRegistered(configs.address)
-    let url = ''
+    const registered = await contracts.serviceRegistry.registered(address)
+    let url: string | null = null
+    let geoHash: string | null = null
 
-    if (isRegistered) {
-      const service = await contracts.serviceRegistry.services(configs.address)
+    if (registered) {
+      const service = await contracts.serviceRegistry.services(address)
       url = service.url
+      geoHash = service.geohash
     }
 
     return {
-      indexerAddress: configs.address,
-      indexerUrl: configs.url,
-      isRegistered,
-      registeredUrl: url,
-      __typename: 'IndexerStatus',
+      url,
+      address,
+      registered,
+      geoHash,
+      __typename: 'IndexerRegistration',
+    }
+  },
+  indexerEndpoints: async (
+    _: {},
+    { address, contracts }: IndexerManagementResolverContext,
+  ): Promise<object | null> => {
+    const service = await contracts.serviceRegistry.services(address)
+
+    const serviceEndpoint = new IndexerEndpoint(null, false)
+    const channelsEndpoint = new IndexerEndpoint(null, false)
+    const statusEndpoint = new IndexerEndpoint(null, false)
+
+    if (service) {
+      serviceEndpoint.url = service.url
+      const serviceResponse = await fetch(serviceEndpoint.url)
+      serviceEndpoint.healthy = serviceResponse.ok
+
+      channelsEndpoint.url = url.resolve(service.url, '/subgraph/id/qmTestSubgraph')
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const channelResult = await fetch(channelsEndpoint.url!)
+      channelsEndpoint.healthy = channelResult.ok
+
+      statusEndpoint.url = url.resolve(service.url, '/status')
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const statusResult = await fetch(statusEndpoint.url!)
+      statusEndpoint.healthy = statusResult.ok
+    }
+
+    return {
+      serviceEndpoint,
+      statusEndpoint,
+      channelsEndpoint,
     }
   },
 }
