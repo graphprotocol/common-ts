@@ -4,7 +4,7 @@ import { utils } from 'ethers'
 import * as bs58 from 'bs58'
 
 describe('Attestations', () => {
-  test('attestations are correct', async () => {
+  test('Attestations are correct', async () => {
     const mnemonic =
       'coyote tattoo slush ball cluster culture bleak news when action cover effort'
 
