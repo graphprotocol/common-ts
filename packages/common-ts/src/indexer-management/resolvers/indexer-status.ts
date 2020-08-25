@@ -8,7 +8,7 @@ export default {
     _: {},
     { address, contracts }: IndexerManagementResolverContext,
   ): Promise<object | null> => {
-    const registered = await contracts.serviceRegistry.registered(address)
+    const registered = await contracts.serviceRegistry.isRegistered(address)
 
     if (registered) {
       const service = await contracts.serviceRegistry.services(address)
