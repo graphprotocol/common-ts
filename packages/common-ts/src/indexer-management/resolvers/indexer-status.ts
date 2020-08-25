@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 import { IndexerManagementResolverContext } from '../client'
+import geohash, { GeographicPoint } from 'ngeohash'
 import url from 'url'
 
 class IndexerEndpoint {
@@ -20,19 +21,19 @@ export default {
   ): Promise<object | null> => {
     const registered = await contracts.serviceRegistry.registered(address)
     let url: string | null = null
-    let geoHash: string | null = null
+    let location: GeographicPoint | null = null
 
     if (registered) {
       const service = await contracts.serviceRegistry.services(address)
       url = service.url
-      geoHash = service.geohash
+      location = geohash.decode(service.geohash)
     }
 
     return {
       url,
       address,
       registered,
-      geoHash,
+      location,
       __typename: 'IndexerRegistration',
     }
   },
