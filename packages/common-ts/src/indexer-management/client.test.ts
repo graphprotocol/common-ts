@@ -87,7 +87,7 @@ describe('Indexer API client', () => {
       sequelize = await connectDatabase(__DATABASE__)
       models = defineIndexerManagementModels(sequelize)
       address = '0xtest'
-      contracts = await connectContracts(ethers.getDefaultProvider('1'), 1)
+      contracts = await connectContracts(ethers.getDefaultProvider('rinkeby'), 4)
       await sequelize.sync({ force: true })
     })
 
