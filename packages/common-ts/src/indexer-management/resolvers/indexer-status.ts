@@ -58,15 +58,25 @@ export default {
         endpoints.service.healthy = response.ok
 
         endpoints.status.url = new URL('/status', service.url).toString()
-        response = await fetch(endpoints.status.url)
+        response = await fetch('http://localhost:7600/status', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json/' },
+          body: JSON.stringify({ query: '{ indexingStatuses { subgraph } }' }),
+        })
         endpoints.status.healthy = response.ok
 
         endpoints.channels.url = new URL(
           '/channel-messages-inbox',
           service.url,
         ).toString()
-        response = await fetch(endpoints.channels.url)
-        endpoints.channels.healthy = response.ok
+        response = await fetch('http://localhost:7600/channel-messages-inbox', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({}),
+        })
+        // This message is expected to fail, but it shouldn't return a 404
+        // or 401 or anything like that
+        endpoints.channels.healthy = response.status === 500
       }
     } catch {
       // Return empty endpoints
