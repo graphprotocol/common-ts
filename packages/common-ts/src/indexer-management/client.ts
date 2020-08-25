@@ -66,9 +66,9 @@ const SCHEMA_SDL = gql`
   }
 
   type IndexerEndpoints {
-    serviceEndpoint: IndexerEndpoint!
-    statusEndpoint: IndexerEndpoint!
-    channelsEndpoint: IndexerEndpoint!
+    service: IndexerEndpoint!
+    status: IndexerEndpoint!
+    channels: IndexerEndpoint!
   }
 
   type Query {
@@ -88,11 +88,6 @@ export interface IndexerManagementClientOptions {
   models: IndexerManagementModels
   address: string
   contracts: NetworkContracts
-}
-
-export interface IndexerConfigs {
-  address: string
-  url: string
 }
 
 export type IndexerManagementClient = Client
