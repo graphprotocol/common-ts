@@ -48,11 +48,16 @@ const SCHEMA_SDL = gql`
     decisionBasis: IndexingDecisionBasis
   }
 
+  type GeoLocation {
+    latitude: String!
+    longitude: String!
+  }
+
   type IndexerRegistration {
     url: String
     address: String
     registered: Boolean!
-    geoHash: String
+    location: GeoLocation
   }
 
   type IndexerEndpoint {
