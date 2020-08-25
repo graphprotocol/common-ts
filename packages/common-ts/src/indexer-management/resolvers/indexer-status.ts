@@ -58,9 +58,9 @@ export default {
         endpoints.service.healthy = response.ok
 
         endpoints.status.url = new URL('/status', service.url).toString()
-        response = await fetch('http://localhost:7600/status', {
+        response = await fetch(endpoints.status.url, {
           method: 'POST',
-          headers: { 'content-type': 'application/json/' },
+          headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ query: '{ indexingStatuses { subgraph } }' }),
         })
         endpoints.status.healthy = response.ok
@@ -69,7 +69,7 @@ export default {
           '/channel-messages-inbox',
           service.url,
         ).toString()
-        response = await fetch('http://localhost:7600/channel-messages-inbox', {
+        response = await fetch(endpoints.channels.url, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({}),
