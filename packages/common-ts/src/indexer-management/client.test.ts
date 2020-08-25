@@ -78,7 +78,6 @@ const INDEXING_RULES_QUERY = gql`
 let sequelize: Sequelize
 let models: IndexerManagementModels
 let address: string
-let url: string
 let contracts: NetworkContracts
 
 describe('Indexer API client', () => {
@@ -88,7 +87,6 @@ describe('Indexer API client', () => {
       sequelize = await connectDatabase(__DATABASE__)
       models = defineIndexerManagementModels(sequelize)
       address = '0xtest'
-      url = 'http://localhost'
       contracts = await connectContracts(ethers.getDefaultProvider('1'), 1)
       await sequelize.sync({ force: true })
     })
@@ -118,7 +116,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -156,7 +153,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -194,7 +190,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -248,7 +243,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -324,7 +318,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -389,7 +382,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -437,7 +429,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
@@ -521,7 +512,6 @@ describe('Indexer API client', () => {
       const client = await createIndexerManagementClient({
         models,
         address,
-        url,
         contracts,
       })
 
