@@ -62,9 +62,16 @@ const SCHEMA_SDL = gql`
     location: GeoLocation
   }
 
+  type IndexerEndpointTest {
+    test: String!
+    error: String
+    possibleActions: [String]!
+  }
+
   type IndexerEndpoint {
     url: String
     healthy: Boolean!
+    tests: [IndexerEndpointTest!]!
   }
 
   type IndexerEndpoints {
