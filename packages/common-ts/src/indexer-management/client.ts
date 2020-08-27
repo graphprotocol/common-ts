@@ -6,11 +6,13 @@ import { IndexerManagementModels } from './models'
 import indexingRuleResolvers from './resolvers/indexing-rules'
 import statusResolvers from './resolvers/indexer-status'
 import { NetworkContracts } from '../contracts'
+import { Logger } from '../logging'
 
 export interface IndexerManagementResolverContext {
   models: IndexerManagementModels
   address: string
   contracts: NetworkContracts
+  logger?: Logger
 }
 
 const SCHEMA_SDL = gql`
@@ -88,6 +90,7 @@ export interface IndexerManagementClientOptions {
   models: IndexerManagementModels
   address: string
   contracts: NetworkContracts
+  logger?: Logger
 }
 
 export type IndexerManagementClient = Client
@@ -96,6 +99,7 @@ export const createIndexerManagementClient = async ({
   models,
   address,
   contracts,
+  logger,
 }: IndexerManagementClientOptions): Promise<Client> => {
   const schema = buildSchema(print(SCHEMA_SDL))
   const resolvers = {
@@ -110,6 +114,7 @@ export const createIndexerManagementClient = async ({
       models,
       address,
       contracts,
+      logger: logger?.child({ component: 'IndexerManagementClient' }),
     },
   })
 

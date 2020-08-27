@@ -32,7 +32,7 @@ export default {
 
   indexerEndpoints: async (
     _: {},
-    { address, contracts }: IndexerManagementResolverContext,
+    { address, contracts, logger }: IndexerManagementResolverContext,
   ): Promise<object | null> => {
     const endpoints = {
       service: {
@@ -53,33 +53,53 @@ export default {
       const service = await contracts.serviceRegistry.services(address)
 
       if (service) {
-        let response = await fetch(service.url)
         endpoints.service.url = service.url
-        endpoints.service.healthy = response.ok
+        try {
+          const response = await fetch(service.url)
+          endpoints.service.healthy = response.ok
+        } catch (error) {
+          logger?.warn(`Service endpoint is unhealthy`, {
+            error: error.message || error,
+          })
+        }
 
         endpoints.status.url = new URL('/status', service.url).toString()
-        response = await fetch(endpoints.status.url, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ query: '{ indexingStatuses { subgraph } }' }),
-        })
-        endpoints.status.healthy = response.ok
+        try {
+          const response = await fetch(endpoints.status.url, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ query: '{ indexingStatuses { subgraph } }' }),
+          })
+          endpoints.status.healthy = response.ok
+        } catch (error) {
+          logger?.warn(`Status endpoint is unhealthy`, { error: error.message | error })
+        }
 
         endpoints.channels.url = new URL(
           '/channel-messages-inbox',
           service.url,
         ).toString()
-        response = await fetch(endpoints.channels.url, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({}),
-        })
-        // This message is expected to fail, but it shouldn't return a 404
-        // or 401 or anything like that
-        endpoints.channels.healthy = response.status === 500
+
+        try {
+          const response = await fetch(endpoints.channels.url, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({}),
+          })
+          // This message is expected to fail, but it shouldn't return a 404
+          // or 401 or anything like that
+          endpoints.channels.healthy = response.status === 500
+        } catch (error) {
+          logger?.warn(`Channels endpoint is unhealthy`, {
+            error: error.message || error,
+          })
+        }
       }
-    } catch {
+    } catch (error) {
       // Return empty endpoints
+      logger?.warn(`Failed to detect service endpoints`, {
+        error: error.message || error,
+      })
     }
 
     return endpoints

@@ -10,6 +10,7 @@ import { Sequelize } from 'sequelize/types'
 import gql from 'graphql-tag'
 import { connectContracts, NetworkContracts } from '../contracts'
 import { ethers } from 'ethers'
+import { createLogger, Logger } from '../logging'
 
 // Make global Jest variable available
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -79,6 +80,7 @@ let sequelize: Sequelize
 let models: IndexerManagementModels
 let address: string
 let contracts: NetworkContracts
+let logger: Logger
 
 describe('Indexer API client', () => {
   describe('Indexing rules', () => {
@@ -89,6 +91,7 @@ describe('Indexer API client', () => {
       address = '0xtest'
       contracts = await connectContracts(ethers.getDefaultProvider('rinkeby'), 4)
       await sequelize.sync({ force: true })
+      logger = createLogger({ name: 'Indexer API Client', level: 'trace' })
     })
 
     afterEach(async () => {
@@ -117,6 +120,7 @@ describe('Indexer API client', () => {
         models,
         address,
         contracts,
+        logger,
       })
 
       // Update the rule and ensure the right data is returned
@@ -154,6 +158,7 @@ describe('Indexer API client', () => {
         models,
         address,
         contracts,
+        logger,
       })
 
       // Update the rule
@@ -191,6 +196,7 @@ describe('Indexer API client', () => {
         models,
         address,
         contracts,
+        logger,
       })
 
       // Write the orginal
