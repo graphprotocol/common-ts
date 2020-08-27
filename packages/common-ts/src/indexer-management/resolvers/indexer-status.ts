@@ -160,7 +160,7 @@ export default {
               possibleActions: (url) => [
                 `Make sure ${url} can be reached from this machine`,
                 `Make sure the port of ${url} is set up correctly`,
-                `Make sure ${url} corresponds to the /status endpoint of indexer-service`,
+                `Make sure ${url} is the /status endpoint of indexer-service`,
                 `Make sure the test command returns an HTTP status code < 400`,
                 `Make sure the test command returns a valid GraphQL response`,
               ],
@@ -200,8 +200,8 @@ export default {
               possibleActions: (url) => [
                 `Make sure ${url} can be reached from this machine`,
                 `Make sure the port of ${url} is set up correctly`,
-                `Make sure ${url} corresponds to the /channel-messages-inbox endpoint of indexer-service`,
-                `Make sure the test command returns an HTTP status code 500`,
+                `Make sure ${url} is the /channel-messages-inbox endpoint of indexer-service`,
+                `Make sure the test command returns an HTTP status code 500 (yes, that's right)`,
               ],
             },
           ])
