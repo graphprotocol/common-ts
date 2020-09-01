@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.4] - 2020-09-01
+### Changed
+- Serve metrics from /metrics by default
+
 ## [0.2.3] - 2020-08-27
 ### Added
 - More details provided by the `indexerEndpoints` GraphQL API
@@ -242,7 +246,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.2.4...HEAD
+[0.2.4]: https://github.com/graphprotocol/common/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/graphprotocol/common/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/graphprotocol/common/compare/v0.1.0...v0.2.2
 [0.1.0]: https://github.com/graphprotocol/common/compare/v0.0.51...v0.1.0
