@@ -24,6 +24,7 @@ export interface MetricsServerOptions {
   logger: Logger
   registry: Registry
   port?: number
+  route?: string
 }
 
 export const createMetricsServer = (options: MetricsServerOptions): Server => {
@@ -31,7 +32,7 @@ export const createMetricsServer = (options: MetricsServerOptions): Server => {
 
   const app = express()
 
-  app.get('/', (_, res) => {
+  app.get(options.route || '/metrics', (_, res) => {
     res.status(200).send(options.registry.metrics())
   })
 
