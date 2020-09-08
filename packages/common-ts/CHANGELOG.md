@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.6] - 2020-09-08
+### Changed
+- Rerelease to publish to private registry
+
 ## [0.2.5] - 2020-09-08
 ### Removed
 - Move indexer management to indexer repository
@@ -254,7 +258,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.2.5...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.2.6...HEAD
+[0.2.6]: https://github.com/graphprotocol/common/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/graphprotocol/common/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/graphprotocol/common/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/graphprotocol/common/compare/v0.2.2...v0.2.3
