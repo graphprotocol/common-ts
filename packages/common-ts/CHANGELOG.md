@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.5] - 2020-09-08
+### Removed
+- Move indexer management to indexer repository
+
+### Added
+- Add `Eventual<T>` concept
+- Add `Address` type and `toAddress` converter for normalizing addresses
+
 ## [0.2.4] - 2020-09-01
 ### Changed
 - Serve metrics from /metrics by default
@@ -246,7 +254,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.2.4...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.2.5...HEAD
+[0.2.5]: https://github.com/graphprotocol/common/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/graphprotocol/common/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/graphprotocol/common/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/graphprotocol/common/compare/v0.1.0...v0.2.2
