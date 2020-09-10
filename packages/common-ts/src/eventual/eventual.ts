@@ -2,6 +2,7 @@ import { equal } from '../util'
 
 export type Awaitable<T> = T | Promise<T>
 export type Mapper<T, U> = (t: T) => Awaitable<U>
+export type Reducer<T, U> = (acc: U, t: T) => Awaitable<U>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type NamedEventuals<T> = { [k: string]: Eventual<any> } & { [K in keyof T]: T[K] }
@@ -22,6 +23,7 @@ export interface Eventual<T> {
   map<U>(f: Mapper<T, U>): Eventual<U>
   pipe(f: (t: T) => void): void
   throttle(interval: number): Eventual<T>
+  reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U>
 }
 
 export interface WritableEventual<T> extends Eventual<T> {
@@ -88,6 +90,10 @@ export class EventualValue<T> implements WritableEventual<T> {
   throttle(interval: number): Eventual<T> {
     return throttle(this, interval)
   }
+
+  reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U> {
+    return reduce(this, f, initial)
+  }
 }
 
 export function mutable<T>(initial?: T): WritableEventual<T> {
@@ -153,26 +159,38 @@ export function throttle<T>(source: Eventual<T>, interval: number): Eventual<T> 
   return output
 }
 
-export function poll<T>(
-  fn: (previous: T | undefined) => Awaitable<T>,
-  interval: number,
-): Eventual<T> {
-  const output: WritableEventual<T> = mutable()
+export function timer(milliseconds: number): Eventual<number> {
+  const time = mutable(Date.now())
+  setTimeout(() => time.push(Date.now()), milliseconds)
+  return time
+}
 
-  let value: T | undefined
+export function reduce<T, U>(
+  source: Eventual<T>,
+  reducer: (acc: U, t: T) => Awaitable<U>,
+  initial: U,
+): Eventual<U> {
+  const output = mutable(initial)
 
-  const run = async () => {
-    const newValue = await fn(value)
-    if (!equal(newValue, value)) {
-      value = newValue
-      output.push(value)
+  let acc: U = initial
+  let previousT: T | undefined
+  let latestT: T | undefined
+
+  let reducePromise: Promise<void> | undefined
+
+  source.subscribe(t => {
+    latestT = t
+    if (reducePromise === undefined) {
+      reducePromise = (async () => {
+        while (!equal(latestT, previousT)) {
+          previousT = latestT
+          acc = await reducer(acc, latestT)
+          output.push(acc)
+        }
+        reducePromise = undefined
+      })()
     }
-  }
-
-  setTimeout(async () => {
-    await run()
-    setInterval(run, interval)
-  }, 0)
+  })
 
   return output
 }

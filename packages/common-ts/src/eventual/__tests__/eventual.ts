@@ -137,4 +137,22 @@ describe('Eventual', () => {
       new Map<string, number>([['a', 1]]),
     )
   })
+
+  test('Reduce', async () => {
+    const source = mutable(['a', 'b'])
+    const reduced = source.reduce((s, values) => s + values.join(''), '')
+
+    await expect(source.value()).resolves.toStrictEqual(['a', 'b'])
+    await expect(reduced.value()).resolves.toStrictEqual('ab')
+
+    source.push(['c', 'd'])
+
+    await expect(source.value()).resolves.toStrictEqual(['c', 'd'])
+    await expect(reduced.value()).resolves.toStrictEqual('abcd')
+
+    source.push(['e'])
+
+    await expect(source.value()).resolves.toStrictEqual(['e'])
+    await expect(reduced.value()).resolves.toStrictEqual('abcde')
+  })
 })
