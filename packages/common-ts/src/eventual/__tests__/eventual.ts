@@ -1,5 +1,4 @@
 import { mutable } from '../eventual'
-import e from 'express'
 
 describe('Eventual', () => {
   test('Value', async () => {
