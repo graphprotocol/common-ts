@@ -161,7 +161,7 @@ export function throttle<T>(source: Eventual<T>, interval: number): Eventual<T> 
 
 export function timer(milliseconds: number): Eventual<number> {
   const time = mutable(Date.now())
-  setTimeout(() => time.push(Date.now()), milliseconds)
+  setInterval(() => time.push(Date.now()), milliseconds)
   return time
 }
 
