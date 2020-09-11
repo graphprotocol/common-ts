@@ -1,6 +1,6 @@
 import { equal } from '../util'
 
-export type Awaitable<T> = T | Promise<T>
+export type Awaitable<T> = T | PromiseLike<T>
 export type Mapper<T, U> = (t: T) => Awaitable<U>
 export type Reducer<T, U> = (acc: U, t: T) => Awaitable<U>
 
@@ -21,7 +21,7 @@ export interface Eventual<T> {
   subscribe(subscriber: Subscriber<T>): void
 
   map<U>(f: Mapper<T, U>): Eventual<U>
-  pipe(f: (t: T) => void): void
+  pipe(f: (t: T) => Awaitable<void>): void
   throttle(interval: number): Eventual<T>
   reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U>
 }
@@ -83,7 +83,7 @@ export class EventualValue<T> implements WritableEventual<T> {
     return map(this, f)
   }
 
-  pipe(f: (t: T) => void): void {
+  pipe(f: (t: T) => Awaitable<void>): void {
     return pipe(this, f)
   }
 

@@ -102,7 +102,9 @@ describe('Eventual', () => {
     const lower = mutable(['a', 'b', 'c'])
 
     const piped = [] as string[][]
-    lower.pipe(values => piped.push(values))
+    lower.pipe(values => {
+      piped.push(values)
+    })
 
     await expect(lower.value()).resolves.toStrictEqual(['a', 'b', 'c'])
     expect(piped).toStrictEqual([['a', 'b', 'c']])
@@ -121,6 +123,24 @@ describe('Eventual', () => {
       ['c', 'd'],
       ['e', 'f'],
     ])
+  })
+
+  test('Pipe (no race conditions)', async () => {
+    const lower = mutable(['a', 'b', 'c'])
+    let slowUpperRunning = false
+    lower.pipe(async () => {
+      expect(slowUpperRunning).toBeFalsy()
+      slowUpperRunning = true
+      await new Promise(resolve => setTimeout(resolve, 500)).then(() => {
+        slowUpperRunning = false
+      })
+    })
+
+    lower.push(['d'])
+    lower.push(['e'])
+
+    await expect(lower.value()).resolves.toStrictEqual(['e'])
+    await new Promise(resolve => setTimeout(resolve, 1500))
   })
 
   test('Equality with Map objects', async () => {
