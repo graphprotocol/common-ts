@@ -60,6 +60,26 @@ describe('Eventual', () => {
     await expect(codes.value()).resolves.toStrictEqual([67, 68])
   })
 
+  test('Filter (even and odd)', async () => {
+    const source = mutable(0)
+    const even = source.filter(value => value % 2 === 0)
+    const odd = source.filter(value => value % 2 !== 0)
+
+    await expect(source.value()).resolves.toStrictEqual(0)
+    await expect(even.value()).resolves.toStrictEqual(0)
+    // Note: we cannot check the value of `odd` here because it would block indefinitely
+
+    for (let i = 1; i < 10; i++) {
+      source.push(i)
+
+      // Always expect the latest value in `source`, the most recent even value
+      // in `even` and the most recent odd value in `odd`.
+      await expect(source.value()).resolves.toStrictEqual(i)
+      await expect(even.value()).resolves.toStrictEqual(i % 2 === 0 ? i : i - 1)
+      await expect(odd.value()).resolves.toStrictEqual(i % 2 === 0 ? i - 1 : i)
+    }
+  })
+
   test('Throttle', async () => {
     const lower = mutable(['a', 'b', 'c'])
     const throttled = lower.throttle(500)

@@ -2,6 +2,7 @@ import { equal } from '../util'
 
 export type Awaitable<T> = T | PromiseLike<T>
 export type Mapper<T, U> = (t: T) => Awaitable<U>
+export type Filter<T> = (t: T) => Awaitable<boolean>
 export type Reducer<T, U> = (acc: U, t: T) => Awaitable<U>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,6 +22,7 @@ export interface Eventual<T> {
   subscribe(subscriber: Subscriber<T>): void
 
   map<U>(f: Mapper<T, U>): Eventual<U>
+  filter(f: Filter<T>): Eventual<T>
   pipe(f: (t: T) => Awaitable<void>): void
   throttle(interval: number): Eventual<T>
   reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U>
@@ -83,6 +85,10 @@ export class EventualValue<T> implements WritableEventual<T> {
     return map(this, f)
   }
 
+  filter(f: Filter<T>): Eventual<T> {
+    return filter(this, f)
+  }
+
   pipe(f: (t: T) => Awaitable<void>): void {
     return pipe(this, f)
   }
@@ -117,6 +123,31 @@ export function map<T, U>(
         while (!equal(latestT, previousT)) {
           previousT = latestT
           output.push(await mapper(latestT))
+        }
+        mapPromise = undefined
+      })()
+    }
+  })
+
+  return output
+}
+
+export function filter<T>(source: Eventual<T>, f: Filter<T>): Eventual<T> {
+  const output: WritableEventual<T> = mutable()
+
+  let previousT: T | undefined
+  let latestT: T | undefined
+  let mapPromise: Promise<void> | undefined
+
+  source.subscribe(t => {
+    latestT = t
+    if (mapPromise === undefined) {
+      mapPromise = (async () => {
+        while (!equal(latestT, previousT)) {
+          previousT = latestT
+          if (await f(latestT)) {
+            output.push(latestT)
+          }
         }
         mapPromise = undefined
       })()
