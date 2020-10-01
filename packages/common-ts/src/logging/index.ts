@@ -11,8 +11,8 @@ export interface LoggerOptions {
 }
 
 export class Logger {
-  private options: LoggerOptions
-  private inner: pino.Logger
+  options: LoggerOptions
+  inner: pino.Logger
 
   constructor(options: LoggerOptions) {
     this.options = options
