@@ -47,7 +47,7 @@ export const createMetricsServer = (options: MetricsServerOptions): Server => {
 export async function timed<T>(
   metric: Histogram<string> | undefined,
   labels: LabelValues<string> | undefined,
-  promise: Promise<T>,
+  promise: T | Promise<T>,
 ): Promise<T> {
   const timer = metric?.startTimer(labels)
   try {
