@@ -8,6 +8,7 @@ export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' |
 export interface LoggerOptions {
   name: string
   level?: LogLevel
+  async?: boolean
 }
 
 export class Logger {
@@ -16,7 +17,11 @@ export class Logger {
 
   constructor(options: LoggerOptions) {
     this.options = options
-    this.inner = pino({ name: options.name, level: options.level || 'debug' })
+
+    const loggerOptions = { name: options.name, level: options.level || 'debug' }
+    this.inner = options.async
+      ? pino(loggerOptions, pino.destination({ minLength: 4096, sync: false }))
+      : pino(loggerOptions)
   }
 
   child(bindings: pino.Bindings): Logger {
