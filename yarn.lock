@@ -360,7 +360,7 @@
   dependencies:
     "@ethersproject/bignumber" "^5.0.7"
 
-"@ethersproject/contracts@5.0.5":
+"@ethersproject/contracts@5.0.5", "@ethersproject/contracts@^5.0.3":
   version "5.0.5"
   resolved "https://registry.npmjs.org/@ethersproject/contracts/-/contracts-5.0.5.tgz#64831a341ec8ca225e83ff3e9437c26b970fd5d7"
   integrity sha512-tFI255lFbmbqMkgnuyhDWHl3yWqttPlReplYuVvDCT/SuvBjLR4ad2uipBlh1fh5X1ipK9ettAoV4S0HKim4Kw==
@@ -678,10 +678,13 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@graphprotocol/contracts@0.5.0-testnet-phase1":
-  version "0.5.0-testnet-phase1"
-  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-0.5.0-testnet-phase1.tgz#db457821ce9d849262d51d020b9564706808b7eb"
-  integrity sha512-Geph8Q71q9R1JQ4q6Ph7tF87yLnwDwDiIjw7he/KfRqwtcrseCmTJ0vFgRAhqD9mWszljj5BUt8qiDommUCkPQ==
+"@graphprotocol/contracts@0.7.0-testnet-phase2":
+  version "0.7.0-testnet-phase2"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/contracts/-/contracts-0.7.0-testnet-phase2.tgz#6e349bb4e0872aff825117a4125a72e843bb7114"
+  integrity sha512-zjKajxPmx3alIiB0V4+1e+efGQn/q0si6F/6m7PUlMf/zMypG3z+57edg8dK/Mz74MIdgOZvtWJFZKYmnyk+pg==
+  dependencies:
+    "@ethersproject/contracts" "^5.0.3"
+    ethers "^5.0.9"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -3616,7 +3619,7 @@ etag@~1.8.1:
   resolved "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-ethers@^5.0.15:
+ethers@^5.0.15, ethers@^5.0.9:
   version "5.0.15"
   resolved "https://registry.npmjs.org/ethers/-/ethers-5.0.15.tgz#958818605ea1bfe5a745bbe6b6f4f2c5c0e4637c"
   integrity sha512-ODBTkK+dg44d4yzLgD/w3IxDBa9nLFBF4z8OgICISvkVO2uLLmlR5boqv61PtTMTIPydT9wTn5C1cUntHKFkqQ==
