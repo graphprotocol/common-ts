@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2020-10-12
+### Changed
+- Update contracts to 0.7.4-testnet-phase2-production
+
 ## [0.3.0] - 2020-10-12
 ### Added
 - Add `filter` eventual
@@ -287,7 +291,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/graphprotocol/common/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/graphprotocol/common/compare/v0.2.9...v0.3.0
 [0.2.9]: https://github.com/graphprotocol/common/compare/v0.2.8...v0.2.9
 [0.2.8]: https://github.com/graphprotocol/common/compare/v0.2.7...v0.2.8
