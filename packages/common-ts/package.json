@@ -15,7 +15,7 @@
     "test:watch": "jest --watch --passWithNoTests --verbose"
   },
   "dependencies": {
-    "@graphprotocol/contracts": "^0.7.4-testnet-phase2-production",
+    "@graphprotocol/contracts": "0.7.5-testnet-phase2",
     "@urql/core": "^1.12.3",
     "@urql/exchange-execute": "^1.0.1",
     "body-parser": "^1.19.0",
@@ -59,7 +59,7 @@
     "scrypt": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz"
   },
   "peerDependencies": {
-    "@graphprotocol/contracts": "^0.5.0-testnet-phase1"
+    "@graphprotocol/contracts": "^0.7.5-testnet-phase2"
   },
   "gitHead": "8d9126f4c6c764ad6462c6ca2cc4523a268820fa"
 }
