@@ -678,10 +678,10 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@graphprotocol/contracts@0.7.5-testnet-phase2":
-  version "0.7.5-testnet-phase2"
-  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-0.7.5-testnet-phase2.tgz#a5aa42483979ec59b1a4b6993684b89db72b3f12"
-  integrity sha512-3W/j3OXnMrg/7qVx1z5gNmzKCxmYURfiHhQ/v61CaTkOJaQfh7hJiTzNANKN2KHRC/dJasScQ1sOGFtZL5wl+w==
+"@graphprotocol/contracts@0.7.7-testnet-phase2":
+  version "0.7.7-testnet-phase2"
+  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-0.7.7-testnet-phase2.tgz#629be9c6b8eb2adf539be11fa35fe56a467e3cd6"
+  integrity sha512-79l1Mj9cfwfAjPnDxeDZTKpwQdUjn6D2O03mz4lLifkn5hclY9fKVmugvhrNREiNCQy68koelP3bcYgc4H8ojg==
   dependencies:
     "@ethersproject/contracts" "^5.0.3"
     ethers "^5.0.9"
