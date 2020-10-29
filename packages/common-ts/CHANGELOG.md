@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.6] - 2020-10-30
+### Changed
+- Downgrade `@urql/core` and `@urql/exchange-execute`
+
 ## [0.3.5] - 2020-10-29
 ### Changed
 - Update and pin all dependencies
@@ -307,7 +311,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.5...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.6...HEAD
+[0.3.6]: https://github.com/graphprotocol/common/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/graphprotocol/common/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/graphprotocol/common/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/graphprotocol/common/compare/v0.3.2...v0.3.3

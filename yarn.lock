@@ -2413,19 +2413,26 @@
     "@typescript-eslint/types" "4.6.0"
     eslint-visitor-keys "^2.0.0"
 
-"@urql/core@1.14.1", "@urql/core@>=1.14.0":
+"@urql/core@1.13.1":
+  version "1.13.1"
+  resolved "https://registry.npmjs.org/@urql/core/-/core-1.13.1.tgz#7247c27dccd7570010de91730d1f16fd15892829"
+  integrity sha512-Zl4UwvcE9JbWKzrtxnlmfF+rkX50GzK5dpMlB6FnUYF0sLmuGMxp67lnhTQsfTNJ+41bkj4lk0PMWEnG7KUsTw==
+  dependencies:
+    wonka "^4.0.14"
+
+"@urql/core@>=1.12.0":
   version "1.14.1"
   resolved "https://registry.npmjs.org/@urql/core/-/core-1.14.1.tgz#eadd3f4dbbb9d194a67bc84fcce082bb511d13fe"
   integrity sha512-yRpGazoqn4eSzcVcnwKCYcXEePiwc/fwkKAzguPP9sNZu3qWMBSHzH7huu0FeuwTiSxu6S1x3l0s7QYere0ZFQ==
   dependencies:
     wonka "^4.0.14"
 
-"@urql/exchange-execute@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@urql/exchange-execute/-/exchange-execute-1.0.2.tgz#b09c7aa14cb2da53b44b94462b2954315bb150a2"
-  integrity sha512-4eK3ow7wOtPpeKET1+PaAFOLxnELen9tMoLF16B0FuuNRwuzhLK1tk3eNaTWIwSv4VlTdV086W5e2b+GcWn+bw==
+"@urql/exchange-execute@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@urql/exchange-execute/-/exchange-execute-1.0.1.tgz#4cda7cbb8130c6c99f035927ca5d4756685f1ab4"
+  integrity sha512-7WgchTfgfPr+9KAiRlsf/MocMcjbP+1Tvlfjd5jWCiJDtIfaGA6ALx/ibAUhTRKF97zXuHfyeD3dWrodmPLuag==
   dependencies:
-    "@urql/core" ">=1.14.0"
+    "@urql/core" ">=1.12.0"
     wonka "^4.0.14"
 
 "@zkochan/cmd-shim@^3.1.0":
@@ -7938,6 +7945,10 @@ scrypt-js@3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/scrypt-js/-/scrypt-js-3.0.1.tgz#d314a57c2aef69d1ad98a138a21fe9eafa9ee312"
   integrity sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==
+
+"scrypt@https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz#77a4f0789bbd0aba4a1a19c97e03402475df02d1"
 
 "semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0, semver@^5.7.0, semver@^5.7.1:
   version "5.7.1"
