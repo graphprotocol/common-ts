@@ -4,11 +4,17 @@
 import pino from 'pino'
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | 'silent'
+export type ErrorLevel = 'error' | 'fatal' | 'critical'
+
+export interface ErrorTracker {
+  trackError(error: Error, context: any, level: ErrorLevel): void
+}
 
 export interface LoggerOptions {
   name: string
   level?: LogLevel
   async?: boolean
+  errorTracker?: ErrorTracker
 }
 
 export class Logger {
@@ -73,6 +79,10 @@ export class Logger {
 
   error(msg: string, o?: object, ...args: any[]): void {
     if (o) {
+      const { error } = o as any
+      delete (o as any)['error']
+      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'error')
+
       this.inner.error(o, msg, ...args)
     } else {
       this.inner.error(msg, ...args)
@@ -81,6 +91,10 @@ export class Logger {
 
   fatal(msg: string, o?: object, ...args: any[]): void {
     if (o) {
+      const { error } = o as any
+      delete (o as any)['error']
+      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'fatal')
+
       this.inner.fatal(o, msg, ...args)
     } else {
       this.inner.fatal(msg, ...args)
@@ -89,6 +103,10 @@ export class Logger {
 
   crit(msg: string, o?: object, ...args: any[]): void {
     if (o) {
+      const { error } = o as any
+      delete (o as any)['error']
+      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'critical')
+
       this.inner.fatal(o, msg, ...args)
     } else {
       this.inner.fatal(msg, ...args)
@@ -97,6 +115,10 @@ export class Logger {
 
   critical(msg: string, o?: object, ...args: any[]): void {
     if (o) {
+      const { error } = o as any
+      delete (o as any)['error']
+      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'critical')
+
       this.inner.fatal(o, msg, ...args)
     } else {
       this.inner.fatal(msg, ...args)
