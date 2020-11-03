@@ -2,19 +2,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import pino from 'pino'
+import pinoMultiStream from 'pino-multi-stream'
+import pinoSentry from 'pino-sentry'
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | 'silent'
 export type ErrorLevel = 'error' | 'fatal' | 'critical'
 
-export interface ErrorTracker {
-  trackError(error: Error, context: any, level: ErrorLevel): void
+export interface LoggerSentryOptions {
+  dsn: string
+  serverName: string
+  release: string
+  tracesSampleRate: number
+  debug: boolean
 }
 
 export interface LoggerOptions {
   name: string
   level?: LogLevel
   async?: boolean
-  errorTracker?: ErrorTracker
+  sentry?: LoggerSentryOptions
 }
 
 export class Logger {
@@ -25,9 +31,25 @@ export class Logger {
     this.options = options
 
     const loggerOptions = { name: options.name, level: options.level || 'debug' }
-    this.inner = options.async
-      ? pino(loggerOptions, pino.destination({ minLength: 4096, sync: false }))
-      : pino(loggerOptions)
+
+    const stream = options.async
+      ? pino.destination({ minLength: 4096, sync: false })
+      : pino.destination()
+
+    if (options.sentry) {
+      const streams = [
+        { stream },
+        {
+          stream: pinoSentry.createWriteStream(options.sentry),
+        },
+      ]
+      this.inner = pinoMultiStream({
+        ...loggerOptions,
+        streams,
+      })
+    } else {
+      this.inner = pino(loggerOptions, stream)
+    }
   }
 
   child(bindings: pino.Bindings): Logger {
@@ -79,10 +101,6 @@ export class Logger {
 
   error(msg: string, o?: object, ...args: any[]): void {
     if (o) {
-      const { error } = o as any
-      delete (o as any)['error']
-      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'error')
-
       this.inner.error(o, msg, ...args)
     } else {
       this.inner.error(msg, ...args)
@@ -91,10 +109,6 @@ export class Logger {
 
   fatal(msg: string, o?: object, ...args: any[]): void {
     if (o) {
-      const { error } = o as any
-      delete (o as any)['error']
-      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'fatal')
-
       this.inner.fatal(o, msg, ...args)
     } else {
       this.inner.fatal(msg, ...args)
@@ -103,10 +117,6 @@ export class Logger {
 
   crit(msg: string, o?: object, ...args: any[]): void {
     if (o) {
-      const { error } = o as any
-      delete (o as any)['error']
-      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'critical')
-
       this.inner.fatal(o, msg, ...args)
     } else {
       this.inner.fatal(msg, ...args)
@@ -115,10 +125,6 @@ export class Logger {
 
   critical(msg: string, o?: object, ...args: any[]): void {
     if (o) {
-      const { error } = o as any
-      delete (o as any)['error']
-      this.options.errorTracker?.trackError(error, { msg, args, ...o }, 'critical')
-
       this.inner.fatal(o, msg, ...args)
     } else {
       this.inner.fatal(msg, ...args)
