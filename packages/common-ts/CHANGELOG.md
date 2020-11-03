@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.11] - 2020-11-03
+### Fixed
+- Fix using trace or debug levels
+
 ## [0.3.10] - 2020-11-03
 ### Added
 - Add level option for Sentry error tracking
@@ -327,7 +331,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.10...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.11...HEAD
+[0.3.11]: https://github.com/graphprotocol/common/compare/v0.3.10...v0.3.11
 [0.3.10]: https://github.com/graphprotocol/common/compare/v0.3.9...v0.3.10
 [0.3.9]: https://github.com/graphprotocol/common/compare/v0.3.8...v0.3.9
 [0.3.8]: https://github.com/graphprotocol/common/compare/v0.3.7...v0.3.8

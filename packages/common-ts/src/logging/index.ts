@@ -5,7 +5,7 @@ import pino from 'pino'
 import pinoMultiStream from 'pino-multi-stream'
 import * as pinoSentry from 'pino-sentry'
 
-export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | 'silent'
+export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal'
 
 export interface LoggerSentryOptions {
   dsn: string
@@ -38,7 +38,7 @@ export class Logger {
 
     if (options.sentry) {
       const streams = [
-        { stream },
+        { stream, level: loggerOptions.level },
         {
           stream: options.async
             ? pinoSentry.createWriteStreamAsync(options.sentry)
