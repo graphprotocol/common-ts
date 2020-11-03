@@ -6,7 +6,6 @@ import pinoMultiStream from 'pino-multi-stream'
 import * as pinoSentry from 'pino-sentry'
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | 'silent'
-export type ErrorLevel = 'error' | 'fatal' | 'critical'
 
 export interface LoggerSentryOptions {
   dsn: string
@@ -14,6 +13,7 @@ export interface LoggerSentryOptions {
   release: string
   tracesSampleRate: number
   debug: boolean
+  level: 'debug' | 'info' | 'warning' | 'error' | 'fatal'
 }
 
 export interface LoggerOptions {
