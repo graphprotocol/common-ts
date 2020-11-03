@@ -3,7 +3,7 @@
 
 import pino from 'pino'
 import pinoMultiStream from 'pino-multi-stream'
-import pinoSentry from 'pino-sentry'
+import * as pinoSentry from 'pino-sentry'
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal' | 'silent'
 export type ErrorLevel = 'error' | 'fatal' | 'critical'
@@ -40,7 +40,9 @@ export class Logger {
       const streams = [
         { stream },
         {
-          stream: pinoSentry.createWriteStream(options.sentry),
+          stream: options.async
+            ? pinoSentry.createWriteStreamAsync(options.sentry)
+            : pinoSentry.createWriteStream(options.sentry),
         },
       ]
       this.inner = pinoMultiStream({

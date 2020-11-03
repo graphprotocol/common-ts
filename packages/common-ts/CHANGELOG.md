@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.9] - 2020-11-03
+### Fixed
+- Fix Sentry integration in Logger
+
 ## [0.3.8] - 2020-11-03
 ### Added
 - Add error tracking with Sentry, make it easy to use
@@ -319,7 +323,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.8...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.9...HEAD
+[0.3.9]: https://github.com/graphprotocol/common/compare/v0.3.8...v0.3.9
 [0.3.8]: https://github.com/graphprotocol/common/compare/v0.3.7...v0.3.8
 [0.3.7]: https://github.com/graphprotocol/common/compare/v0.3.6...v0.3.7
 [0.3.6]: https://github.com/graphprotocol/common/compare/v0.3.5...v0.3.6
