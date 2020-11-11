@@ -14,6 +14,10 @@ export class SubgraphName {
   }
 }
 
+// Security: Input validation
+const bytes32Check = /^0x[0-9a-f]{64}$/
+const multiHashCheck = /^Qm[1-9a-km-zA-HJ-NP-Z]{44}$/
+
 export class SubgraphDeploymentID {
   kind: 'deployment-id' = 'deployment-id'
 
@@ -21,10 +25,18 @@ export class SubgraphDeploymentID {
   value: string
 
   constructor(id: string) {
-    if (id.startsWith('Qm')) {
-      this.value = utils.hexlify(base58.decode(id).slice(2))
+    let value
+    // Security: Input validation
+    if (multiHashCheck.test(id)) {
+      value = utils.hexlify(base58.decode(id).slice(2))
+    } else if (bytes32Check.test(id)) {
+      value = id
+    }
+
+    if (value != null) {
+      this.value = value
     } else {
-      this.value = id
+      throw new Error(`Invalid subgraph deployment ID: ${id}`)
     }
   }
 

@@ -48,4 +48,25 @@ describe('Subgraph deployment IDs', () => {
     )
     expect(id2.ipfsHash).toEqual(original2)
   })
+
+  test('Invalid values', () => {
+    const cases = [
+      // IPFS too long
+      "QmY8Uzg61ttrogeTyCKLcDDR4gKNK44g9qkGDqeProkSHEE",
+      // IPFS too short
+      "QmY8Uzg61ttrogeTyCKLcDDR4gKNK44g9qkGDqeProkSH",
+      // IPFS Invalid characters
+      "QmY8Uzg61ttrogeTyCKLcDDR4gKNK44g9qkGDqePro'SHE",
+      // Bytes32 too long
+      "0xaa937267f33a096e959296c675eae0c8898d549f9a5de9930149de8950c03203a",
+      // Bytes32 too short
+      "0xaa937267f33a096e959296c675eae0c8898d549f9a5de9930149de8950c0320",
+      // Bytes32 invalid characters
+      "0xaa937267f33a096e959296c675eae0c8898d549f9a5de9930149de8+50c03Y03",
+    ];
+
+    for (const id of cases) {
+      expect(() => new SubgraphDeploymentID(id)).toThrow(new Error((`Invalid subgraph deployment ID: ${id}`)))
+    }
+  })
 })
