@@ -15,7 +15,7 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@graphprotocol/contracts": "0.7.7-testnet-phase2",
+    "@graphprotocol/contracts": "0.7.8-testnet-staging-phase2",
     "@urql/core": "1.13.1",
     "@urql/exchange-execute": "1.0.1",
     "body-parser": "1.19.0",
