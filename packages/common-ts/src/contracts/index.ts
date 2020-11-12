@@ -14,6 +14,8 @@ import { RewardsManager } from '@graphprotocol/contracts/dist/typechain/contract
 import { ServiceRegistry } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistry'
 import { Staking } from '@graphprotocol/contracts/dist/typechain/contracts/Staking'
 import { GraphToken } from '@graphprotocol/contracts/dist/typechain/contracts/GraphToken'
+import { GrtAssetHolder } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolder'
+import { AttestationApp } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationApp'
 
 // Contract factories
 import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationFactory'
@@ -24,10 +26,12 @@ import { RewardsManagerFactory } from '@graphprotocol/contracts/dist/typechain/c
 import { ServiceRegistryFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistryFactory'
 import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contracts/StakingFactory'
 import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenFactory'
-import { GRTAssetHolder } from '@graphprotocol/contracts/dist/typechain/contracts/GRTAssetHolder'
+import { GrtAssetHolderFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolderFactory'
+import { AttestationAppFactory } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationAppFactory'
 
 export interface NetworkContracts {
-  assetHolder: GRTAssetHolder
+  assetHolder: GrtAssetHolder
+  attestationApp: AttestationApp
   curation: Curation
   disputeManager: DisputeManager
   epochManager: EpochManager
@@ -45,8 +49,12 @@ export const connectContracts = async (
   const deployedContracts = DEPLOYED_CONTRACTS[`${chainId}`]
 
   return {
-    assetHolder: GRTAssetHolder.connect(
-      deployedContracts.GRTAssetHolder.address,
+    assetHolder: GrtAssetHolderFactory.connect(
+      deployedContracts.GrtAssetHolder.address,
+      providerOrSigner,
+    ),
+    attestationApp: AttestationAppFactory.connect(
+      deployedContracts.AttestationApp.address,
       providerOrSigner,
     ),
     curation: CurationFactory.connect(
