@@ -24,8 +24,10 @@ import { RewardsManagerFactory } from '@graphprotocol/contracts/dist/typechain/c
 import { ServiceRegistryFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistryFactory'
 import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contracts/StakingFactory'
 import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenFactory'
+import { GRTAssetHolder } from '@graphprotocol/contracts/dist/typechain/contracts/GRTAssetHolder'
 
 export interface NetworkContracts {
+  assetHolder: GRTAssetHolder
   curation: Curation
   disputeManager: DisputeManager
   epochManager: EpochManager
@@ -43,6 +45,10 @@ export const connectContracts = async (
   const deployedContracts = DEPLOYED_CONTRACTS[`${chainId}`]
 
   return {
+    assetHolder: GRTAssetHolder.connect(
+      deployedContracts.GRTAssetHolder.address,
+      providerOrSigner,
+    ),
     curation: CurationFactory.connect(
       deployedContracts.Curation.address,
       providerOrSigner,
