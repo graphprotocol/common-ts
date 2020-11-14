@@ -50,7 +50,7 @@ export const connectContracts = async (
 
   return {
     assetHolder: GrtAssetHolderFactory.connect(
-      deployedContracts.GrtAssetHolder.address,
+      deployedContracts.GRTAssetHolder.address,
       providerOrSigner,
     ),
     attestationApp: AttestationAppFactory.connect(
