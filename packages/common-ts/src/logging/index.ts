@@ -41,8 +41,8 @@ export class Logger {
         { stream, level: loggerOptions.level },
         {
           stream: options.async
-            ? pinoSentry.createWriteStreamAsync(options.sentry)
-            : pinoSentry.createWriteStream(options.sentry),
+            ? pinoSentry.createWriteStreamAsync({ ...options.sentry, useErr: true })
+            : pinoSentry.createWriteStream({ ...options.sentry, useErr: true }),
         },
       ]
       this.inner = pinoMultiStream({
