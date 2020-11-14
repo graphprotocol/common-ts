@@ -3,7 +3,7 @@
 
 import pino from 'pino'
 import pinoMultiStream from 'pino-multi-stream'
-import * as pinoSentry from 'pino-sentry'
+import * as pinoSentry from '@graphprotocol/pino-sentry-simple'
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal'
 
@@ -14,6 +14,8 @@ export interface LoggerSentryOptions {
   tracesSampleRate: number
   debug: boolean
   level: 'debug' | 'info' | 'warning' | 'error' | 'fatal'
+  tagKeys?: string[]
+  excludeKeys?: string[]
 }
 
 export interface LoggerOptions {
@@ -41,8 +43,8 @@ export class Logger {
         { stream, level: loggerOptions.level },
         {
           stream: options.async
-            ? pinoSentry.createWriteStreamAsync({ ...options.sentry, useErr: true })
-            : pinoSentry.createWriteStream({ ...options.sentry, useErr: true }),
+            ? pinoSentry.createWriteStreamAsync({ ...options.sentry })
+            : pinoSentry.createWriteStream({ ...options.sentry }),
         },
       ]
       this.inner = pinoMultiStream({

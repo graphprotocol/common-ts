@@ -707,13 +707,12 @@
     "@ethersproject/contracts" "^5.0.3"
     ethers "^5.0.9"
 
-"@graphprotocol/pino-sentry@^0.6.1-alpha.0":
-  version "0.6.1-alpha.0"
-  resolved "https://registry.npmjs.org/@graphprotocol/pino-sentry/-/pino-sentry-0.6.1-alpha.0.tgz#07b4e1f4146e11361259061e66441b8947135000"
-  integrity sha512-QxitUw3NxBWoZNgBtMWZsQd7wz+z9c+O3hogROSJ3zCiRzYsoGyER7fc8qQdFhVxIV84Wr4FaTtz16kWeVcthA==
+"@graphprotocol/pino-sentry-simple@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.npmjs.org/@graphprotocol/pino-sentry-simple/-/pino-sentry-simple-0.7.1.tgz#ac08b978bfa33178b9e809f53ae0983ff5f724d8"
+  integrity sha512-iccKFdFBjarSp8/liXuK1EtGq8Vwn118tqymbOJBxblecRsi4rOebk63qnL+dK/a0IvxH6h2+RjjWDbRt7UsUA==
   dependencies:
     "@sentry/node" "^5.21.1"
-    commander "^2.20.0"
     pumpify "^2.0.1"
     split2 "^3.1.1"
     through2 "^3.0.1"
@@ -3355,11 +3354,6 @@ combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   dependencies:
     delayed-stream "~1.0.0"
-
-commander@^2.20.0:
-  version "2.20.3"
-  resolved "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
-  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
 compare-func@^2.0.0:
   version "2.0.0"
@@ -7417,23 +7411,12 @@ pinkie@^2.0.0:
   resolved "https://registry.npmjs.org/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pino-multi-stream@^5.1.1:
+pino-multi-stream@5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/pino-multi-stream/-/pino-multi-stream-5.1.1.tgz#abd634705b48bcb0e6b8d5c0145b82c2e45475f7"
   integrity sha512-P9z/5OXRaaZJulNcxvvvV4p+m1tmiuKC4RT3I5NixOQwCWj9uHbDQaXP/NLtKgFqjrGHl5bkIb73nIvWe7KnbQ==
   dependencies:
     pino "^6.0.0"
-
-pino-sentry@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmjs.org/pino-sentry/-/pino-sentry-0.6.0.tgz#5f0e4c820299c4b54cc190d701e72d620c12f2d9"
-  integrity sha512-xhawK+TZji6peLpPxknH7LfLhvTIIBxDhl04jZ2Bvfxi7wb8gv8dTf1ggl+gwxrRJQGqYSkJcbXE8XeU6k68eg==
-  dependencies:
-    "@sentry/node" "^5.21.1"
-    commander "^2.20.0"
-    pumpify "^2.0.1"
-    split2 "^3.1.1"
-    through2 "^3.0.1"
 
 pino-std-serializers@^2.4.2:
   version "2.5.0"

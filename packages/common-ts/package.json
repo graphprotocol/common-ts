@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@graphprotocol/contracts": "0.7.9-testnet-phase2",
-    "@graphprotocol/pino-sentry": "^0.6.1-alpha.0",
+    "@graphprotocol/pino-sentry-simple": "0.7.1",
     "@urql/core": "1.13.1",
     "@urql/exchange-execute": "1.0.1",
     "body-parser": "1.19.0",
@@ -34,8 +34,7 @@
     "pg": "8.4.2",
     "pg-hstore": "2.3.3",
     "pino": "6.7.0",
-    "pino-multi-stream": "^5.1.1",
-    "pino-sentry": "^0.6.0",
+    "pino-multi-stream": "5.1.1",
     "prom-client": "12.0.0",
     "sequelize": "6.3.5"
   },
