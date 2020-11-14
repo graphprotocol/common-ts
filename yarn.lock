@@ -707,6 +707,17 @@
     "@ethersproject/contracts" "^5.0.3"
     ethers "^5.0.9"
 
+"@graphprotocol/pino-sentry@^0.6.1-alpha.0":
+  version "0.6.1-alpha.0"
+  resolved "https://registry.npmjs.org/@graphprotocol/pino-sentry/-/pino-sentry-0.6.1-alpha.0.tgz#07b4e1f4146e11361259061e66441b8947135000"
+  integrity sha512-QxitUw3NxBWoZNgBtMWZsQd7wz+z9c+O3hogROSJ3zCiRzYsoGyER7fc8qQdFhVxIV84Wr4FaTtz16kWeVcthA==
+  dependencies:
+    "@sentry/node" "^5.21.1"
+    commander "^2.20.0"
+    pumpify "^2.0.1"
+    split2 "^3.1.1"
+    through2 "^3.0.1"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -8087,6 +8098,10 @@ scrypt-js@3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/scrypt-js/-/scrypt-js-3.0.1.tgz#d314a57c2aef69d1ad98a138a21fe9eafa9ee312"
   integrity sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==
+
+"scrypt@https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz#77a4f0789bbd0aba4a1a19c97e03402475df02d1"
 
 "semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0, semver@^5.7.0, semver@^5.7.1:
   version "5.7.1"
