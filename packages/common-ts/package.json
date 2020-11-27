@@ -15,7 +15,7 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@graphprotocol/contracts": "0.7.9-testnet-phase2",
+    "@graphprotocol/contracts": "0.8.0-testnet-phase2.2",
     "@graphprotocol/pino-sentry-simple": "0.7.1",
     "@urql/core": "1.13.1",
     "@urql/exchange-execute": "1.0.1",
