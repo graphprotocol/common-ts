@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.12] - 2020-11-27
+### Fixed
+- Fix asset holder address
+- Add missing dependency on our fork of pino-sentry
+
+## [0.3.12-alpha.0] - 2020-11-27
+### Fixed
+- Validate subgraph IDs for security reasons
+
+### Added
+- Add `GRTAssetHolder` to `NetworkContracts`
+- Add our own pino-sentry fork for better stack trace support
+
 ## [0.3.11] - 2020-11-03
 ### Fixed
 - Fix using trace or debug levels
@@ -331,7 +344,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.11...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v0.3.12...HEAD
+[0.3.12]: https://github.com/graphprotocol/common/compare/v0.3.12-alpha.0...v0.3.12
+[0.3.12-alpha.0]: https://github.com/graphprotocol/common/compare/v0.3.11...v0.3.12-alpha.0
 [0.3.11]: https://github.com/graphprotocol/common/compare/v0.3.10...v0.3.11
 [0.3.10]: https://github.com/graphprotocol/common/compare/v0.3.9...v0.3.10
 [0.3.9]: https://github.com/graphprotocol/common/compare/v0.3.8...v0.3.9
