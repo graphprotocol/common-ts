@@ -16,6 +16,7 @@ import { Staking } from '@graphprotocol/contracts/dist/typechain/contracts/Staki
 import { GraphToken } from '@graphprotocol/contracts/dist/typechain/contracts/GraphToken'
 import { GrtAssetHolder } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolder'
 import { AttestationApp } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationApp'
+import { Controller } from '@graphprotocol/contracts/dist/typechain/contracts/Controller'
 
 // Contract factories
 import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationFactory'
@@ -28,6 +29,7 @@ import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contract
 import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenFactory'
 import { GrtAssetHolderFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolderFactory'
 import { AttestationAppFactory } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationAppFactory'
+import { ControllerFactory } from '@graphprotocol/contracts'
 
 export interface NetworkContracts {
   assetHolder: GrtAssetHolder
@@ -40,6 +42,7 @@ export interface NetworkContracts {
   serviceRegistry: ServiceRegistry
   staking: Staking
   token: GraphToken
+  controller: Controller
 }
 
 export const connectContracts = async (
@@ -81,6 +84,10 @@ export const connectContracts = async (
     staking: StakingFactory.connect(deployedContracts.Staking.address, providerOrSigner),
     token: GraphTokenFactory.connect(
       deployedContracts.GraphToken.address,
+      providerOrSigner,
+    ),
+    controller: ControllerFactory.connect(
+      deployedContracts.Controller.address,
       providerOrSigner,
     ),
   }
