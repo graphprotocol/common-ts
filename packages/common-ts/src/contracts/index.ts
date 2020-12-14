@@ -16,6 +16,7 @@ import { Staking } from '@graphprotocol/contracts/dist/typechain/contracts/Staki
 import { GraphToken } from '@graphprotocol/contracts/dist/typechain/contracts/GraphToken'
 import { GrtAssetHolder } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolder'
 import { AttestationApp } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationApp'
+import { Controller } from '@graphprotocol/contracts/dist/typechain/contracts/Controller'
 
 // Contract factories
 import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationFactory'
@@ -40,6 +41,7 @@ export interface NetworkContracts {
   serviceRegistry: ServiceRegistry
   staking: Staking
   token: GraphToken
+  controller: Controller
 }
 
 export const connectContracts = async (
