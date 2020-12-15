@@ -14,6 +14,9 @@
     "test": "jest --passWithNoTests --detectOpenHandles --verbose",
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
+  "peerDependencies": {
+    "@graphprotocol/contracts": "1.0.1"
+  },
   "dependencies": {
     "@graphprotocol/contracts": "1.0.1",
     "@graphprotocol/pino-sentry-simple": "0.7.1",
