@@ -29,7 +29,7 @@ import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contract
 import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenFactory'
 import { GrtAssetHolderFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolderFactory'
 import { AttestationAppFactory } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationAppFactory'
-import { ControllerFactory } from '@graphprotocol/contracts'
+import { ControllerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ControllerFactory'
 
 export interface NetworkContracts {
   assetHolder: GrtAssetHolder
