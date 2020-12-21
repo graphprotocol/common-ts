@@ -5,6 +5,11 @@
 
 **NOTE: THIS PROJECT IS BETA SOFTWARE.**
 
+## Usage / Documentation
+
+More information can be found in the [`@graphprotocol/common-ts`
+README](./packages/common-ts/README.md).
+
 ## Development notes
 
 ### General notes
