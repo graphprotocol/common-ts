@@ -8,7 +8,7 @@
 ## Usage / Documentation
 
 More information can be found in the [`@graphprotocol/common-ts`
-README](./packages/common-ts/README.md).
+README](./packages/common-ts/).
 
 ## Development notes
 
