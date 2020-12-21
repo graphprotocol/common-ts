@@ -43,6 +43,14 @@ After that, the test suite can be run with:
 yarn test
 ```
 
+### Release
+
+1. Update the changelog(s).
+2. Run
+   ```sh
+   yarn publish
+   ```
+
 ## Copyright
 
 Copyright &copy; 2020 The Graph Foundation.
