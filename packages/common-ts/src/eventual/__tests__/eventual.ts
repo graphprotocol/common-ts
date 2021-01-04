@@ -1,4 +1,4 @@
-import { mutable } from '../eventual'
+import { join, mutable } from '../eventual'
 
 describe('Eventual', () => {
   test('Value', async () => {
@@ -194,5 +194,61 @@ describe('Eventual', () => {
 
     await expect(source.value()).resolves.toStrictEqual(['e'])
     await expect(reduced.value()).resolves.toStrictEqual('abcde')
+  })
+
+  test('Join (all values ready)', async () => {
+    const letters = mutable(['a', 'b'])
+    const numbers = mutable([1, 2])
+    const joined = join({ letters, numbers })
+
+    await expect(joined.value()).resolves.toStrictEqual({
+      letters: ['a', 'b'],
+      numbers: [1, 2],
+    })
+  })
+
+  test('Join (not all values ready initally)', async () => {
+    const letters = mutable(['a', 'b'])
+    const numbers = mutable([1, 2])
+    const delayed = mutable()
+    const joined = join({ letters, numbers, delayed })
+
+    setTimeout(() => delayed.push('ready now'), 500)
+
+    await expect(joined.value()).resolves.toStrictEqual({
+      letters: ['a', 'b'],
+      numbers: [1, 2],
+      delayed: 'ready now',
+    })
+  })
+
+  test('Join (multiple updates)', async () => {
+    const letters = mutable(['a', 'b'])
+    const numbers = mutable([1, 2])
+    const delayed = mutable()
+
+    const joined = join({ letters, numbers, delayed })
+
+    setTimeout(() => delayed.push('ready now'), 500)
+
+    // Update letters again before the delayed eventual has a value; this should
+    // not update the join result before the delayed eventual is ready
+    letters.push(['c', 'd'])
+
+    await expect(joined.value()).resolves.toStrictEqual({
+      letters: ['c', 'd'],
+      numbers: [1, 2],
+      delayed: 'ready now',
+    })
+
+    // Update letters again after the delayed eventual has a value; this should
+    // update the join result as in any regular case
+    letters.push(['e', 'f'])
+
+    await expect(joined.value()).resolves.toStrictEqual({
+      letters: ['e', 'f'],
+      numbers: [1, 2],
+      delayed: 'ready now',
+    })
   })
 })

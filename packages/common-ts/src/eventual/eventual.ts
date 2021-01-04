@@ -13,6 +13,11 @@ export type Join<T> = Eventual<
   { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }
 >
 
+type MutableJoin<T> = WritableEventual<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }
+>
+
 export type Subscriber<T> = (value: T) => void
 
 export interface Eventual<T> {
@@ -222,6 +227,33 @@ export function reduce<T, U>(
       })()
     }
   })
+
+  return output
+}
+
+export function join<T>(sources: NamedEventuals<T>): Join<T> {
+  const output: MutableJoin<T> = mutable()
+
+  const keys = Object.keys(sources) as Array<keyof T>
+
+  const sourceValues: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key in keyof T]: T[key] extends Eventual<infer U> ? U : any
+  } = keys.reduce((out, key) => {
+    out[key] = undefined
+    return out
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }, {} as any)
+
+  for (const key of keys) {
+    sources[key].subscribe(value => {
+      sourceValues[key] = value
+
+      if (!keys.some(key => sourceValues[key] === undefined)) {
+        output.push(sourceValues)
+      }
+    })
+  }
 
   return output
 }
