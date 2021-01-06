@@ -1,4 +1,4 @@
-import { join, mutable } from '../eventual'
+import { join, mutable, WritableEventual } from '../eventual'
 
 describe('Eventual', () => {
   test('Value', async () => {
@@ -58,6 +58,39 @@ describe('Eventual', () => {
     await expect(lower.value()).resolves.toStrictEqual(['c', 'd'])
     await expect(upper.value()).resolves.toStrictEqual(['C', 'D'])
     await expect(codes.value()).resolves.toStrictEqual([67, 68])
+  })
+
+  test('Try map', async () => {
+    const numbers: WritableEventual<number> = mutable()
+    const errors: string[] = []
+    const onError = (err: string) => errors.push(err)
+
+    const evenNumbersOnly = numbers.tryMap(
+      n => {
+        if (n % 2 === 0) {
+          return n
+        } else {
+          throw `${n} is odd`
+        }
+      },
+      { onError },
+    )
+
+    for (let i = 0; i < 10; i++) {
+      numbers.push(i)
+      await expect(numbers.value()).resolves.toStrictEqual(i)
+      await expect(evenNumbersOnly.value()).resolves.toStrictEqual(
+        i % 2 === 0 ? i : i - 1,
+      )
+    }
+
+    expect(errors).toStrictEqual([
+      `1 is odd`,
+      `3 is odd`,
+      `5 is odd`,
+      `7 is odd`,
+      `9 is odd`,
+    ])
   })
 
   test('Filter (even and odd)', async () => {

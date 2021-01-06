@@ -18,6 +18,11 @@ type MutableJoin<T> = WritableEventual<
   { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }
 >
 
+export interface TryMapOptions {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onError: (err: any) => void
+}
+
 export type Subscriber<T> = (value: T) => void
 
 export interface Eventual<T> {
@@ -27,6 +32,7 @@ export interface Eventual<T> {
   subscribe(subscriber: Subscriber<T>): void
 
   map<U>(f: Mapper<T, U>): Eventual<U>
+  tryMap<U>(f: Mapper<T, U>, options: TryMapOptions): Eventual<U>
   filter(f: Filter<T>): Eventual<T>
   pipe(f: (t: T) => Awaitable<void>): void
   throttle(interval: number): Eventual<T>
@@ -90,6 +96,10 @@ export class EventualValue<T> implements WritableEventual<T> {
     return map(this, f)
   }
 
+  tryMap<U>(f: Mapper<T, U>, options: TryMapOptions): Eventual<U> {
+    return tryMap(this, f, options)
+  }
+
   filter(f: Filter<T>): Eventual<T> {
     return filter(this, f)
   }
@@ -130,6 +140,38 @@ export function map<T, U>(
           output.push(await mapper(latestT))
         }
         mapPromise = undefined
+      })()
+    }
+  })
+
+  return output
+}
+
+export function tryMap<T, U>(
+  source: Eventual<T>,
+  mapper: (t: T) => Awaitable<U>,
+  { onError }: TryMapOptions,
+): Eventual<U> {
+  const output: WritableEventual<U> = mutable()
+
+  let previousT: T | undefined
+  let latestT: T | undefined
+  let promiseActive = false
+
+  source.subscribe(t => {
+    latestT = t
+    if (!promiseActive) {
+      promiseActive = true
+      ;(async () => {
+        while (!equal(latestT, previousT)) {
+          try {
+            previousT = latestT
+            output.push(await mapper(latestT))
+          } catch (err) {
+            onError(err)
+          }
+        }
+        promiseActive = false
       })()
     }
   })
