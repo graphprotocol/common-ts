@@ -1,4 +1,4 @@
-import { join, mutable, WritableEventual } from '../eventual'
+import { join, mutable, timer, WritableEventual } from '../eventual'
 
 describe('Eventual', () => {
   test('Value', async () => {
@@ -283,5 +283,18 @@ describe('Eventual', () => {
       numbers: [1, 2],
       delayed: 'ready now',
     })
+  })
+
+  test('Join (timer)', async () => {
+    const ticker = timer(100)
+    const ticks = ticker.reduce(n => ++n, 0)
+    const ticksViaJoin = join({ ticker }).reduce(n => ++n, 0)
+
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    // We should have seen 9-10 timer events, but as long as we've seen a few
+    // we're happy
+    await expect(ticks.value()).resolves.toBeGreaterThan(5)
+    await expect(ticksViaJoin.value()).resolves.toBeGreaterThan(5)
   })
 })

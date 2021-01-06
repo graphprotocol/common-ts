@@ -292,7 +292,10 @@ export function join<T>(sources: NamedEventuals<T>): Join<T> {
       sourceValues[key] = value
 
       if (!keys.some(key => sourceValues[key] === undefined)) {
-        output.push(sourceValues)
+        // NOTE: creating a new JS object is important, otherwise
+        // `output.inner` and `sourceValues` will be the same object
+        // and therefore always be considered identical
+        output.push({ ...sourceValues })
       }
     })
   }
