@@ -40,6 +40,6 @@ Convenience features:
 
 ## Copyright
 
-Copyright &copy; 2021 The Graph Foundation.
+Copyright &copy; 2020-2021 The Graph Foundation.
 
 Licensed under the [MIT license](./LICENSE).
