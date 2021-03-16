@@ -31,7 +31,6 @@
     "graphql": "15.4.0",
     "graphql-tag": "2.11.0",
     "helmet": "4.1.1",
-    "lodash.isequal": "4.5.0",
     "morgan": "1.10.0",
     "ngeohash": "0.6.3",
     "pg": "8.4.2",

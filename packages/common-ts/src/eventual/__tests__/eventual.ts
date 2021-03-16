@@ -197,17 +197,17 @@ describe('Eventual', () => {
   })
 
   test('Equality with Map objects', async () => {
-    const source = mutable(new Map<string, number>())
-    await expect(source.value()).resolves.toStrictEqual(new Map<string, number>())
-    source.push(
-      new Map<string, number>([['a', 1]]),
+    const source = mutable(new Map([['y', 'x']]))
+    await expect(source.value()).resolves.toStrictEqual(
+      new Map<string, string>([['y', 'x']]),
     )
+    source.push(new Map([['x', 'y']]))
 
     // This tests that JS Map objects are compared for equality/inequality
     // accurately; we had a bug initially where the comparison was based on
     // JSON.stringify, which for Map always returns {}.
     await expect(source.value()).resolves.toStrictEqual(
-      new Map<string, number>([['a', 1]]),
+      new Map<string, string>([['x', 'y']]),
     )
   })
 
