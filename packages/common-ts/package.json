@@ -18,7 +18,7 @@
     "@graphprotocol/contracts": "1.0.1"
   },
   "dependencies": {
-    "@graphprotocol/contracts": "1.1.0",
+    "@graphprotocol/contracts": "1.2.0",
     "@graphprotocol/pino-sentry-simple": "0.7.1",
     "@urql/core": "1.13.1",
     "@urql/exchange-execute": "1.0.1",
