@@ -1,4 +1,4 @@
-import { join, mutable, timer, WritableEventual } from '../eventual'
+import { Eventual, join, mutable, timer, WritableEventual } from '../eventual'
 
 describe('Eventual', () => {
   test('Value', async () => {
@@ -296,5 +296,26 @@ describe('Eventual', () => {
     // we're happy
     await expect(ticks.value()).resolves.toBeGreaterThan(5)
     await expect(ticksViaJoin.value()).resolves.toBeGreaterThan(5)
+  })
+
+  test('Values (async generator)', async () => {
+    const values = Array.from(Array(100).keys())
+
+    const numbers = mutable()
+    for (const value of values) {
+      setTimeout(() => {
+        numbers.push(value)
+      }, 50 + value * 50)
+    }
+
+    let i = 0
+    for await (const value of numbers.values(0)) {
+      expect(value).toStrictEqual(values[i++])
+      if (i >= 100) {
+        break
+      }
+    }
+
+    expect(i).toStrictEqual(100)
   })
 })

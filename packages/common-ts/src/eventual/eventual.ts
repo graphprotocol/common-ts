@@ -37,6 +37,7 @@ export interface Eventual<T> {
   pipe(f: (t: T) => Awaitable<void>): void
   throttle(interval: number): Eventual<T>
   reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U>
+  values(interval: number): AsyncGenerator<T, never, void>
 }
 
 export interface WritableEventual<T> extends Eventual<T> {
@@ -114,6 +115,52 @@ export class EventualValue<T> implements WritableEventual<T> {
 
   reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U> {
     return reduce(this, f, initial)
+  }
+
+  async *values(): AsyncGenerator<T, never, void> {
+    // Creates a promise and exposes its `resolve` method so it can be triggered
+    // externally
+    function defer() {
+      let resolve: ((t: T) => void) | null = null
+      const promise = new Promise<T>(_resolve => {
+        resolve = _resolve
+      })
+
+      const deferred: {
+        promise: Promise<T>
+        resolve: (t: T) => void
+      } = {
+        promise,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        resolve: resolve!,
+      }
+
+      return deferred
+    }
+
+    // Create the initial promise
+    let next = defer()
+
+    // Whenever there is a new value, resolve the current promise
+    // and replace it with a new one;
+    //
+    // NOTE: There _may_ be a race condition here where `next`
+    // is replaced before the `yield await` statement below
+    // is executed; in our test for this that doesn't happen
+    // but I'm not sure to what extent the execution order
+    // is specified in this case or left to JS implementations
+    this.pipe(t => {
+      if (next.resolve) {
+        next.resolve(t)
+      }
+      next = defer()
+    })
+
+    while (true) {
+      if (next.promise) {
+        yield await next.promise
+      }
+    }
   }
 }
 
