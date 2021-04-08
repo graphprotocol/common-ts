@@ -37,7 +37,7 @@ export interface Eventual<T> {
   pipe(f: (t: T) => Awaitable<void>): void
   throttle(interval: number): Eventual<T>
   reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U>
-  values(interval: number): AsyncGenerator<T, never, void>
+  values(): AsyncGenerator<T, never, void>
 }
 
 export interface WritableEventual<T> extends Eventual<T> {

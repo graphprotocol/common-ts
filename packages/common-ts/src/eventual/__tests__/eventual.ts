@@ -309,7 +309,7 @@ describe('Eventual', () => {
     }
 
     let i = 0
-    for await (const value of numbers.values(0)) {
+    for await (const value of numbers.values()) {
       expect(value).toStrictEqual(values[i++])
       if (i >= 100) {
         break
