@@ -37,6 +37,12 @@ export interface Eventual<T> {
   pipe(f: (t: T) => Awaitable<void>): void
   throttle(interval: number): Eventual<T>
   reduce<U>(f: Reducer<T, U>, initial: U): Eventual<U>
+
+  // An asynchronous generator over values pushed into the Eventual
+  // over time. Note: There is no guarantee that all values will be
+  // emitted; some may be skipped e.g. if multiple different values
+  // are pushed into the eventual at almost the same time; only the
+  // last of these may be emitted in this case.
   values(): AsyncGenerator<T, never, void>
 }
 
@@ -142,24 +148,14 @@ export class EventualValue<T> implements WritableEventual<T> {
     let next = defer()
 
     // Whenever there is a new value, resolve the current promise
-    // and replace it with a new one;
-    //
-    // NOTE: There _may_ be a race condition here where `next`
-    // is replaced before the `yield await` statement below
-    // is executed; in our test for this that doesn't happen
-    // but I'm not sure to what extent the execution order
-    // is specified in this case or left to JS implementations
+    // and replace it with a new one
     this.pipe(t => {
-      if (next.resolve) {
-        next.resolve(t)
-      }
+      next.resolve(t)
       next = defer()
     })
 
     while (true) {
-      if (next.promise) {
-        yield await next.promise
-      }
+      yield await next.promise
     }
   }
 }
