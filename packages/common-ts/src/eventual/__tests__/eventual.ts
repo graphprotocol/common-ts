@@ -301,21 +301,18 @@ describe('Eventual', () => {
   test('Values (async generator)', async () => {
     const values = Array.from(Array(100).keys())
 
-    const numbers = mutable()
+    const numbers: WritableEventual<number> = mutable()
     for (const value of values) {
-      setTimeout(() => {
-        numbers.push(value)
-      }, 50 + value * 50)
+      setTimeout(() => numbers.push(value), 50 + value * 20)
     }
 
-    let i = 0
+    let prev = -1
     for await (const value of numbers.values()) {
-      expect(value).toStrictEqual(values[i++])
-      if (i >= 100) {
+      expect(value).toBeGreaterThan(prev)
+      prev = value
+      if (value >= 99) {
         break
       }
     }
-
-    expect(i).toStrictEqual(100)
   })
 })
