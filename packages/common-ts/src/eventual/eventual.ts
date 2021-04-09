@@ -147,12 +147,20 @@ export class EventualValue<T> implements WritableEventual<T> {
     // Create the initial promise
     let next = defer()
 
-    // Whenever there is a new value, resolve the current promise
-    // and replace it with a new one
-    this.pipe(t => {
-      next.resolve(t)
-      next = defer()
-    })
+    // Delay this ever so slightly to allow `await next.promise` to be executed
+    // before we resolve the first value. Otherwise we'd skip the value at the
+    // time `values()` is called, because `await next.promise` would await the
+    // second, not the initial promise.
+    setTimeout(
+      () =>
+        // Whenever there is a new value, resolve the current promise
+        // and replace it with a new one
+        this.pipe(t => {
+          next.resolve(t)
+          next = defer()
+        }),
+      0,
+    )
 
     while (true) {
       yield await next.promise

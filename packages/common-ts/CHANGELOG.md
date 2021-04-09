@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add `values()` async generator for eventuals
 
+### Fixed
+- Fix missing current value in async eventual `values()` generator
+
 ## [1.3.3] - 2021-04-04
 ### Changed
 - Update ethers to 5.1.0
