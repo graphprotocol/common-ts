@@ -1,4 +1,4 @@
-import { Eventual, join, mutable, timer, WritableEventual } from '../eventual'
+import { join, mutable, timer, WritableEventual } from '../eventual'
 
 describe('Eventual', () => {
   test('Value', async () => {
@@ -314,5 +314,14 @@ describe('Eventual', () => {
         break
       }
     }
+  })
+
+  test('Values (async generator, subscribed after last value)', async () => {
+    const numbers: WritableEventual<number> = mutable(0)
+    numbers.push(1)
+    await expect(numbers.values().next()).resolves.toStrictEqual({
+      done: false,
+      value: 1,
+    })
   })
 })
