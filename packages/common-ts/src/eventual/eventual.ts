@@ -305,18 +305,19 @@ export function reduce<T, U>(
   let previousT: T | undefined
   let latestT: T | undefined
 
-  let reducePromise: Promise<void> | undefined
+  let promiseActive = false
 
   source.subscribe(t => {
     latestT = t
-    if (reducePromise === undefined) {
-      reducePromise = (async () => {
+    if (!promiseActive) {
+      promiseActive = true
+      ;(async () => {
         while (!equal(latestT, previousT)) {
           previousT = latestT
           acc = await reducer(acc, latestT)
           output.push(acc)
         }
-        reducePromise = undefined
+        promiseActive = false
       })()
     }
   })
