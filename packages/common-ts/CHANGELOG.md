@@ -5,11 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.4.2] - 2021-04-14
 ### Added
 - Add `values()` async generator for eventuals
 
 ### Fixed
 - Fix missing current value in async eventual `values()` generator
+- Fix race condition causing `reduce()` eventual to stop working
 
 ## [1.3.3] - 2021-04-04
 ### Changed
@@ -372,7 +375,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v1.3.3...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/graphprotocol/common/compare/v1.3.3...v1.4.2
 [1.3.3]: https://github.com/graphprotocol/common/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/graphprotocol/common/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/graphprotocol/common/compare/v1.3.0...v1.3.1
