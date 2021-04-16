@@ -1,6 +1,17 @@
 import { utils } from 'ethers'
 import * as eip712 from './eip712'
 
+const {
+  defaultAbiCoder: abi,
+  arrayify,
+  concat,
+  hexlify,
+  splitSignature,
+  joinSignature,
+} = utils
+
+const SIG_SIZE_BYTES = 161
+const RECEIPT_SIZE_BYTES = 96
 const RECEIPT_TYPE_HASH = eip712.typeHash(
   'Receipt(bytes32 requestCID,bytes32 responseCID,bytes32 subgraphDeploymentID)',
 )
@@ -55,5 +66,40 @@ export const createAttestation = async (
     v,
     r,
     s,
+  }
+}
+
+export const encodeAttestation = (attestation: Attestation): string => {
+  const data = arrayify(
+    abi.encode(
+      ['bytes32', 'bytes32', 'bytes32'],
+      [attestation.requestCID, attestation.responseCID, attestation.subgraphDeploymentID],
+    ),
+  )
+  const sig = joinSignature(attestation)
+  return hexlify(concat([data, sig]))
+}
+
+export const decodeAttestation = (attestationData: string): Attestation => {
+  const attestationBytes = arrayify(attestationData)
+  if (attestationBytes.length !== SIG_SIZE_BYTES) {
+    throw new Error('Invalid signature length')
+  }
+
+  const [requestCID, responseCID, subgraphDeploymentID] = abi.decode(
+    ['bytes32', 'bytes32', 'bytes32'],
+    attestationBytes,
+  )
+  const sig = splitSignature(
+    attestationBytes.slice(RECEIPT_SIZE_BYTES, RECEIPT_SIZE_BYTES + SIG_SIZE_BYTES),
+  )
+
+  return {
+    requestCID,
+    responseCID,
+    subgraphDeploymentID,
+    v: sig.v,
+    r: sig.r,
+    s: sig.s,
   }
 }
