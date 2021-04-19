@@ -40,12 +40,10 @@ export interface Attestation {
   s: string
 }
 
-export const createAttestation = async (
-  signer: utils.BytesLike,
+export const getDomainSeparator = (
   chainId: number,
   disputeManagerAddress: string,
-  receipt: Receipt,
-): Promise<Attestation> => {
+): string => {
   const domainSeparator = eip712.domainSeparator({
     name: 'Graph Protocol',
     version: '0',
@@ -53,6 +51,16 @@ export const createAttestation = async (
     verifyingContract: disputeManagerAddress,
     salt: SALT,
   })
+  return domainSeparator
+}
+
+export const createAttestation = async (
+  signer: utils.BytesLike,
+  chainId: number,
+  disputeManagerAddress: string,
+  receipt: Receipt,
+): Promise<Attestation> => {
+  const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress)
   const encodedReceipt = encodeReceipt(receipt)
   const message = eip712.encode(domainSeparator, encodedReceipt)
   const messageHash = utils.keccak256(message)
@@ -102,4 +110,24 @@ export const decodeAttestation = (attestationData: string): Attestation => {
     r: sig.r,
     s: sig.s,
   }
+}
+
+export const recoverAttestation = (
+  chainId: number,
+  disputeManagerAddress: string,
+  attestation: Attestation,
+): string => {
+  const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress)
+  const receipt = {
+    requestCID: attestation.requestCID,
+    responseCID: attestation.responseCID,
+    subgraphDeploymentID: attestation.subgraphDeploymentID,
+  }
+  const encodedReceipt = encodeReceipt(receipt)
+  const message = eip712.encode(domainSeparator, encodedReceipt)
+  const messageHash = utils.keccak256(message)
+  return utils.recoverAddress(
+    messageHash,
+    joinSignature({ r: attestation.r, s: attestation.s, v: attestation.v }),
+  )
 }
