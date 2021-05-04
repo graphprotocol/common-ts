@@ -21,6 +21,10 @@ currently provides the following functionality:
 
 - Type-safe and normalized Ethereum addresses.
 
+- Bonding curve functions to recreate the functions on the Curation and GNS so
+  they can be executed in typescript. Designed to take graph-network-subgraph
+  data.
+
 Convenience features:
 
 - Security ehancement for [Express](https://expressjs.com/) web servers.
