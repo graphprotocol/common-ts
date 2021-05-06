@@ -28,6 +28,9 @@ export class BytesWriter {
         this.offset = offset;
     }
 
+    writeZeroes(bytes: number) {
+        this.offset += bytes;
+    }
 
     unwrap(): Uint8Array {
         if (this.offset !== this.data.length) {
