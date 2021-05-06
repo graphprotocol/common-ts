@@ -8,6 +8,7 @@
     "bootstrap": "lerna bootstrap",
     "prepublish": "lerna run prepublish",
     "publish": "lerna run publish",
+    "publish-canary": "lerna publish -c minor",
     "test": "lerna run test --stream",
     "test:watch": "lerna run test:watch --stream"
   },
