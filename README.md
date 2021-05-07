@@ -3,8 +3,6 @@
 [![CI](https://github.com/graphprotocol/common-ts/workflows/CI/badge.svg)](https://github.com/graphprotocol/common-ts/actions?query=workflow%3ACI)
 [![Coverage](https://codecov.io/gh/graphprotocol/common-ts/branch/master/graph/badge.svg)](https://codecov.io/gh/graphprotocol/common-ts)
 
-**NOTE: THIS PROJECT IS BETA SOFTWARE.**
-
 ## Usage / Documentation
 
 More information can be found in the [`@graphprotocol/common-ts`
