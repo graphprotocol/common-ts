@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2021-05-11
+### Added
+- `BytesWriter`: Also handle inputs without leading `0x`
+
 ## [1.5.0] - 2021-05-07
 ### Added
 - Add attestation encoding, decoding and signer recovery helpers
@@ -380,7 +384,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/graphprotocol/common/compare/v1.5.1...HEAD
+[1.5.1]: https://github.com/graphprotocol/common/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/graphprotocol/common/compare/v1.4.2...v1.5.0
 [1.4.2]: https://github.com/graphprotocol/common/compare/v1.3.3...v1.4.2
 [1.3.3]: https://github.com/graphprotocol/common/compare/v1.3.2...v1.3.3
