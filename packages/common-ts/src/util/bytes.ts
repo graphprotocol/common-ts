@@ -19,7 +19,10 @@ export class BytesWriter {
     // TODO: Performance
     // There are no great answers in JS,
     // but individual characters might be better. Need to profile.
-    let iRead = 2 // Skips 0x
+    let iRead = 0
+    if (hex.startsWith('0x')) {
+      iRead = 2
+    }
     while (iRead < hex.length) {
       const num = hex.slice(iRead, iRead + 2)
       data[offset++] = parseInt(num, 16)
