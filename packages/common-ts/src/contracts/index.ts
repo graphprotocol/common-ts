@@ -6,38 +6,32 @@ import { Signer } from 'ethers'
 const DEPLOYED_CONTRACTS = require('@graphprotocol/contracts/addresses.json')
 
 // Contract ABIs
-import { Curation } from '@graphprotocol/contracts/dist/typechain/contracts/Curation'
-import { DisputeManager } from '@graphprotocol/contracts/dist/typechain/contracts/DisputeManager'
-import { EpochManager } from '@graphprotocol/contracts/dist/typechain/contracts/EpochManager'
-import { Gns } from '@graphprotocol/contracts/dist/typechain/contracts/Gns'
-import { RewardsManager } from '@graphprotocol/contracts/dist/typechain/contracts/RewardsManager'
-import { ServiceRegistry } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistry'
-import { Staking } from '@graphprotocol/contracts/dist/typechain/contracts/Staking'
-import { GraphToken } from '@graphprotocol/contracts/dist/typechain/contracts/GraphToken'
-import { GrtAssetHolder } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolder'
-import { AttestationApp } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationApp'
-import { Controller } from '@graphprotocol/contracts/dist/typechain/contracts/Controller'
+import { Curation } from '@graphprotocol/contracts/dist/types/Curation'
+import { DisputeManager } from '@graphprotocol/contracts/dist/types/DisputeManager'
+import { EpochManager } from '@graphprotocol/contracts/dist/types/EpochManager'
+import { GNS } from '@graphprotocol/contracts/dist/types/GNS'
+import { RewardsManager } from '@graphprotocol/contracts/dist/types/RewardsManager'
+import { ServiceRegistry } from '@graphprotocol/contracts/dist/types/ServiceRegistry'
+import { Staking } from '@graphprotocol/contracts/dist/types/Staking'
+import { GraphToken } from '@graphprotocol/contracts/dist/types/GraphToken'
+import { Controller } from '@graphprotocol/contracts/dist/types/Controller'
 
 // Contract factories
-import { CurationFactory } from '@graphprotocol/contracts/dist/typechain/contracts/CurationFactory'
-import { DisputeManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/DisputeManagerFactory'
-import { EpochManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/EpochManagerFactory'
-import { GnsFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GnsFactory'
-import { RewardsManagerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/RewardsManagerFactory'
-import { ServiceRegistryFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ServiceRegistryFactory'
-import { StakingFactory } from '@graphprotocol/contracts/dist/typechain/contracts/StakingFactory'
-import { GraphTokenFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GraphTokenFactory'
-import { GrtAssetHolderFactory } from '@graphprotocol/contracts/dist/typechain/contracts/GrtAssetHolderFactory'
-import { AttestationAppFactory } from '@graphprotocol/contracts/dist/typechain/contracts/AttestationAppFactory'
-import { ControllerFactory } from '@graphprotocol/contracts/dist/typechain/contracts/ControllerFactory'
+import { Curation__factory } from '@graphprotocol/contracts/dist/types/factories/Curation__factory'
+import { DisputeManager__factory } from '@graphprotocol/contracts/dist/types/factories/DisputeManager__factory'
+import { EpochManager__factory } from '@graphprotocol/contracts/dist/types/factories/EpochManager__factory'
+import { GNS__factory } from '@graphprotocol/contracts/dist/types/factories/GNS__factory'
+import { RewardsManager__factory } from '@graphprotocol/contracts/dist/types/factories/RewardsManager__factory'
+import { ServiceRegistry__factory } from '@graphprotocol/contracts/dist/types/factories/ServiceRegistry__factory'
+import { Staking__factory } from '@graphprotocol/contracts/dist/types/factories/Staking__factory'
+import { GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphToken__factory'
+import { Controller__factory } from '@graphprotocol/contracts/dist/types/factories/Controller__factory'
 
 export interface NetworkContracts {
-  assetHolder: GrtAssetHolder
-  attestationApp: AttestationApp
   curation: Curation
   disputeManager: DisputeManager
   epochManager: EpochManager
-  gns: Gns
+  gns: GNS
   rewardsManager: RewardsManager
   serviceRegistry: ServiceRegistry
   staking: Staking
@@ -52,41 +46,36 @@ export const connectContracts = async (
   const deployedContracts = DEPLOYED_CONTRACTS[`${chainId}`]
 
   return {
-    assetHolder: GrtAssetHolderFactory.connect(
-      deployedContracts.GRTAssetHolder.address,
-      providerOrSigner,
-    ),
-    attestationApp: AttestationAppFactory.connect(
-      deployedContracts.AttestationApp.address,
-      providerOrSigner,
-    ),
-    curation: CurationFactory.connect(
+    curation: Curation__factory.connect(
       deployedContracts.Curation.address,
       providerOrSigner,
     ),
-    disputeManager: DisputeManagerFactory.connect(
+    disputeManager: DisputeManager__factory.connect(
       deployedContracts.DisputeManager.address,
       providerOrSigner,
     ),
-    epochManager: EpochManagerFactory.connect(
+    epochManager: EpochManager__factory.connect(
       deployedContracts.EpochManager.address,
       providerOrSigner,
     ),
-    gns: GnsFactory.connect(deployedContracts.GNS.address, providerOrSigner),
-    rewardsManager: RewardsManagerFactory.connect(
+    gns: GNS__factory.connect(deployedContracts.GNS.address, providerOrSigner),
+    rewardsManager: RewardsManager__factory.connect(
       deployedContracts.RewardsManager.address,
       providerOrSigner,
     ),
-    serviceRegistry: ServiceRegistryFactory.connect(
+    serviceRegistry: ServiceRegistry__factory.connect(
       deployedContracts.ServiceRegistry.address,
       providerOrSigner,
     ),
-    staking: StakingFactory.connect(deployedContracts.Staking.address, providerOrSigner),
-    token: GraphTokenFactory.connect(
+    staking: Staking__factory.connect(
+      deployedContracts.Staking.address,
+      providerOrSigner,
+    ),
+    token: GraphToken__factory.connect(
       deployedContracts.GraphToken.address,
       providerOrSigner,
     ),
-    controller: ControllerFactory.connect(
+    controller: Controller__factory.connect(
       deployedContracts.Controller.address,
       providerOrSigner,
     ),
