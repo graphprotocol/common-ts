@@ -8,15 +8,13 @@ export type Reducer<T, U> = (acc: U, t: T) => Awaitable<U>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type NamedEventuals<T> = { [k: string]: Eventual<any> } & { [K in keyof T]: T[K] }
 
-export type Join<T> = Eventual<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }
->
+export type Join<T> =
+  Eventual<// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }>
 
-type MutableJoin<T> = WritableEventual<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }
->
+type MutableJoin<T> =
+  WritableEventual<// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  { [key in keyof T]: T[key] extends Eventual<infer U> ? U : any }>
 
 export interface TryMapOptions {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
