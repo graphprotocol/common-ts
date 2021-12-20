@@ -1,5 +1,4 @@
-import { providers } from 'ethers'
-import { Signer } from 'ethers'
+import { providers, Signer } from 'ethers'
 
 // Contract addresses
 // eslint-disable-next-line @typescript-eslint/no-var-requires
