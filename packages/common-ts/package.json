@@ -13,6 +13,7 @@
     "compile": "./node_modules/.bin/tsc",
     "prepublish": "yarn format && yarn lint && yarn compile",
     "test": "jest --passWithNoTests --detectOpenHandles --verbose --forceExit",
+    "tes": "jest --passWithNoTests --detectOpenHandles --verbose --forceExit",
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
