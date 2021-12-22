@@ -32,8 +32,9 @@ export const createMetricsServer = (options: MetricsServerOptions): Server => {
 
   const app = express()
 
-  app.get(options.route || '/metrics', (_, res) => {
-    res.status(200).send(options.registry.metrics())
+  app.get(options.route || '/metrics', async (_, res) => {
+    res.set('Content-Type', options.registry.contentType)
+    res.status(200).send(await options.registry.metrics())
   })
 
   const port = options.port || 7300
