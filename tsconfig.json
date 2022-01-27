@@ -4,6 +4,7 @@
     "paths": {
       "@graphprotocol/*": ["./*/src"]
     },
+    "resolveJsonModule": true,
     "skipLibCheck": true,
   }
 }
