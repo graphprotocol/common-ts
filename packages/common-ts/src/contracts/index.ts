@@ -13,6 +13,7 @@ import { ServiceRegistry } from '@graphprotocol/contracts/dist/types/ServiceRegi
 import { Staking } from '@graphprotocol/contracts/dist/types/Staking'
 import { GraphToken } from '@graphprotocol/contracts/dist/types/GraphToken'
 import { Controller } from '@graphprotocol/contracts/dist/types/Controller'
+import { AllocationExchange } from '@graphprotocol/contracts/dist/types/AllocationExchange'
 
 // Contract factories
 import { Curation__factory } from '@graphprotocol/contracts/dist/types/factories/Curation__factory'
@@ -24,6 +25,7 @@ import { ServiceRegistry__factory } from '@graphprotocol/contracts/dist/types/fa
 import { Staking__factory } from '@graphprotocol/contracts/dist/types/factories/Staking__factory'
 import { GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphToken__factory'
 import { Controller__factory } from '@graphprotocol/contracts/dist/types/factories/Controller__factory'
+import { AllocationExchange__factory } from '@graphprotocol/contracts/dist/types/factories/AllocationExchange__factory'
 
 export interface NetworkContracts {
   curation: Curation
@@ -35,6 +37,7 @@ export interface NetworkContracts {
   staking: Staking
   token: GraphToken
   controller: Controller
+  allocationExchange: AllocationExchange
 }
 
 export const connectContracts = async (
@@ -75,6 +78,10 @@ export const connectContracts = async (
     ),
     controller: Controller__factory.connect(
       deployedContracts.Controller.address,
+      providerOrSigner,
+    ),
+    allocationExchange: AllocationExchange__factory.connect(
+      deployedContracts.AllocationExchange.address,
       providerOrSigner,
     ),
   }
