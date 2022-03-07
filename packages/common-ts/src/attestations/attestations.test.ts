@@ -79,13 +79,13 @@ describe('Attestations', () => {
       chainID,
       contractAddress,
       receipt,
-      '1.0.0',
+      '=1.0.0',
     )
     const recoveredAddress = recoverAttestation(
       chainID,
       contractAddress,
       attestation,
-      '1.0.0',
+      '=1.0.0',
     )
     expect(recoveredAddress).toStrictEqual(await signer.getAddress())
   })
