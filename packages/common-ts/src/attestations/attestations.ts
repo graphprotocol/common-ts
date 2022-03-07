@@ -43,10 +43,11 @@ export interface Attestation {
 export const getDomainSeparator = (
   chainId: number,
   disputeManagerAddress: string,
+  version: string,
 ): string => {
   const domainSeparator = eip712.domainSeparator({
     name: 'Graph Protocol',
-    version: '0',
+    version,
     chainId,
     verifyingContract: disputeManagerAddress,
     salt: SALT,
@@ -59,8 +60,9 @@ export const createAttestation = async (
   chainId: number,
   disputeManagerAddress: string,
   receipt: Receipt,
+  version: string,
 ): Promise<Attestation> => {
-  const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress)
+  const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress, version)
   const encodedReceipt = encodeReceipt(receipt)
   const message = eip712.encode(domainSeparator, encodedReceipt)
   const messageHash = utils.keccak256(message)
@@ -116,8 +118,9 @@ export const recoverAttestation = (
   chainId: number,
   disputeManagerAddress: string,
   attestation: Attestation,
+  version: string,
 ): string => {
-  const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress)
+  const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress, version)
   const receipt = {
     requestCID: attestation.requestCID,
     responseCID: attestation.responseCID,
