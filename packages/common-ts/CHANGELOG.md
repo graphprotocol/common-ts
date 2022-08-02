@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Include AllocationExchange in NetworkContracts
 - Upgrade dependencies
+- Upgrade @graphprotocol/contracts to v1.13.0
 
 ## [1.8.1] - 2021-12-22
 ### Changed
