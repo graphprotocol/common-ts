@@ -645,10 +645,10 @@
   resolved "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@graphprotocol/contracts@1.11.1":
-  version "1.11.1"
-  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-1.11.1.tgz#22df943388b3349218b92d570722f663b890266e"
-  integrity sha512-z4klBGRf9X08iE+JQKHH5VfmPh/8btDVVof9pckDd5bSsnPG4TvvpDHJnPAw+TQRRtoiKmDIvNIGBajRTAtQzA==
+"@graphprotocol/contracts@1.13.0":
+  version "1.13.0"
+  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-1.13.0.tgz#0289f9ef725f342ad1c69a9ac70bc5129c3eb0a3"
+  integrity sha512-1s6559hsvOQv6bbEGYOvkvuO4DkurwNKeHQ4wM3qT3j0v96sEd1xJSXL9fIOTPyg53BDfz8pZHe2+xaohXvVbg==
   dependencies:
     ethers "^5.4.4"
 
