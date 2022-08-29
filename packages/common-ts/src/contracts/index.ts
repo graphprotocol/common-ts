@@ -1,4 +1,5 @@
 import { providers, Signer } from 'ethers'
+import graphChain from './chain'
 
 // Contract addresses
 import * as DEPLOYED_CONTRACTS from '@graphprotocol/contracts/addresses.json'
@@ -14,6 +15,15 @@ import { Staking } from '@graphprotocol/contracts/dist/types/Staking'
 import { GraphToken } from '@graphprotocol/contracts/dist/types/GraphToken'
 import { Controller } from '@graphprotocol/contracts/dist/types/Controller'
 import { AllocationExchange } from '@graphprotocol/contracts/dist/types/AllocationExchange'
+import { GraphProxyAdmin } from '@graphprotocol/contracts/dist/types/GraphProxyAdmin'
+import { SubgraphNFT } from '@graphprotocol/contracts/dist/types/SubgraphNFT'
+import { GraphCurationToken } from '@graphprotocol/contracts/dist/types/GraphCurationToken'
+import { L1GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L1GraphTokenGateway'
+import { L1Reservoir } from '@graphprotocol/contracts/dist/types/L1Reservoir'
+import { BridgeEscrow } from '@graphprotocol/contracts/dist/types/BridgeEscrow'
+import { L2GraphToken } from '@graphprotocol/contracts/dist/types/L2GraphToken'
+import { L2GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L2GraphTokenGateway'
+import { L2Reservoir } from '@graphprotocol/contracts/dist/types/L2Reservoir'
 
 // Contract factories
 import { Curation__factory } from '@graphprotocol/contracts/dist/types/factories/Curation__factory'
@@ -26,6 +36,17 @@ import { Staking__factory } from '@graphprotocol/contracts/dist/types/factories/
 import { GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphToken__factory'
 import { Controller__factory } from '@graphprotocol/contracts/dist/types/factories/Controller__factory'
 import { AllocationExchange__factory } from '@graphprotocol/contracts/dist/types/factories/AllocationExchange__factory'
+import { GraphProxyAdmin__factory } from '@graphprotocol/contracts/dist/types/factories/GraphProxyAdmin__factory'
+import { SubgraphNFT__factory } from '@graphprotocol/contracts/dist/types/factories/SubgraphNFT__factory'
+import { GraphCurationToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphCurationToken__factory'
+import { L1GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/types/factories/L1GraphTokenGateway__factory'
+import { L1Reservoir__factory } from '@graphprotocol/contracts/dist/types/factories/L1Reservoir__factory'
+import { BridgeEscrow__factory } from '@graphprotocol/contracts/dist/types/factories/BridgeEscrow__factory'
+import { L2GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphToken__factory'
+import { L2GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphTokenGateway__factory'
+import { L2Reservoir__factory } from '@graphprotocol/contracts/dist/types/factories/L2Reservoir__factory'
+
+export const GraphChain = graphChain
 
 export interface NetworkContracts {
   curation: Curation
@@ -35,9 +56,21 @@ export interface NetworkContracts {
   rewardsManager: RewardsManager
   serviceRegistry: ServiceRegistry
   staking: Staking
-  token: GraphToken
+  token: GraphToken | L2GraphToken
   controller: Controller
   allocationExchange: AllocationExchange
+  graphProxyAdmin: GraphProxyAdmin
+  subgraphNFT: SubgraphNFT
+  graphCurationToken: GraphCurationToken
+
+  // Only L1
+  l1GraphTokenGateway?: L1GraphTokenGateway
+  l1Reservoir?: L1Reservoir
+  bridgeEscrow?: BridgeEscrow
+
+  // Only L2
+  l2GraphTokenGateway?: L2GraphTokenGateway
+  l2Reservoir?: L2Reservoir
 }
 
 export const connectContracts = async (
@@ -46,7 +79,16 @@ export const connectContracts = async (
 ): Promise<NetworkContracts> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const deployedContracts = (DEPLOYED_CONTRACTS as any)[`${chainId}`]
-  return {
+
+  const GraphTokenFactory = GraphChain.isL1(chainId)
+    ? GraphToken__factory
+    : L2GraphToken__factory
+
+  const graphTokenAddress = GraphChain.isL1(chainId)
+    ? deployedContracts.GraphToken.address
+    : deployedContracts.L2GraphToken.address
+
+  const contracts: NetworkContracts = {
     curation: Curation__factory.connect(
       deployedContracts.Curation.address,
       providerOrSigner,
@@ -72,8 +114,8 @@ export const connectContracts = async (
       deployedContracts.Staking.address,
       providerOrSigner,
     ),
-    token: GraphToken__factory.connect(
-      deployedContracts.GraphToken.address,
+    token: GraphTokenFactory.connect(
+      graphTokenAddress,
       providerOrSigner,
     ),
     controller: Controller__factory.connect(
@@ -84,5 +126,46 @@ export const connectContracts = async (
       deployedContracts.AllocationExchange.address,
       providerOrSigner,
     ),
+    graphProxyAdmin: GraphProxyAdmin__factory.connect(
+      deployedContracts.GraphProxyAdmin.address,
+      providerOrSigner,
+    ),
+    subgraphNFT: SubgraphNFT__factory.connect(
+      deployedContracts.SubgraphNFT.address,
+      providerOrSigner,
+    ),
+    graphCurationToken: GraphCurationToken__factory.connect(
+      deployedContracts.GraphCurationToken.address,
+      providerOrSigner,
+    ),
   }
+
+  if (GraphChain.isL1(chainId)) {
+    contracts.l1GraphTokenGateway = L1GraphTokenGateway__factory.connect(
+      deployedContracts.L1GraphTokenGateway.address,
+      providerOrSigner,
+    )
+    contracts.bridgeEscrow = BridgeEscrow__factory.connect(
+      deployedContracts.BridgeEscrow.address,
+      providerOrSigner,
+    )
+    // L1Reservoir is not deployed on scratch1
+    if (deployedContracts.L1Reservoir) {
+      contracts.l1Reservoir = L1Reservoir__factory.connect(
+        deployedContracts.L1Reservoir.address,
+        providerOrSigner,
+      )
+    }
+  } else if (GraphChain.isL2(chainId)) {
+    contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
+      deployedContracts.L2GraphTokenGateway.address,
+      providerOrSigner,
+    )
+    contracts.l2Reservoir = L2Reservoir__factory.connect(
+      deployedContracts.L2Reservoir.address,
+      providerOrSigner,
+    )
+  }
+
+  return contracts
 }
