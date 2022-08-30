@@ -84,6 +84,10 @@ export const connectContracts = async (
     ? GraphToken__factory
     : L2GraphToken__factory
 
+  const graphTokenAddress = GraphChain.isL1(chainId)
+    ? deployedContracts.GraphToken.address
+    : deployedContracts.L2GraphToken.address
+
   const contracts: NetworkContracts = {
     curation: Curation__factory.connect(
       deployedContracts.Curation.address,
@@ -111,7 +115,7 @@ export const connectContracts = async (
       providerOrSigner,
     ),
     token: GraphTokenFactory.connect(
-      deployedContracts.GraphToken.address,
+      graphTokenAddress,
       providerOrSigner,
     ),
     controller: Controller__factory.connect(
