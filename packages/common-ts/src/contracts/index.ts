@@ -25,7 +25,6 @@ import { L2GraphToken } from '@graphprotocol/contracts/dist/types/L2GraphToken'
 import { L2GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L2GraphTokenGateway'
 import { L2Reservoir } from '@graphprotocol/contracts/dist/types/L2Reservoir'
 
-
 // Contract factories
 import { Curation__factory } from '@graphprotocol/contracts/dist/types/factories/Curation__factory'
 import { DisputeManager__factory } from '@graphprotocol/contracts/dist/types/factories/DisputeManager__factory'
@@ -81,7 +80,9 @@ export const connectContracts = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const deployedContracts = (DEPLOYED_CONTRACTS as any)[`${chainId}`]
 
-  const GraphTokenFactory = GraphChain.isL1(chainId) ? GraphToken__factory : L2GraphToken__factory
+  const GraphTokenFactory = GraphChain.isL1(chainId)
+    ? GraphToken__factory
+    : L2GraphToken__factory
 
   const contracts: NetworkContracts = {
     curation: Curation__factory.connect(
@@ -140,14 +141,17 @@ export const connectContracts = async (
       deployedContracts.L1GraphTokenGateway.address,
       providerOrSigner,
     )
-    contracts.l1Reservoir = L1Reservoir__factory.connect(
-      deployedContracts.L1Reservoir.address,
-      providerOrSigner,
-    )
     contracts.bridgeEscrow = BridgeEscrow__factory.connect(
       deployedContracts.BridgeEscrow.address,
       providerOrSigner,
     )
+    // L1Reservoir is not deployed on scratch1
+    if (deployedContracts.L1Reservoir) {
+      contracts.l1Reservoir = L1Reservoir__factory.connect(
+        deployedContracts.L1Reservoir.address,
+        providerOrSigner,
+      )
+    }
   } else if (GraphChain.isL2(chainId)) {
     contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
       deployedContracts.L2GraphTokenGateway.address,
