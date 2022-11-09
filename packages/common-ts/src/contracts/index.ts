@@ -19,11 +19,9 @@ import { GraphProxyAdmin } from '@graphprotocol/contracts/dist/types/GraphProxyA
 import { SubgraphNFT } from '@graphprotocol/contracts/dist/types/SubgraphNFT'
 import { GraphCurationToken } from '@graphprotocol/contracts/dist/types/GraphCurationToken'
 import { L1GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L1GraphTokenGateway'
-import { L1Reservoir } from '@graphprotocol/contracts/dist/types/L1Reservoir'
 import { BridgeEscrow } from '@graphprotocol/contracts/dist/types/BridgeEscrow'
 import { L2GraphToken } from '@graphprotocol/contracts/dist/types/L2GraphToken'
 import { L2GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L2GraphTokenGateway'
-import { L2Reservoir } from '@graphprotocol/contracts/dist/types/L2Reservoir'
 
 // Contract factories
 import { Curation__factory } from '@graphprotocol/contracts/dist/types/factories/Curation__factory'
@@ -40,11 +38,9 @@ import { GraphProxyAdmin__factory } from '@graphprotocol/contracts/dist/types/fa
 import { SubgraphNFT__factory } from '@graphprotocol/contracts/dist/types/factories/SubgraphNFT__factory'
 import { GraphCurationToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphCurationToken__factory'
 import { L1GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/types/factories/L1GraphTokenGateway__factory'
-import { L1Reservoir__factory } from '@graphprotocol/contracts/dist/types/factories/L1Reservoir__factory'
 import { BridgeEscrow__factory } from '@graphprotocol/contracts/dist/types/factories/BridgeEscrow__factory'
 import { L2GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphToken__factory'
 import { L2GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphTokenGateway__factory'
-import { L2Reservoir__factory } from '@graphprotocol/contracts/dist/types/factories/L2Reservoir__factory'
 
 export const GraphChain = graphChain
 
@@ -65,12 +61,10 @@ export interface NetworkContracts {
 
   // Only L1
   l1GraphTokenGateway?: L1GraphTokenGateway
-  l1Reservoir?: L1Reservoir
   bridgeEscrow?: BridgeEscrow
 
   // Only L2
   l2GraphTokenGateway?: L2GraphTokenGateway
-  l2Reservoir?: L2Reservoir
 }
 
 export const connectContracts = async (
@@ -149,20 +143,9 @@ export const connectContracts = async (
       deployedContracts.BridgeEscrow.address,
       providerOrSigner,
     )
-    // L1Reservoir is not deployed on scratch1
-    if (deployedContracts.L1Reservoir) {
-      contracts.l1Reservoir = L1Reservoir__factory.connect(
-        deployedContracts.L1Reservoir.address,
-        providerOrSigner,
-      )
-    }
   } else if (GraphChain.isL2(chainId)) {
     contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
       deployedContracts.L2GraphTokenGateway.address,
-      providerOrSigner,
-    )
-    contracts.l2Reservoir = L2Reservoir__factory.connect(
-      deployedContracts.L2Reservoir.address,
       providerOrSigner,
     )
   }
