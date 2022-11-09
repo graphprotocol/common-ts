@@ -108,10 +108,7 @@ export const connectContracts = async (
       deployedContracts.Staking.address,
       providerOrSigner,
     ),
-    token: GraphTokenFactory.connect(
-      graphTokenAddress,
-      providerOrSigner,
-    ),
+    token: GraphTokenFactory.connect(graphTokenAddress, providerOrSigner),
     controller: Controller__factory.connect(
       deployedContracts.Controller.address,
       providerOrSigner,
