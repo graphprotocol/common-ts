@@ -4,23 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.4-testnet-scratch1] - 2022-08-30
-### Changed
-- Update to use @graphprotocol/contracts@2.0.4-testnet-scratch1
-
-## [2.0.3-testnet-scratch1] - 2022-08-30
-### Fixed
-- Fixed a bug where L2 graph token would initialize with L1 address.
-
-## [2.0.2-testnet-scratch1] - 2022-08-30
-### Fixed
-- Don't require L1Reservoir to be deployed (not deployed in scratch1)
-
-## [2.0.1-testnet-scratch1] - 2022-08-29
+## [2.0.0-testnet] - 2022-11-09
 ### Changed
 - Add support for L2 contracts
 - Add GraphChain utils
-- Update @graphprotocol/contracts to v2.0.2-testnet-scratch1
+- Update @graphprotocol/contracts to v2.0.0-testnet
 
 ## [Unreleased]
 ### Changed
