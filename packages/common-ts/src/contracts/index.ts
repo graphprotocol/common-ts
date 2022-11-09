@@ -132,19 +132,25 @@ export const connectContracts = async (
   }
 
   if (GraphChain.isL1(chainId)) {
-    contracts.l1GraphTokenGateway = L1GraphTokenGateway__factory.connect(
-      deployedContracts.L1GraphTokenGateway.address,
-      providerOrSigner,
-    )
-    contracts.bridgeEscrow = BridgeEscrow__factory.connect(
-      deployedContracts.BridgeEscrow.address,
-      providerOrSigner,
-    )
+    if (contracts.l1GraphTokenGateway) {
+      contracts.l1GraphTokenGateway = L1GraphTokenGateway__factory.connect(
+        deployedContracts.L1GraphTokenGateway.address,
+        providerOrSigner,
+      )
+    }
+    if (contracts.bridgeEscrow) {
+      contracts.bridgeEscrow = BridgeEscrow__factory.connect(
+        deployedContracts.BridgeEscrow.address,
+        providerOrSigner,
+      )
+    }
   } else if (GraphChain.isL2(chainId)) {
-    contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
-      deployedContracts.L2GraphTokenGateway.address,
-      providerOrSigner,
-    )
+    if (contracts.l2GraphTokenGateway) {
+      contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
+        deployedContracts.L2GraphTokenGateway.address,
+        providerOrSigner,
+      )
+    }
   }
 
   return contracts
