@@ -647,7 +647,7 @@
   resolved "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@graphprotocol/contracts@^2.0.0-testnet":
+"@graphprotocol/contracts@l2-testnet":
   version "2.0.0-testnet"
   resolved "https://registry.yarnpkg.com/@graphprotocol/contracts/-/contracts-2.0.0-testnet.tgz#95f3156a03bffc754f523240bf47801a4cbc7eca"
   integrity sha512-ZJ/dxGeSnN4cFI7HGUcU2HBe7hZtNat/5UX2B4f27sQyfV9IJBcXy+6wBugn97rmZFPGj3yk7K1PMvJVVOFKpA==
