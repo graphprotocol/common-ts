@@ -73,7 +73,6 @@ export const connectContracts = async (
 ): Promise<NetworkContracts> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const deployedContracts = (DEPLOYED_CONTRACTS as any)[`${chainId}`]
-
   const GraphTokenFactory = GraphChain.isL1(chainId)
     ? GraphToken__factory
     : L2GraphToken__factory
@@ -132,20 +131,20 @@ export const connectContracts = async (
   }
 
   if (GraphChain.isL1(chainId)) {
-    if (contracts.l1GraphTokenGateway) {
+    if (deployedContracts.L1GraphTokenGateway) {
       contracts.l1GraphTokenGateway = L1GraphTokenGateway__factory.connect(
         deployedContracts.L1GraphTokenGateway.address,
         providerOrSigner,
       )
     }
-    if (contracts.bridgeEscrow) {
+    if (deployedContracts.BridgeEscrow) {
       contracts.bridgeEscrow = BridgeEscrow__factory.connect(
         deployedContracts.BridgeEscrow.address,
         providerOrSigner,
       )
     }
   } else if (GraphChain.isL2(chainId)) {
-    if (contracts.l2GraphTokenGateway) {
+    if (deployedContracts.L2GraphTokenGateway) {
       contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
         deployedContracts.L2GraphTokenGateway.address,
         providerOrSigner,
