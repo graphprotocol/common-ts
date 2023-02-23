@@ -36,7 +36,7 @@
     "pino": "7.6.0",
     "pino-multi-stream": "6.0.0",
     "prom-client": "14.0.1",
-    "sequelize": "6.19.0"
+    "sequelize": "6.28.2"
   },
   "devDependencies": {
     "@types/bs58": "4.0.1",
