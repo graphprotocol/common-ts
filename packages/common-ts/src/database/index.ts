@@ -7,6 +7,8 @@ interface ConnectOptions {
   password: string
   database: string
   logging?: (sql: string, timing?: number) => void
+  poolMin?: number
+  poolMax?: number
 }
 
 export const connectDatabase = async (options: ConnectOptions): Promise<Sequelize> => {
@@ -14,6 +16,8 @@ export const connectDatabase = async (options: ConnectOptions): Promise<Sequeliz
 
   // Use port 5432 by default
   const port = options.port || 5432
+  const poolMin = options.poolMin || 0
+  const poolMax = options.poolMax || 10
 
   // Connect to the database
   const sequelize = new Sequelize({
@@ -24,8 +28,8 @@ export const connectDatabase = async (options: ConnectOptions): Promise<Sequeliz
     password,
     database,
     pool: {
-      max: 10,
-      min: 0,
+      max: poolMax,
+      min: poolMin,
     },
     logging,
   })
