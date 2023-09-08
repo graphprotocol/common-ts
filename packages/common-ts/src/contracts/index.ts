@@ -12,6 +12,7 @@ import { GNS } from '@graphprotocol/contracts/dist/types/GNS'
 import { RewardsManager } from '@graphprotocol/contracts/dist/types/RewardsManager'
 import { ServiceRegistry } from '@graphprotocol/contracts/dist/types/ServiceRegistry'
 import { Staking } from '@graphprotocol/contracts/dist/types/Staking'
+import { StakingExtension } from '@graphprotocol/contracts/dist/types/StakingExtension'
 import { GraphToken } from '@graphprotocol/contracts/dist/types/GraphToken'
 import { Controller } from '@graphprotocol/contracts/dist/types/Controller'
 import { AllocationExchange } from '@graphprotocol/contracts/dist/types/AllocationExchange'
@@ -31,6 +32,7 @@ import { GNS__factory } from '@graphprotocol/contracts/dist/types/factories/GNS_
 import { RewardsManager__factory } from '@graphprotocol/contracts/dist/types/factories/RewardsManager__factory'
 import { ServiceRegistry__factory } from '@graphprotocol/contracts/dist/types/factories/ServiceRegistry__factory'
 import { Staking__factory } from '@graphprotocol/contracts/dist/types/factories/Staking__factory'
+import { StakingExtension__factory } from '@graphprotocol/contracts/dist/types/factories/StakingExtension__factory'
 import { GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphToken__factory'
 import { Controller__factory } from '@graphprotocol/contracts/dist/types/factories/Controller__factory'
 import { AllocationExchange__factory } from '@graphprotocol/contracts/dist/types/factories/AllocationExchange__factory'
@@ -49,10 +51,11 @@ export interface NetworkContracts {
   curation: Curation
   disputeManager: DisputeManager
   epochManager: EpochManager
-  gns: GNS
+  l1GNS: GNS
   rewardsManager: RewardsManager
   serviceRegistry: ServiceRegistry
-  staking: Staking
+  l1Staking: Staking
+  stakingExtension: StakingExtension
   token: GraphToken | L2GraphToken
   controller: Controller
   allocationExchange: AllocationExchange
@@ -100,7 +103,7 @@ export const connectContracts = async (
       deployedContracts.EpochManager.address,
       providerOrSigner,
     ),
-    gns: GNS__factory.connect(deployedContracts.GNS.address, providerOrSigner),
+    l1GNS: GNS__factory.connect(deployedContracts.L1GNS.address, providerOrSigner),
     rewardsManager: RewardsManager__factory.connect(
       deployedContracts.RewardsManager.address,
       providerOrSigner,
@@ -109,8 +112,12 @@ export const connectContracts = async (
       deployedContracts.ServiceRegistry.address,
       providerOrSigner,
     ),
-    staking: Staking__factory.connect(
-      deployedContracts.Staking.address,
+    l1Staking: Staking__factory.connect(
+      deployedContracts.L1Staking.address,
+      providerOrSigner,
+    ),
+    stakingExtension: StakingExtension__factory.connect(
+      deployedContracts.StakingExtension.address,
       providerOrSigner,
     ),
     token: GraphTokenFactory.connect(graphTokenAddress, providerOrSigner),

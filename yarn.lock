@@ -647,10 +647,10 @@
   resolved "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@graphprotocol/contracts@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@graphprotocol/contracts/-/contracts-2.1.0.tgz#c2e9131973af231e3f6f84ada31baebccc77ed48"
-  integrity sha512-SeymJCUxBp488K/KNi77EKvrkPT0t/7rERGp8zFkmf5KByerjihhE9Ty9oXJAU9RzbUpxsU0JkPBSmiw9/2DYQ==
+"@graphprotocol/contracts@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/contracts/-/contracts-5.1.0.tgz#6fea0ad2d6e7ea33b9231103db1f3bc9f5d3b4a7"
+  integrity sha512-RKG8ZRTR5UJBbajDjWI/qFkRqieJ+1/HxGRlrrEybgF1tulzavK5K4Y2NpGujw/03KLsyI5Mz2VL7Jnh55uj5w==
   dependencies:
     console-table-printer "^2.11.1"
     ethers "^5.6.0"
