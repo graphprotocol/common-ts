@@ -45,6 +45,7 @@ import { L1GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/type
 import { BridgeEscrow__factory } from '@graphprotocol/contracts/dist/types/factories/BridgeEscrow__factory'
 import { L2GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphToken__factory'
 import { L2GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphTokenGateway__factory'
+import { readFileSync } from 'fs'
 
 export const GraphChain = graphChain
 
@@ -74,9 +75,13 @@ export interface NetworkContracts {
 export const connectContracts = async (
   providerOrSigner: providers.Provider | Signer,
   chainId: number,
+  addressBook?: string,
 ): Promise<NetworkContracts> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const deployedContracts = (DEPLOYED_CONTRACTS as any)[`${chainId}`]
+  const deployedContracts = addressBook
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      JSON.parse(readFileSync(addressBook).toString())[`${chainId}`]
+    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (DEPLOYED_CONTRACTS as any)[`${chainId}`]
   if (!deployedContracts) {
     throw new Error(`chainId: '${chainId}' has no deployed contracts`)
   }
