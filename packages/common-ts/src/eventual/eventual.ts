@@ -273,12 +273,15 @@ export function throttle<T>(source: Eventual<T>, interval: number): Eventual<T> 
       latestT = t
 
       if (!timeout) {
-        timeout = setTimeout(() => {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          output.push(latestT!)
-          lastPushed = Date.now()
-          timeout = undefined
-        }, Math.max(0, Math.min(interval, Date.now() - lastPushed)))
+        timeout = setTimeout(
+          () => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            output.push(latestT!)
+            lastPushed = Date.now()
+            timeout = undefined
+          },
+          Math.max(0, Math.min(interval, Date.now() - lastPushed)),
+        )
       }
     }
   })

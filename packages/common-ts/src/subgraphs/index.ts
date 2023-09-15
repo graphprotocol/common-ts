@@ -2,7 +2,7 @@ import { utils } from 'ethers'
 import base58 from 'bs58'
 
 export class SubgraphName {
-  kind: 'name' = 'name'
+  kind: 'name' = 'name' as const
   value: string
 
   constructor(name: string) {
@@ -19,7 +19,7 @@ const bytes32Check = /^0x[0-9a-f]{64}$/
 const multiHashCheck = /^Qm[1-9a-km-zA-HJ-NP-Z]{44}$/
 
 export class SubgraphDeploymentID {
-  kind: 'deployment-id' = 'deployment-id'
+  kind: 'deployment-id' = 'deployment-id' as const
 
   // Hexadecimal (bytes32) representation of the subgraph deployment Id
   value: string
