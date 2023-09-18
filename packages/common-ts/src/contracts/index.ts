@@ -11,7 +11,8 @@ import { EpochManager } from '@graphprotocol/contracts/dist/types/EpochManager'
 import { GNS } from '@graphprotocol/contracts/dist/types/GNS'
 import { RewardsManager } from '@graphprotocol/contracts/dist/types/RewardsManager'
 import { ServiceRegistry } from '@graphprotocol/contracts/dist/types/ServiceRegistry'
-import { Staking } from '@graphprotocol/contracts/dist/types/Staking'
+import { IL1Staking } from '@graphprotocol/contracts/dist/types/IL1Staking'
+import { IL2Staking } from '@graphprotocol/contracts/dist/types/IL2Staking'
 import { GraphToken } from '@graphprotocol/contracts/dist/types/GraphToken'
 import { Controller } from '@graphprotocol/contracts/dist/types/Controller'
 import { AllocationExchange } from '@graphprotocol/contracts/dist/types/AllocationExchange'
@@ -30,7 +31,8 @@ import { EpochManager__factory } from '@graphprotocol/contracts/dist/types/facto
 import { GNS__factory } from '@graphprotocol/contracts/dist/types/factories/GNS__factory'
 import { RewardsManager__factory } from '@graphprotocol/contracts/dist/types/factories/RewardsManager__factory'
 import { ServiceRegistry__factory } from '@graphprotocol/contracts/dist/types/factories/ServiceRegistry__factory'
-import { Staking__factory } from '@graphprotocol/contracts/dist/types/factories/Staking__factory'
+import { IL1Staking__factory } from '@graphprotocol/contracts/dist/types/factories/IL1Staking__factory'
+import { IL2Staking__factory } from '@graphprotocol/contracts/dist/types/factories/IL2Staking__factory'
 import { GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/GraphToken__factory'
 import { Controller__factory } from '@graphprotocol/contracts/dist/types/factories/Controller__factory'
 import { AllocationExchange__factory } from '@graphprotocol/contracts/dist/types/factories/AllocationExchange__factory'
@@ -51,7 +53,7 @@ export interface NetworkContracts {
   gns: GNS
   rewardsManager: RewardsManager
   serviceRegistry: ServiceRegistry
-  staking: Staking
+  staking: IL1Staking | IL2Staking
   token: GraphToken | L2GraphToken
   controller: Controller
   allocationExchange: AllocationExchange
@@ -81,6 +83,10 @@ export const connectContracts = async (
     ? deployedContracts.GraphToken.address
     : deployedContracts.L2GraphToken.address
 
+  const staking =  GraphChain.isL1(chainId)
+    ? IL1Staking__factory.connect(deployedContracts.L1Staking.address, providerOrSigner)
+    : IL2Staking__factory.connect(deployedContracts.L2Staking.address, providerOrSigner)
+
   const contracts: NetworkContracts = {
     curation: Curation__factory.connect(
       deployedContracts.Curation.address,
@@ -103,10 +109,7 @@ export const connectContracts = async (
       deployedContracts.ServiceRegistry.address,
       providerOrSigner,
     ),
-    staking: Staking__factory.connect(
-      deployedContracts.Staking.address,
-      providerOrSigner,
-    ),
+    staking: staking,
     token: GraphTokenFactory.connect(graphTokenAddress, providerOrSigner),
     controller: Controller__factory.connect(
       deployedContracts.Controller.address,
