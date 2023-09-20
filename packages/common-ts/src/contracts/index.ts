@@ -75,60 +75,80 @@ export const connectContracts = async (
 ): Promise<NetworkContracts> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const deployedContracts = (DEPLOYED_CONTRACTS as any)[`${chainId}`]
+  if (!deployedContracts) {
+    throw new Error(`chainId: '${chainId}' has no deployed contracts`)
+  }
+
+  const getContractAddress = (contractName: string) => {
+    if (!deployedContracts[contractName]) {
+      throw new Error(
+        `Deployed contract '${contractName}' is undefined for chainId: '${chainId}'`,
+      )
+    }
+    const address = deployedContracts[contractName].address
+    if (!address) {
+      throw new Error(
+        `Deployed contract '${contractName}' address is undefined for chainId: '${chainId}'`,
+      )
+    }
+    return address
+  }
+
   const GraphTokenFactory = GraphChain.isL1(chainId)
     ? GraphToken__factory
     : L2GraphToken__factory
 
   const graphTokenAddress = GraphChain.isL1(chainId)
-    ? deployedContracts.GraphToken.address
-    : deployedContracts.L2GraphToken.address
+    ? getContractAddress('GraphToken')
+    : getContractAddress('L2GraphToken')
 
-  const staking =  GraphChain.isL1(chainId)
-    ? IL1Staking__factory.connect(deployedContracts.L1Staking.address, providerOrSigner)
-    : IL2Staking__factory.connect(deployedContracts.L2Staking.address, providerOrSigner)
+  const staking = GraphChain.isL1(chainId)
+    ? IL1Staking__factory.connect(getContractAddress('L1Staking'), providerOrSigner)
+    : IL2Staking__factory.connect(getContractAddress('L2Staking'), providerOrSigner)
+
+  const gns = GraphChain.isL1(chainId)
+    ? GNS__factory.connect(getContractAddress('L1GNS'), providerOrSigner)
+    : GNS__factory.connect(getContractAddress('L2GNS'), providerOrSigner)
 
   const contracts: NetworkContracts = {
-    curation: Curation__factory.connect(
-      deployedContracts.Curation.address,
-      providerOrSigner,
-    ),
+    curation: Curation__factory.connect(getContractAddress('Curation'), providerOrSigner),
     disputeManager: DisputeManager__factory.connect(
-      deployedContracts.DisputeManager.address,
+      getContractAddress('DisputeManager'),
       providerOrSigner,
     ),
     epochManager: EpochManager__factory.connect(
-      deployedContracts.EpochManager.address,
+      getContractAddress('EpochManager'),
       providerOrSigner,
     ),
-    gns: GNS__factory.connect(deployedContracts.GNS.address, providerOrSigner),
+    gns,
     rewardsManager: RewardsManager__factory.connect(
-      deployedContracts.RewardsManager.address,
+      getContractAddress('RewardsManager'),
       providerOrSigner,
     ),
     serviceRegistry: ServiceRegistry__factory.connect(
-      deployedContracts.ServiceRegistry.address,
+      getContractAddress('ServiceRegistry'),
       providerOrSigner,
     ),
-    staking: staking,
+    staking,
     token: GraphTokenFactory.connect(graphTokenAddress, providerOrSigner),
     controller: Controller__factory.connect(
-      deployedContracts.Controller.address,
+      getContractAddress('Controller'),
       providerOrSigner,
     ),
     allocationExchange: AllocationExchange__factory.connect(
-      deployedContracts.AllocationExchange.address,
+      getContractAddress('AllocationExchange'),
       providerOrSigner,
     ),
     graphProxyAdmin: GraphProxyAdmin__factory.connect(
-      deployedContracts.GraphProxyAdmin.address,
+      getContractAddress('GraphProxyAdmin'),
       providerOrSigner,
     ),
     subgraphNFT: SubgraphNFT__factory.connect(
-      deployedContracts.SubgraphNFT.address,
+      getContractAddress('SubgraphNFT'),
       providerOrSigner,
     ),
     graphCurationToken: GraphCurationToken__factory.connect(
-      deployedContracts.GraphCurationToken.address,
+      getContractAddress('GraphCurationToken'),
       providerOrSigner,
     ),
   }
@@ -136,20 +156,20 @@ export const connectContracts = async (
   if (GraphChain.isL1(chainId)) {
     if (deployedContracts.L1GraphTokenGateway) {
       contracts.l1GraphTokenGateway = L1GraphTokenGateway__factory.connect(
-        deployedContracts.L1GraphTokenGateway.address,
+        getContractAddress('L1GraphTokenGateway'),
         providerOrSigner,
       )
     }
     if (deployedContracts.BridgeEscrow) {
       contracts.bridgeEscrow = BridgeEscrow__factory.connect(
-        deployedContracts.BridgeEscrow.address,
+        getContractAddress('BridgeEscrow'),
         providerOrSigner,
       )
     }
   } else if (GraphChain.isL2(chainId)) {
     if (deployedContracts.L2GraphTokenGateway) {
       contracts.l2GraphTokenGateway = L2GraphTokenGateway__factory.connect(
-        deployedContracts.L2GraphTokenGateway.address,
+        getContractAddress('L2GraphTokenGateway'),
         providerOrSigner,
       )
     }
