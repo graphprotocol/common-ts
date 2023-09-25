@@ -23,9 +23,11 @@ import { L1GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L1Graph
 import { BridgeEscrow } from '@graphprotocol/contracts/dist/types/BridgeEscrow'
 import { L2GraphToken } from '@graphprotocol/contracts/dist/types/L2GraphToken'
 import { L2GraphTokenGateway } from '@graphprotocol/contracts/dist/types/L2GraphTokenGateway'
+import { L2Curation } from '@graphprotocol/contracts/dist/types/L2Curation'
 
 // Contract factories
 import { Curation__factory } from '@graphprotocol/contracts/dist/types/factories/Curation__factory'
+import { L2Curation__factory } from '@graphprotocol/contracts/dist/types/factories/L2Curation__factory'
 import { DisputeManager__factory } from '@graphprotocol/contracts/dist/types/factories/DisputeManager__factory'
 import { EpochManager__factory } from '@graphprotocol/contracts/dist/types/factories/EpochManager__factory'
 import { GNS__factory } from '@graphprotocol/contracts/dist/types/factories/GNS__factory'
@@ -47,7 +49,7 @@ import { L2GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/type
 export const GraphChain = graphChain
 
 export interface NetworkContracts {
-  curation: Curation
+  curation: Curation | L2Curation
   disputeManager: DisputeManager
   epochManager: EpochManager
   gns: GNS
@@ -110,8 +112,11 @@ export const connectContracts = async (
     ? GNS__factory.connect(getContractAddress('L1GNS'), providerOrSigner)
     : GNS__factory.connect(getContractAddress('L2GNS'), providerOrSigner)
 
+  const curation = GraphChain.isL1(chainId)
+    ? Curation__factory.connect(getContractAddress('Curation'), providerOrSigner)
+    : L2Curation__factory.connect(getContractAddress('L2Curation'), providerOrSigner)
+
   const contracts: NetworkContracts = {
-    curation: Curation__factory.connect(getContractAddress('Curation'), providerOrSigner),
     disputeManager: DisputeManager__factory.connect(
       getContractAddress('DisputeManager'),
       providerOrSigner,
@@ -121,6 +126,7 @@ export const connectContracts = async (
       providerOrSigner,
     ),
     gns,
+    curation,
     rewardsManager: RewardsManager__factory.connect(
       getContractAddress('RewardsManager'),
       providerOrSigner,
