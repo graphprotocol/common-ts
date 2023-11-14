@@ -1,9 +1,6 @@
 import { providers, Signer } from 'ethers'
 import graphChain from './chain'
 
-// Contract addresses
-import * as DEPLOYED_CONTRACTS from '@graphprotocol/contracts/addresses.json'
-
 // Contract ABIs
 import { Curation } from '@graphprotocol/contracts/dist/types/Curation'
 import { DisputeManager } from '@graphprotocol/contracts/dist/types/DisputeManager'
@@ -45,7 +42,6 @@ import { L1GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/type
 import { BridgeEscrow__factory } from '@graphprotocol/contracts/dist/types/factories/BridgeEscrow__factory'
 import { L2GraphToken__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphToken__factory'
 import { L2GraphTokenGateway__factory } from '@graphprotocol/contracts/dist/types/factories/L2GraphTokenGateway__factory'
-import { readFileSync } from 'fs'
 
 export const GraphChain = graphChain
 
@@ -72,16 +68,14 @@ export interface NetworkContracts {
   l2GraphTokenGateway?: L2GraphTokenGateway
 }
 
+export type AddressBook = { [key: string]: { [key: string]: { address: string } } }
+
 export const connectContracts = async (
   providerOrSigner: providers.Provider | Signer,
   chainId: number,
-  addressBook?: string,
+  addressBook: AddressBook,
 ): Promise<NetworkContracts> => {
-  const deployedContracts = addressBook
-    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      JSON.parse(readFileSync(addressBook).toString())[`${chainId}`]
-    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (DEPLOYED_CONTRACTS as any)[`${chainId}`]
+  const deployedContracts = addressBook[`${chainId}`]
   if (!deployedContracts) {
     throw new Error(`chainId: '${chainId}' has no deployed contracts`)
   }
