@@ -4,35 +4,57 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 2022-11-30
+## [Unreleased]
+
+## [2.0.7] - 2023-09-25
+### Changed
+- Add L2Curation contract
+
+## [2.0.6] - 2023-09-20
+### Added
+- Add Robustness checks around contract information
+
+## [2.0.5] - 2023-09-19
+### Fixed
+- Use the correct interface for staking on contracts 5.x
+
+## [2.0.4] - 2023-09-18
+### Changed
+- Update node-versions of action runners used by CI workflow
+- Upgrade many dependencies
+
+## [2.0.2] - 2023-08-23
 ### Changed
 - Update @graphprotocol/contracts to v2.1.0
-- Add mainnet bridge contracts and L2 contracts
-
-## [2.0.4-testnet] - 2022-11-09
-### Changed
-- Fix L1/L2 specific contracts not being loaded
-
-## [2.0.3-testnet] - 2022-11-09
-### Changed
-- Don't error out if contract is not deployed
-
-## [2.0.1-testnet] - 2022-11-09
-### Changed
-- Remove reservoir contracts
-
-## [2.0.0-testnet] - 2022-11-09
-### Changed
 - Add support for L2 contracts
-- Add GraphChain utils
-- Update @graphprotocol/contracts to v2.0.0-testnet
+- Let connection pool size be configured
+- Upgrade sequelize dependency
 
-## [Unreleased]
+### Fixed
+- Remove reservoir contracts
+- Don't error out if contract not deployed
+- L1/L2 specific contracts weren't being loaded
+
+## [1.8.6] - 2022-08-02
 ### Changed
-- Include AllocationExchange in NetworkContracts
+- Upgrade sequelize dependency
+
+## [1.8.5] - 2022-08-02
+### Changed
+- Upgrade @graphprotocol/contracts
+
+## [1.8.3] - 2022-04-12
+### Changed
 - Upgrade dependencies
-- Upgrade @graphprotocol/contracts to v1.13.0
-- Upgrade sequelize
+- Update test for query versioning to match spec
+- Allow set version for EIP721 domain separator
+
+## [1.8.2] - 2022-02-23
+### Added
+- Add AllocationExchange to NetworkContracts
+
+### Changed
+- Use TS import for contract addresses
 
 ## [1.8.1] - 2021-12-22
 ### Changed
@@ -419,7 +441,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common database module for simplifying database setup
 - Connext client module with Postgres-based store implementation
 
-[Unreleased]: https://github.com/graphprotocol/common-ts/compare/v1.8.1...HEAD
+[Unreleased]: https://github.com/graphprotocol/common-ts/compare/v2.0.7...HEAD
+[2.0.7]: https://github.com/graphprotocol/common-ts/compare/2.0.6...v2.0.7
+[2.0.6]: https://github.com/graphprotocol/common-ts/compare/2.0.5...v2.0.6
+[2.0.5]: https://github.com/graphprotocol/common-ts/compare/2.0.4...v2.0.5
+[2.0.4]: https://github.com/graphprotocol/common-ts/compare/2.0.2...v2.0.4
+[2.0.2]: https://github.com/graphprotocol/common-ts/compare/v1.8.6...v2.0.2
+[1.8.6]: https://github.com/graphprotocol/common-ts/compare/v1.8.5...v1.8.6
+[1.8.5]: https://github.com/graphprotocol/common-ts/compare/v1.8.3...v1.8.5
+[1.8.3]: https://github.com/graphprotocol/common-ts/compare/v1.8.2...v1.8.3
+[1.8.2]: https://github.com/graphprotocol/common-ts/compare/v1.8.1...v1.8.2
 [1.8.1]: https://github.com/graphprotocol/common-ts/compare/v1.5.1...v1.8.1
 [1.5.1]: https://github.com/graphprotocol/common/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/graphprotocol/common/compare/v1.4.2...v1.5.0
