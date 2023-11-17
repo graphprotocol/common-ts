@@ -1,6 +1,9 @@
 import { providers, Signer } from 'ethers'
 import graphChain from './chain'
 
+// Contract addresses
+import * as DEPLOYED_CONTRACTS from '@graphprotocol/contracts/addresses.json'
+
 // Contract ABIs
 import { Curation } from '@graphprotocol/contracts/dist/types/Curation'
 import { DisputeManager } from '@graphprotocol/contracts/dist/types/DisputeManager'
@@ -73,9 +76,10 @@ export type AddressBook = { [key: string]: { [key: string]: { address: string } 
 export const connectContracts = async (
   providerOrSigner: providers.Provider | Signer,
   chainId: number,
-  addressBook: AddressBook,
+  addressBook: AddressBook | undefined,
 ): Promise<NetworkContracts> => {
-  const deployedContracts = addressBook[`${chainId}`]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const deployedContracts = addressBook ? addressBook[`${chainId}`] : (DEPLOYED_CONTRACTS as any)[`${chainId}`]
   if (!deployedContracts) {
     throw new Error(`chainId: '${chainId}' has no deployed contracts`)
   }
