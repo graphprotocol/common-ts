@@ -14,6 +14,7 @@ const chainMap = new MapWithGetKey<number>([
   [1, 42161], // Ethereum Mainnet - Arbitrum One
   [4, 421611], // Ethereum Rinkeby - Arbitrum Rinkeby
   [5, 421613], // Ethereum Goerli - Arbitrum Goerli
+  [11155111, 421614], // Ethereum Sepolia - Arbitrum Sepolia
   [1337, 412346], // Localhost - Arbitrum Localhost
 ])
 

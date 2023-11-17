@@ -78,8 +78,10 @@ export const connectContracts = async (
   chainId: number,
   addressBook: AddressBook | undefined,
 ): Promise<NetworkContracts> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const deployedContracts = addressBook ? addressBook[`${chainId}`] : (DEPLOYED_CONTRACTS as any)[`${chainId}`]
+  const deployedContracts = addressBook
+    ? addressBook[`${chainId}`]
+    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (DEPLOYED_CONTRACTS as any)[`${chainId}`]
   if (!deployedContracts) {
     throw new Error(`chainId: '${chainId}' has no deployed contracts`)
   }
