@@ -6,6 +6,7 @@ interface ConnectOptions {
   username: string
   password: string
   database: string
+  sslEnabled?: boolean
   logging?: (sql: string, timing?: number) => void
   poolMin?: number
   poolMax?: number
@@ -18,6 +19,7 @@ export const connectDatabase = async (options: ConnectOptions): Promise<Sequeliz
   const port = options.port || 5432
   const poolMin = options.poolMin || 0
   const poolMax = options.poolMax || 10
+  const sslEnabled = options.sslEnabled || false
 
   // Connect to the database
   const sequelize = new Sequelize({
@@ -27,6 +29,7 @@ export const connectDatabase = async (options: ConnectOptions): Promise<Sequeliz
     username,
     password,
     database,
+    ssl: sslEnabled,
     pool: {
       max: poolMax,
       min: poolMin,
