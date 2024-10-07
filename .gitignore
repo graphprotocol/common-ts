@@ -107,3 +107,6 @@ dist
 
 # IDE directories
 .idea
+
+# Vscode directories
+.vscode

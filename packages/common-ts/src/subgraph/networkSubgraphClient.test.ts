@@ -12,11 +12,15 @@ describe('Network Subgraph Client', () => {
 
     expect(
       client
-        .query(gql`
-          {
-            ok
-          }
-        `)
+        .query(
+          gql`
+            {
+              ok
+            }
+          `,
+          [],
+          [],
+        )
         .toPromise(),
     ).resolves.toMatchObject({
       data: { ok: true },
