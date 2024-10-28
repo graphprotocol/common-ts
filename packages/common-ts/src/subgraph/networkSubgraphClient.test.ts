@@ -19,7 +19,7 @@ describe('Network Subgraph Client', () => {
             }
           `,
           [],
-          [],
+          undefined,
         )
         .toPromise(),
     ).resolves.toMatchObject({
