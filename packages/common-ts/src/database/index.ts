@@ -29,7 +29,11 @@ export const connectDatabase = async (options: ConnectOptions): Promise<Sequeliz
     username,
     password,
     database,
-    ssl: sslEnabled,
+    ...(sslEnabled && {
+      dialectOptions: {
+        ssl: { require: true, rejectUnauthorized: true },
+      },
+    }),
     pool: {
       max: poolMax,
       min: poolMin,
