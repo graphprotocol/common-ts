@@ -289,10 +289,10 @@ export function throttle<T>(source: Eventual<T>, interval: number): Eventual<T> 
   return output
 }
 
-export function timer(milliseconds: number): Eventual<number> {
+export function timer(milliseconds: number): [NodeJS.Timer, Eventual<number>] {
   const time = mutable(Date.now())
-  setInterval(() => time.push(Date.now()), milliseconds)
-  return time
+  const intervalID = setInterval(() => time.push(Date.now()), milliseconds)
+  return [intervalID, time]
 }
 
 export function reduce<T, U>(

@@ -286,7 +286,7 @@ describe('Eventual', () => {
   })
 
   test('Join (timer)', async () => {
-    const ticker = timer(100)
+    const [intervalID, ticker] = timer(100)
     const ticks = ticker.reduce(n => ++n, 0)
     const ticksViaJoin = join({ ticker }).reduce(n => ++n, 0)
 
@@ -296,6 +296,7 @@ describe('Eventual', () => {
     // we're happy
     await expect(ticks.value()).resolves.toBeGreaterThan(5)
     await expect(ticksViaJoin.value()).resolves.toBeGreaterThan(5)
+    clearInterval(intervalID)
   })
 
   test('Values (async generator)', async () => {
