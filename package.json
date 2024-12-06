@@ -14,5 +14,8 @@
   "devDependencies": {
     "@octokit/core": "^3.2.0",
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "mysql2": "^3.11.5"
   }
 }
