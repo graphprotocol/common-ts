@@ -103,7 +103,9 @@ export const decodeAttestation = (attestationData: string): Attestation => {
     attestationBytes,
   )
   const sig = Signature.from(
-    hexlify(attestationBytes.slice(RECEIPT_SIZE_BYTES, RECEIPT_SIZE_BYTES + SIG_SIZE_BYTES))
+    hexlify(
+      attestationBytes.slice(RECEIPT_SIZE_BYTES, RECEIPT_SIZE_BYTES + SIG_SIZE_BYTES),
+    ),
   )
 
   return {
