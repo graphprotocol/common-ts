@@ -967,14 +967,6 @@
     unist-util-remove-position "^4.0.0"
     unist-util-select "^4.0.0"
 
-"@graphprotocol/contracts@5.3.3":
-  version "5.3.3"
-  resolved "https://registry.npmjs.org/@graphprotocol/contracts/-/contracts-5.3.3.tgz#89c383ce244d9ed6cf1146baafde379cbbdfdfe6"
-  integrity sha512-fmFSKr+VDinWWotj2q/Ztn92PppcRrYXeO/62gLgkLos/DcYa7bGWKbcOWyMUw0vsUvXxk6QAtr5o/LG3yQ1WQ==
-  dependencies:
-    console-table-printer "^2.11.1"
-    ethers "^5.6.0"
-
 "@graphprotocol/pino-sentry-simple@0.7.1":
   version "0.7.1"
   resolved "https://registry.npmjs.org/@graphprotocol/pino-sentry-simple/-/pino-sentry-simple-0.7.1.tgz#ac08b978bfa33178b9e809f53ae0983ff5f724d8"
@@ -3463,13 +3455,6 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   resolved "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
   integrity sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=
 
-console-table-printer@^2.11.1:
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/console-table-printer/-/console-table-printer-2.11.1.tgz#c2dfe56e6343ea5bcfa3701a4be29fe912dbd9c7"
-  integrity sha512-8LfFpbF/BczoxPwo2oltto5bph8bJkGOATXsg3E9ddMJOGnWJciKHldx2zDj5XIBflaKzPfVCjOTl6tMh7lErg==
-  dependencies:
-    simple-wcswidth "^1.0.1"
-
 content-disposition@0.5.4:
   version "0.5.4"
   resolved "https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.4.tgz#8b82b4efac82512a02bb0b1dcec9d2c5e8eb5bfe"
@@ -4119,7 +4104,7 @@ etag@~1.8.1:
   resolved "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-ethers@5.7.0, ethers@^5.6.0:
+ethers@5.7.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.7.0.tgz#0055da174b9e076b242b8282638bc94e04b39835"
   integrity sha512-5Xhzp2ZQRi0Em+0OkOcRHxPzCfoBfgtOQA+RUylSkuHbhTEaQklnYi2hsWbRgs3ztJsXVXd9VKBcO1ScWL8YfA==
@@ -7754,11 +7739,6 @@ signale@^1.4.0:
     chalk "^2.3.2"
     figures "^2.0.0"
     pkg-conf "^2.1.0"
-
-simple-wcswidth@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/simple-wcswidth/-/simple-wcswidth-1.0.1.tgz#8ab18ac0ae342f9d9b629604e54d2aa1ecb018b2"
-  integrity sha512-xMO/8eNREtaROt7tJvWJqHBDTMFN4eiQ5I4JRMuilwfnFcV5W9u7RUkueNkdw0jPqGMX36iCywelS5yilTuOxg==
 
 sisteransi@^1.0.5:
   version "1.0.5"
