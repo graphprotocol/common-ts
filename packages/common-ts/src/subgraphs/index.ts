@@ -1,4 +1,4 @@
-import { utils } from 'ethers'
+import { hexlify, getBytes } from 'ethers'
 import base58 from 'bs58'
 
 export class SubgraphName {
@@ -28,7 +28,7 @@ export class SubgraphDeploymentID {
     let value
     // Security: Input validation
     if (multiHashCheck.test(id)) {
-      value = utils.hexlify(base58.decode(id).slice(2))
+      value = hexlify(base58.decode(id).slice(2))
     } else if (bytes32Check.test(id)) {
       value = id
     }
@@ -56,7 +56,7 @@ export class SubgraphDeploymentID {
   }
 
   get ipfsHash(): string {
-    return base58.encode([0x12, 0x20, ...utils.arrayify(this.value)])
+    return base58.encode([0x12, 0x20, ...getBytes(this.value)])
   }
 }
 

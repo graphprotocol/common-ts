@@ -1,6 +1,5 @@
-import { BigNumber, BigNumberish } from 'ethers'
-import { parseUnits, formatUnits } from 'ethers/lib/utils'
+import { BigNumberish, formatUnits, parseUnits } from 'ethers'
 
 export const formatGRT = (value: BigNumberish): string => formatUnits(value, 18)
 
-export const parseGRT = (grt: string): BigNumber => parseUnits(grt, 18)
+export const parseGRT = (grt: string): bigint => parseUnits(grt, 18)
