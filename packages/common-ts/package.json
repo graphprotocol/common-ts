@@ -1,6 +1,6 @@
 {
   "name": "@graphprotocol/common-ts",
-  "version": "2.0.11",
+  "version": "3.0.1",
   "description": "Common TypeScript library for Graph Protocol components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,6 @@
     "test:watch": "jest --watch --passWithNoTests --detectOpenHandles --verbose"
   },
   "dependencies": {
-    "@graphprotocol/contracts": "5.3.3",
     "@graphprotocol/pino-sentry-simple": "0.7.1",
     "@urql/core": "3.1.0",
     "@urql/exchange-execute": "2.1.0",
@@ -24,7 +23,7 @@
     "bs58": "5.0.0",
     "cors": "2.8.5",
     "cross-fetch": "4.0.0",
-    "ethers": "5.7.0",
+    "ethers": "6.13.7",
     "express": "4.18.2",
     "graphql": "16.8.0",
     "graphql-tag": "2.12.6",

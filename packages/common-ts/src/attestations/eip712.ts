@@ -1,4 +1,4 @@
-import { utils } from 'ethers'
+import { AbiCoder, keccak256, toUtf8Bytes } from 'ethers'
 
 // Hashes a type signature based on the `typeHash` defined on
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#definition-of-hashstruct.
@@ -6,7 +6,7 @@ import { utils } from 'ethers'
 // The type signature is expected to follow the `encodeType` format described on
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#definition-of-encodetype.
 export const typeHash = (typeSignature: string): string =>
-  utils.keccak256(utils.toUtf8Bytes(typeSignature))
+  keccak256(toUtf8Bytes(typeSignature))
 
 // Encodes a list of values according to the given types.
 //
@@ -21,14 +21,14 @@ const encodeData = (types: string[], values: any[]): string => {
   for (let i = 0; i < types.length; i++) {
     if (types[i] === 'string' || types[i] === 'bytes') {
       transformedTypes[i] = 'bytes32'
-      transformedValues[i] = utils.keccak256(utils.toUtf8Bytes(values[i]))
+      transformedValues[i] = keccak256(toUtf8Bytes(values[i]))
     } else {
       transformedTypes[i] = types[i]
       transformedValues[i] = values[i]
     }
   }
 
-  return utils.defaultAbiCoder.encode(transformedTypes, transformedValues)
+  return AbiCoder.defaultAbiCoder().encode(transformedTypes, transformedValues)
 }
 
 // Hashes a struct based on the hash of a type signature (see `typeHash`),
@@ -37,7 +37,7 @@ const encodeData = (types: string[], values: any[]): string => {
 // NOTE: Does not support recursion yet.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const hashStruct = (typeHash: string, types: string[], values: any[]): string => {
-  return utils.keccak256(encodeData(['bytes32', ...types], [typeHash, ...values]))
+  return keccak256(encodeData(['bytes32', ...types], [typeHash, ...values]))
 }
 
 const EIP712_DOMAIN_TYPE_HASH = typeHash(

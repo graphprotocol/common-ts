@@ -5,7 +5,7 @@ import {
   recoverAttestation,
 } from './attestations'
 import { Wallet } from 'ethers'
-import { utils } from 'ethers'
+import { hexlify } from 'ethers'
 import * as bs58 from 'bs58'
 
 describe('Attestations', () => {
@@ -16,12 +16,12 @@ describe('Attestations', () => {
     const receipt = {
       requestCID: '0xd902c18a1b3590a3d2a8ae4439db376764fda153ca077e339d0427bf776bd463',
       responseCID: '0xbe0b5ae5f598fdf631133571d59ef16b443b2fe02e35ca2cb807158069009db9',
-      subgraphDeploymentID: utils.hexlify(
+      subgraphDeploymentID: hexlify(
         bs58.decode('QmTXzATwNfgGVukV1fX2T6xw9f6LAYRVWpsdXyRWzUR2H9').slice(2),
       ),
     }
 
-    const signer = Wallet.fromMnemonic(mnemonic)
+    const signer = Wallet.fromPhrase(mnemonic)
     const attestation = await createAttestation(
       signer.privateKey,
       1,
@@ -44,7 +44,7 @@ describe('Attestations', () => {
     const receipt = {
       requestCID: '0xd902c18a1b3590a3d2a8ae4439db376764fda153ca077e339d0427bf776bd463',
       responseCID: '0xbe0b5ae5f598fdf631133571d59ef16b443b2fe02e35ca2cb807158069009db9',
-      subgraphDeploymentID: utils.hexlify(
+      subgraphDeploymentID: hexlify(
         bs58.decode('QmTXzATwNfgGVukV1fX2T6xw9f6LAYRVWpsdXyRWzUR2H9').slice(2),
       ),
     }
@@ -66,12 +66,12 @@ describe('Attestations', () => {
     const receipt = {
       requestCID: '0xd902c18a1b3590a3d2a8ae4439db376764fda153ca077e339d0427bf776bd463',
       responseCID: '0xbe0b5ae5f598fdf631133571d59ef16b443b2fe02e35ca2cb807158069009db9',
-      subgraphDeploymentID: utils.hexlify(
+      subgraphDeploymentID: hexlify(
         bs58.decode('QmTXzATwNfgGVukV1fX2T6xw9f6LAYRVWpsdXyRWzUR2H9').slice(2),
       ),
     }
 
-    const signer = Wallet.fromMnemonic(mnemonic)
+    const signer = Wallet.fromPhrase(mnemonic)
     const chainID = 1
     const contractAddress = '0x0000000000000000000000000000000000000000'
     const attestation = await createAttestation(

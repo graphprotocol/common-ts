@@ -1,20 +1,22 @@
-import { utils } from 'ethers'
-import * as eip712 from './eip712'
-
-const {
-  defaultAbiCoder: abi,
-  arrayify,
+import {
+  AbiCoder,
+  getBytes,
   concat,
   hexlify,
-  splitSignature,
-  joinSignature,
-} = utils
+  BytesLike,
+  keccak256,
+  SigningKey,
+  Signature,
+  recoverAddress,
+} from 'ethers'
+import * as eip712 from './eip712'
 
 const SIG_SIZE_BYTES = 161
 const RECEIPT_SIZE_BYTES = 96
 const RECEIPT_TYPE_HASH = eip712.typeHash(
   'Receipt(bytes32 requestCID,bytes32 responseCID,bytes32 subgraphDeploymentID)',
 )
+const abi = AbiCoder.defaultAbiCoder()
 
 export interface Receipt {
   requestCID: string
@@ -56,7 +58,7 @@ export const getDomainSeparator = (
 }
 
 export const createAttestation = async (
-  signer: utils.BytesLike,
+  signer: BytesLike,
   chainId: number,
   disputeManagerAddress: string,
   receipt: Receipt,
@@ -65,9 +67,9 @@ export const createAttestation = async (
   const domainSeparator = getDomainSeparator(chainId, disputeManagerAddress, version)
   const encodedReceipt = encodeReceipt(receipt)
   const message = eip712.encode(domainSeparator, encodedReceipt)
-  const messageHash = utils.keccak256(message)
-  const signingKey = new utils.SigningKey(signer)
-  const { r, s, v } = signingKey.signDigest(messageHash)
+  const messageHash = keccak256(message)
+  const signingKey = new SigningKey(signer)
+  const { r, s, v } = signingKey.sign(messageHash)
 
   return {
     requestCID: receipt.requestCID,
@@ -80,18 +82,18 @@ export const createAttestation = async (
 }
 
 export const encodeAttestation = (attestation: Attestation): string => {
-  const data = arrayify(
+  const data = getBytes(
     abi.encode(
       ['bytes32', 'bytes32', 'bytes32'],
       [attestation.requestCID, attestation.responseCID, attestation.subgraphDeploymentID],
     ),
   )
-  const sig = joinSignature(attestation)
+  const sig = Signature.from(attestation).serialized
   return hexlify(concat([data, sig]))
 }
 
 export const decodeAttestation = (attestationData: string): Attestation => {
-  const attestationBytes = arrayify(attestationData)
+  const attestationBytes = getBytes(attestationData)
   if (attestationBytes.length !== SIG_SIZE_BYTES) {
     throw new Error('Invalid signature length')
   }
@@ -100,8 +102,10 @@ export const decodeAttestation = (attestationData: string): Attestation => {
     ['bytes32', 'bytes32', 'bytes32'],
     attestationBytes,
   )
-  const sig = splitSignature(
-    attestationBytes.slice(RECEIPT_SIZE_BYTES, RECEIPT_SIZE_BYTES + SIG_SIZE_BYTES),
+  const sig = Signature.from(
+    hexlify(
+      attestationBytes.slice(RECEIPT_SIZE_BYTES, RECEIPT_SIZE_BYTES + SIG_SIZE_BYTES),
+    ),
   )
 
   return {
@@ -128,9 +132,9 @@ export const recoverAttestation = (
   }
   const encodedReceipt = encodeReceipt(receipt)
   const message = eip712.encode(domainSeparator, encodedReceipt)
-  const messageHash = utils.keccak256(message)
-  return utils.recoverAddress(
+  const messageHash = keccak256(message)
+  return recoverAddress(
     messageHash,
-    joinSignature({ r: attestation.r, s: attestation.s, v: attestation.v }),
+    Signature.from({ r: attestation.r, s: attestation.s, v: attestation.v }).serialized,
   )
 }
